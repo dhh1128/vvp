@@ -151,7 +151,7 @@ informative:
       name: Daniel Hardman
     date: 18 Dec 2023
   DOSSIER-SCHEMA:
-    target: https://github.com/provenant-dev/public-schema/blob/main/gcd/index.md
+    target: https://github.com/provenant-dev/public-schema/blob/main/vvp-dossier/vvp-dossier.schema.json
     title: "Verifiable Voice Dossier"
     author:
       name: Arshdeep Singh
