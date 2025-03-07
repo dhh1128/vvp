@@ -701,10 +701,10 @@ Table of Contents
    listed for vetting credentials themselves.  Vetting credentials MAY
    expire, but this is not particularly desirable and might actually be
    an antipattern.  ACDCs and AIDs facilitate much longer lifecycles
-   than certificates; prophylactic key rotation is recommended but
-   creates no reason to rotate evidence.  However, a legal entity vetter
-   MUST agree to revoke vetting credentials in a timely manner if the
-   legal status of an entity changes, or if data in a vetting credential
+   than certificates; proactive key rotation is recommended but creates
+   no reason to rotate evidence.  However, a legal entity vetter MUST
+   agree to revoke vetting credentials in a timely manner if the legal
+   status of an entity changes, or if data in a vetting credential
    becomes invalid.
 
 6.1.3.  Vetting brand
