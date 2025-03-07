@@ -870,11 +870,10 @@ Table of Contents
    They point either to an agent or a witness that provides verifiable
    state information for the AID.
 
-   AIDs possess several security properties that are not guaranteed by
-   DIDs in general (self-certification, support for prerotation and
-   multisig, support for witnesses, cooperative delegation, and so
-   forth).  These properties are vital to some of VVP's goals for high
-   assurance.
+   AIDs possess several security properties (e.g., self-certification,
+   support for prerotation and multisig, support for witnesses, and
+   cooperative delegation) that are not guaranteed by DIDs in general.
+   Such properties are vital to some of VVP's goals for high assurance.
 
 6.2.4.  Signatures over SAIDs
 
