@@ -878,14 +878,16 @@ Table of Contents
 6.2.4.  Signatures over SAIDs
 
    Since neither a SAID value nor the data it hashes can be changed
-   without breaking the correspondence between them, signing over a SAID
-   is equivalent, in how it commits the signer to content and provides
-   tamper evidence, to signing over the data that the SAID hashes.
-   Since SAIDs can function as placeholders for JSON objects, a SAID can
-   represent such an object in a larger data structure.  And since SAIDs
-   can function as a reference without making a claim about location, it
-   is possible to combine these properties to achieve some indirections
-   in evidence that are crucial in privacy and regulatory compliance.
+   without breaking the correspondence between them, and since the
+   cryptographic hash function used ensures strong collision resistance,
+   signing over a SAID is equivalent, in how it commits the signer to
+   content and provides tamper evidence, to signing over the data that
+   the SAID hashes.  Since SAIDs can function as placeholders for JSON
+   objects, a SAID can represent such an object in a larger data
+   structure.  And since SAIDs can function as a reference without
+   making a claim about location, it is possible to combine these
+   properties to achieve some indirections in evidence that are crucial
+   in privacy and regulatory compliance.
 
    VVP uses SAIDs and digital signatures as primitive forms of evidence.
 
