@@ -1216,7 +1216,7 @@ Table of Contents
 
    The vetting credential is so called because it MUST be issued
    according to a documented vetting process that offers formal
-   assurance that is is only issued with accurate information, and only
+   assurance that it is only issued with accurate information, and only
    to the entity it describes.  A vetting credential confers the
    privilege of acting with the associated legal identity if and only if
    the bearer can prove their identity as issuee via a digital signature
