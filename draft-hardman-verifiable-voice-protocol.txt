@@ -2330,7 +2330,8 @@ Acknowledgments
    Techniques that apply KERI to telecom use cases were developed by
    Daniel Hardman, Randy Warshaw, and Ruth Choueka, with additional
    contributions from Dmitrii Tychinin, Yaroslav Lazarev, Arshdeep
-   Singh, and many other staff members at Provenant, Inc.
+   Singh, and many other staff members at Provenant, Inc. Thanks as well
+   to Ed Eykholt for multiple editorial improvements.
 
 Author's Address
 
