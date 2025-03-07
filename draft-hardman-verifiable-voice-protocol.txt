@@ -546,9 +546,9 @@ Table of Contents
 5.1.  Algorithm
 
    When a verifier encounters a VVP passport, they SHOULD verify by
-   using an algorithm similar to following.  (Optimizations may combine
-   or reorder operations, but MUST achieve all of the same guarantees,
-   in order to be compliant implementations.)
+   using an algorithm similar to the following.  (Optimizations may
+   combine or reorder operations, but MUST achieve all of the same
+   guarantees, in order to be compliant implementations.)
 
    1.   Confirm that the orig and dest fields match contextual
         observations and other SIP metadata.  That is, the passport
