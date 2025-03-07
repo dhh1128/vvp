@@ -305,8 +305,8 @@ Table of Contents
    Failing to narrow identity appropriately creates vulnerabilities in
    some alternative approaches.  The evidence securing VVP MUST
    therefore prove a valid relationship between the OP's narrow identity
-   and the broader legal entities that stakeholders naturally conceive
-   (see 6.3.4).
+   and the broader legal entities that stakeholders more naturally
+   assume and understand (see 6.3.4).
 
    The direct service provider of an OP is its _originating service
    provider_ (_OSP_).  For a given phone call, there may be complexity
