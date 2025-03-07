@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                        24 February 2025
-Expires: 28 August 2025
+Intended status: Standards Track                            7 March 2025
+Expires: 8 September 2025
 
 
                        Verifiable Voice Protocol
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 August 2025.
+   This Internet-Draft will expire on 8 September 2025.
 
 Copyright Notice
 
@@ -1445,6 +1445,14 @@ Table of Contents
       issuance or revocation event to an unambiguous key state in the
       KEL (6.2.8).
 
+   *  Parties that issue credentials SHOULD employ threshold-based
+      multi-signature schemes.  This enhances security by distributing
+      signing authority across multiple key holders, reducing the risk
+      of single-point compromise.  Threshold-based signatures ensure
+      that no single key compromise undermines the system’s integrity
+      while enabling controlled key recovery and rotation without
+      disrupting credential validity.
+
    Nonetheless, it is still possible to make choices that weaken the
    security posture of the ecosystem, including at least the following:
 
@@ -2245,9 +2253,9 @@ Table of Contents
    [RCD-DRAFT]
               Wendt, C. and J. Peterson, "SIP Call-Info Parameters for
               Rich Call Data", Work in Progress, Internet-Draft, draft-
-              ietf-sipcore-callinfo-rcd-14, 17 February 2025,
+              ietf-sipcore-callinfo-rcd-15, 25 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-sipcore-
-              callinfo-rcd-14>.
+              callinfo-rcd-15>.
 
    [RCD-PASSPORT]
               Wendt, C. and J. Peterson, "PASSporT Extension for Rich
@@ -2287,9 +2295,9 @@ Table of Contents
    [SD-JWT-DRAFT]
               Fett, D., Yasuda, K., and B. Campbell, "Selective
               Disclosure for JWTs (SD-JWT)", Work in Progress, Internet-
-              Draft, draft-ietf-oauth-selective-disclosure-jwt-15, 16
-              January 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-oauth-selective-disclosure-jwt-15>.
+              Draft, draft-ietf-oauth-selective-disclosure-jwt-17, 1
+              March 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-oauth-selective-disclosure-jwt-17>.
 
    [TN-ALLOC-SCHEMA]
               Provenant, "TN Allocation Credential", December 2024,
