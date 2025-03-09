@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-06T00:07:57.652725+00:00",
+  "timestamp": "2025-03-09T00:06:51.505752+00:00",
   "repo": "dhh1128/vvp",
   "labels": [
     {
@@ -56,24 +56,26 @@
       "id": "PR_kwDONMB4L86MhtXJ",
       "title": "update dossier-schema url",
       "url": "https://github.com/dhh1128/vvp/pull/1",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "Arsh-Sandhu",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "- update dossier-schema url",
       "createdAt": "2025-02-25T19:58:14Z",
-      "updatedAt": "2025-02-25T21:51:35Z",
+      "updatedAt": "2025-03-07T04:22:00Z",
       "baseRepository": "dhh1128/vvp",
       "baseRefName": "main",
       "baseRefOid": "61742adb348b27a5cb81e6bee33d0a555428b2a9",
       "headRepository": "Arsh-Sandhu/vvp",
       "headRefName": "fix-dossier-url",
       "headRefOid": "ea19796d27867f2449d371db8c15d1c24862761c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-07T04:21:59Z",
+      "mergedAt": "2025-03-07T04:21:59Z",
+      "mergedBy": "dhh1128",
+      "mergeCommit": {
+        "oid": "fa666b0feb71452f7f8403ad9b8b3ce4030d661c"
+      },
       "comments": [],
       "reviews": [
         {
@@ -87,6 +89,271 @@
           "body": "",
           "createdAt": "2025-02-25T21:51:35Z",
           "updatedAt": "2025-02-25T21:51:35Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONMB4L86e6vxg",
+          "commit": {
+            "abbreviatedOid": "ea19796"
+          },
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "good catch!",
+          "createdAt": "2025-03-07T04:21:51Z",
+          "updatedAt": "2025-03-07T04:21:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDONMB4L86Ns4_P",
+      "title": "Clarification of OP and broader legal entities",
+      "url": "https://github.com/dhh1128/vvp/pull/2",
+      "state": "MERGED",
+      "author": "edeykholt",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\"conceive\" might be interpreted as \"to create\" versus \"understand\"",
+      "createdAt": "2025-03-06T22:31:29Z",
+      "updatedAt": "2025-03-07T04:23:20Z",
+      "baseRepository": "dhh1128/vvp",
+      "baseRefName": "main",
+      "baseRefOid": "61742adb348b27a5cb81e6bee33d0a555428b2a9",
+      "headRepository": "edeykholt/vvp",
+      "headRefName": "patch-2",
+      "headRefOid": "72497da332f239cb73101385e736a246c0860bdf",
+      "closedAt": "2025-03-07T04:23:20Z",
+      "mergedAt": "2025-03-07T04:23:20Z",
+      "mergedBy": "dhh1128",
+      "mergeCommit": {
+        "oid": "7146d30b3cf9c3d73e328f87b2175e26dc544b1a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONMB4L86e6wC6",
+          "commit": {
+            "abbreviatedOid": "72497da"
+          },
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "good improvement, thank you",
+          "createdAt": "2025-03-07T04:23:13Z",
+          "updatedAt": "2025-03-07T04:23:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDONMB4L86Ns6ha",
+      "title": "word choice recommendation",
+      "url": "https://github.com/dhh1128/vvp/pull/3",
+      "state": "MERGED",
+      "author": "edeykholt",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "prophylactic to proactive.  Could alternatively use preventative.",
+      "createdAt": "2025-03-06T22:36:36Z",
+      "updatedAt": "2025-03-07T04:23:56Z",
+      "baseRepository": "dhh1128/vvp",
+      "baseRefName": "main",
+      "baseRefOid": "61742adb348b27a5cb81e6bee33d0a555428b2a9",
+      "headRepository": "edeykholt/vvp",
+      "headRefName": "patch-3",
+      "headRefOid": "aefa280ceb323430a9f37f5efdfa19c3ed567c4e",
+      "closedAt": "2025-03-07T04:23:56Z",
+      "mergedAt": "2025-03-07T04:23:56Z",
+      "mergedBy": "dhh1128",
+      "mergeCommit": {
+        "oid": "24c2e4cdf11c669d8a3a28b9e09fb316d1104e13"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONMB4L86e6wKj",
+          "commit": {
+            "abbreviatedOid": "aefa280"
+          },
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-07T04:23:49Z",
+          "updatedAt": "2025-03-07T04:23:49Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDONMB4L86Ns73H",
+      "title": "clarified security properties with improved word order",
+      "url": "https://github.com/dhh1128/vvp/pull/4",
+      "state": "MERGED",
+      "author": "edeykholt",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-06T22:41:15Z",
+      "updatedAt": "2025-03-07T04:24:46Z",
+      "baseRepository": "dhh1128/vvp",
+      "baseRefName": "main",
+      "baseRefOid": "61742adb348b27a5cb81e6bee33d0a555428b2a9",
+      "headRepository": "edeykholt/vvp",
+      "headRefName": "patch-4",
+      "headRefOid": "78e44ad0b9230d12610cca0eda72d65299b333ed",
+      "closedAt": "2025-03-07T04:24:46Z",
+      "mergedAt": "2025-03-07T04:24:46Z",
+      "mergedBy": "dhh1128",
+      "mergeCommit": {
+        "oid": "bf22c8aeef5f84f20bf84f969a3ad92a42dfe920"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONMB4L86e6wYW",
+          "commit": {
+            "abbreviatedOid": "78e44ad"
+          },
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-07T04:24:38Z",
+          "updatedAt": "2025-03-07T04:24:38Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDONMB4L86Ns-PC",
+      "title": "Mention the strength and collision-resistance of the hash function",
+      "url": "https://github.com/dhh1128/vvp/pull/5",
+      "state": "MERGED",
+      "author": "edeykholt",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-06T22:49:55Z",
+      "updatedAt": "2025-03-07T04:25:24Z",
+      "baseRepository": "dhh1128/vvp",
+      "baseRefName": "main",
+      "baseRefOid": "61742adb348b27a5cb81e6bee33d0a555428b2a9",
+      "headRepository": "edeykholt/vvp",
+      "headRefName": "patch-5",
+      "headRefOid": "0cc064b11b94a7ab4327d52dee5f72f69f2237c3",
+      "closedAt": "2025-03-07T04:25:24Z",
+      "mergedAt": "2025-03-07T04:25:24Z",
+      "mergedBy": "dhh1128",
+      "mergeCommit": {
+        "oid": "ec2a2badd3d048391cfb2c13748146695f695ded"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONMB4L86e6whM",
+          "commit": {
+            "abbreviatedOid": "0cc064b"
+          },
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-07T04:25:17Z",
+          "updatedAt": "2025-03-07T04:25:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDONMB4L86Ns_Pl",
+      "title": "is is typo",
+      "url": "https://github.com/dhh1128/vvp/pull/6",
+      "state": "MERGED",
+      "author": "edeykholt",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-06T22:53:22Z",
+      "updatedAt": "2025-03-07T04:21:15Z",
+      "baseRepository": "dhh1128/vvp",
+      "baseRefName": "main",
+      "baseRefOid": "61742adb348b27a5cb81e6bee33d0a555428b2a9",
+      "headRepository": "edeykholt/vvp",
+      "headRefName": "patch-6",
+      "headRefOid": "54350263b001e3606680a353208e4d3a504507b1",
+      "closedAt": "2025-03-07T04:21:15Z",
+      "mergedAt": "2025-03-07T04:21:15Z",
+      "mergedBy": "dhh1128",
+      "mergeCommit": {
+        "oid": "1d07321a9732344ad88ed35a170cbfe1bf023425"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONMB4L86e6vnS",
+          "commit": {
+            "abbreviatedOid": "5435026"
+          },
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "good catch!",
+          "createdAt": "2025-03-07T04:21:04Z",
+          "updatedAt": "2025-03-07T04:21:04Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDONMB4L86NtCmi",
+      "title": "Add recommendation to use multi-sig",
+      "url": "https://github.com/dhh1128/vvp/pull/7",
+      "state": "MERGED",
+      "author": "edeykholt",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-06T23:04:17Z",
+      "updatedAt": "2025-03-07T04:20:29Z",
+      "baseRepository": "dhh1128/vvp",
+      "baseRefName": "main",
+      "baseRefOid": "61742adb348b27a5cb81e6bee33d0a555428b2a9",
+      "headRepository": "edeykholt/vvp",
+      "headRefName": "patch-7",
+      "headRefOid": "b4a9dc6310948421716a0bf0895383856be5bf4c",
+      "closedAt": "2025-03-07T04:20:28Z",
+      "mergedAt": "2025-03-07T04:20:28Z",
+      "mergedBy": "dhh1128",
+      "mergeCommit": {
+        "oid": "903a7da639a0391a5c249b5adea6f97e03c8e531"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONMB4L86e6vbp",
+          "commit": {
+            "abbreviatedOid": "b4a9dc6"
+          },
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Good suggestion. Thank you. ",
+          "createdAt": "2025-03-07T04:20:08Z",
+          "updatedAt": "2025-03-07T04:20:08Z",
           "comments": []
         }
       ]
