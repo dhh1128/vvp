@@ -1052,7 +1052,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Hardman</td>
-<td class="center">Expires 8 September 2025</td>
+<td class="center">Expires 12 September 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-hardman-verifiable-voice-protocol-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-07" class="published">7 March 2025</time>
+<time datetime="2025-03-11" class="published">11 March 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-08">8 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-09-12">12 September 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1115,7 +1115,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1701,7 +1701,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <p id="section-5.1-2.3.1">Fetch the key state for the OP from the OOBI in <code>kid</code>. Caches may be used to optimize this, as long as they meet the freshness standards of the verifier. Normally, the current key state is checked, but the OOBI returns a data stream that also allows historical analysis.<a href="#section-5.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.4">
-            <p id="section-5.1-2.4.1">Use the public key of the OP to verify that the signature on the passport is valid for that key state. On success, the verifier knows that the OP is at making an assertion about the identity and authorizations of the AP. (This is approximately the level of assurance provided by existing alternatives to VVP.)<a href="#section-5.1-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.4.1">Use the public key of the OP to verify that the signature on the passport is valid for that key state. On success, the verifier knows that the OP is at least making an assertion about the identity and authorizations of the AP. (This is approximately the level of assurance provided by existing alternatives to VVP.)<a href="#section-5.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.5">
             <p id="section-5.1-2.5.1">Extract the <code>evd</code> field, which references the dossier (<a href="#dossier" class="auto internal xref">6.3.2</a>) that constitutes backing evidence.<a href="#section-5.1-2.5.1" class="pilcrow">¶</a></p>
@@ -1710,23 +1710,23 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <p id="section-5.1-2.6.1">Use the SAID (<a href="#said" class="auto internal xref">6.2.1</a>) of the dossier as a lookup key to see whether the dossier has already been fully validated. Since dossiers are highly stable, caching dossier validations is recommended.<a href="#section-5.1-2.6.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.7">
-            <p id="section-5.1-2.7.1">If the dossier requires full validation, perform it. Validation includes checking the signature on each ACDC in the dossier's data graph against the key state of its respective issuer at the time the issuance occurred. Key state is proved by the KEL <a href="#KEL" class="auto internal xref">6.2.8</a>, and checked against independent witnesses.<a href="#section-5.1-2.7.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.7.1">If the dossier requires full validation, perform it. Validation includes checking the signature on each ACDC in the dossier's data graph against the key state of its respective issuer at the time the issuance occurred. Key state is proved by the KEL (<a href="#KEL" class="auto internal xref">6.2.8</a>), and checked against independent witnesses.<a href="#section-5.1-2.7.1" class="pilcrow">¶</a></p>
 <p id="section-5.1-2.7.2">
 Issuance is recorded explicitly in the KEL's overall event sequence, so this check does not require guesses about how to map issuance timestamps to key state events. Subsequent key rotations do not invalidate this analysis.<a href="#section-5.1-2.7.2" class="pilcrow">¶</a></p>
 <p id="section-5.1-2.7.3">
-Validation also includes comparing data structure and values against the declared schema, plus a full traversal of all chained CVD <a href="#cvd" class="auto internal xref">6.2.9</a>, back to the root of trust for each artifact. The correct relationships among evidence artifacts <span class="bcp14">MUST</span> also be checked (e.g., proving that the issuer of one piece is the issuee of another piece).<a href="#section-5.1-2.7.3" class="pilcrow">¶</a></p>
+Validation also includes comparing data structure and values against the declared schema, plus a full traversal of all chained CVD (<a href="#cvd" class="auto internal xref">6.2.9</a>), back to the root of trust for each artifact. The verifier <span class="bcp14">MUST</span> accept the root of trust as a valid authority on the vital question answered by each credential that depends upon it. The correct relationships among evidence artifacts <span class="bcp14">MUST</span> also be checked (e.g., proving that the issuer of one piece is the issuee of another piece).<a href="#section-5.1-2.7.3" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.8">
             <p id="section-5.1-2.8.1">Check to see whether the revocation status of the dossier and each item it depends on has been tested recently enough to satisfy the verifier's freshness standards. If no, check for revocations anywhere in the data graph of the dossier. Revocations are not the same as key rotations. They can be checked much more quickly than doing a full validation. Revocation checks can also be cached, possibly with a different freshness threshold than the main evidence.<a href="#section-5.1-2.8.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.9">
-            <p id="section-5.1-2.9.1">Assuming that the dossier is valid and has no breakages due to revocation, confirm that the OP is authorized to sign the passport. If there is no delegation evidence (<a href="#DE" class="auto internal xref">6.3.4</a>), the AP and the OP must be identical, and the OP must be the issuee of the vetting credential; otherwise, the OP must be the issuee of a delegated signing credential for which the issuer is the AP.<a href="#section-5.1-2.9.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.9.1">Assuming that the dossier is valid and has no breakages due to revocation, confirm that the OP is authorized to sign the passport. If there is no delegation evidence (<a href="#DE" class="auto internal xref">6.3.4</a>), the AP and the OP <span class="bcp14">MUST</span> be identical, and the OP <span class="bcp14">MUST</span> be the issuee of the vetting credential; otherwise, the OP <span class="bcp14">MUST</span> be the issuee of a delegated signing credential for which the issuer is the AP.<a href="#section-5.1-2.9.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.10">
-            <p id="section-5.1-2.10.1">Extract the <code>orig</code> field and compare it to the TNAlloc credential <a href="#tnalloc-credential" class="auto internal xref">6.3.6</a> cited in the dossier <a href="#dossier" class="auto internal xref">6.3.2</a> to confirm that the AP <a href="#AP" class="auto internal xref">3.1.4</a> (or, if OP is not equal to AP and OP is using their own number, the OP <a href="#OP" class="auto internal xref">3.1.3</a>) has the right to originate calls with this number.<a href="#section-5.1-2.10.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.10.1">Extract the <code>orig</code> field and compare it to the TNAlloc credential (<a href="#tnalloc-credential" class="auto internal xref">6.3.6</a>) cited in the dossier (<a href="#dossier" class="auto internal xref">6.3.2</a>) to confirm that the AP (<a href="#AP" class="auto internal xref">3.1.4</a>) -- or, if OP is not equal to AP and OP is using their own number, the OP (<a href="#OP" class="auto internal xref">3.1.3</a>) -- has the right to originate calls with this number.<a href="#section-5.1-2.10.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.11">
-            <p id="section-5.1-2.11.1">If the passport includes non-null values for the optional <code>card</code> or <code>goal</code> fields, extract that information and check that the brand attributes claimed for the call are justified by a brand credential <a href="#brand-credential" class="auto internal xref">6.3.7</a> in the dossier.<a href="#section-5.1-2.11.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.11.1">If the passport includes non-null values for the optional <code>card</code> or <code>goal</code> fields, extract that information and check that the brand attributes claimed for the call are justified by a brand credential (<a href="#brand-credential" class="auto internal xref">6.3.7</a>) in the dossier.<a href="#section-5.1-2.11.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.12">
             <p id="section-5.1-2.12.1">Check any business logic. For example, if the delegated signer credential says that the OP can only call on behalf of the AP during certain hours, or in certain geos, check those attributes of the call.<a href="#section-5.1-2.12.1" class="pilcrow">¶</a></p>
@@ -1741,7 +1741,7 @@ Validation also includes comparing data structure and values against the declare
         </h3>
 <p id="section-5.2-1">The complete algorithm listed above is quite rigorous. With no caches, it may take several seconds, much like a thorough validation of a certificate chain. However, because ACDC-based evidence is indexed by SAID (<a href="#said" class="auto internal xref">6.2.1</a>), any given ACDC only needs to be validated once in its lifespan, which persists across key rotations and may last as long as an AP (<a href="#AP" class="auto internal xref">3.1.4</a>) uses a phone number -- years or decades. This allows very aggressive caching. And since the same dossier is used to justify many outbound calls -- perhaps thousands or millions of calls, for busy call centers -- and many dossiers will reference the same issuers and issuees and their associated key states and KELs (<a href="#KEL" class="auto internal xref">6.2.8</a>), caching will produce huge benefits.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">Furthermore, because SAIDs and their associated data (including links to other nodes in a data graph) have a tamper-evident relationship, any party can perform validation and compile their results, then share the data with verifiers that want to do less work. Validators like this are not oracles, because consumers of such data need not trust shared results blindly. They can always directly recompute some or all of it from a passport, to catch deception. However, they can do this lazily or occasionally, per their preferred balance of risk/effort.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2-3"><em>In toto</em>, these characteristics mean that no centralized registry is required in any given ecosystem. Data can be fetched directly from its source, across jurisdictional boundaries. Because it is fetched from its source, it comes with consent. Privacy can be tuned (see <a href="#privacy" class="auto internal xref">9</a>). Simple opportunistic, uncoordinated reuse (e.g., in or across the datacenters of TSPs will arise spontaneously and will dramatically improve the scale and efficiency of the system.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-3"><em>In toto</em>, these characteristics mean that no centralized registry is required in any given ecosystem. Data can be fetched directly from its source, across jurisdictional boundaries. Because it is fetched from its source, it comes with consent. Privacy can be tuned (see <a href="#privacy" class="auto internal xref">9</a>). Simple opportunistic, uncoordinated reuse (e.g., in or across the datacenters of TSPs) will arise spontaneously and will dramatically improve the scale and efficiency of the system.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1789,7 +1789,7 @@ Validation also includes comparing data structure and values against the declare
           <h4 id="name-allocating-tns">
 <a href="#section-6.1.4" class="section-number selfRef">6.1.4. </a><a href="#name-allocating-tns" class="section-name selfRef">Allocating TNs</a>
           </h4>
-<p id="section-6.1.4-1">At the option of the AP and OP, VVP <span class="bcp14">SHOULD</span> prove the right to use the originating phone number. When this feature is active, regulators <span class="bcp14">MUST</span> issue TNAlloc credentials (<a href="#tnalloc-credential" class="auto internal xref">6.3.6</a>) to range holders, and range holders <span class="bcp14">MUST</span> issue them to telephone number users (TNUs; see <a href="#allocation-holder" class="auto internal xref">3.1.1</a>). TNUs <span class="bcp14">MAY</span> in turn issue them to a delegate such as a call center. If aggregators or other intemediaries hold an RTU in the eyes of a regulator, then intermediate TNAlloc credentials <span class="bcp14">MUST</span> be created to track that RTU as part of the chain. On the other hand, if TNUs acquire phone numbers through aggregators, but regulators do not consider aggregators to hold allocations, then aggregators <span class="bcp14">MUST</span> work with range holders to assure that the appropriate TNAlloc credentials are issued to the TNUs.<a href="#section-6.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.4-1">At the option of the AP and OP, VVP <span class="bcp14">SHOULD</span> prove the right to use the originating phone number. When this feature is active, regulators <span class="bcp14">MUST</span> issue TNAlloc credentials (<a href="#tnalloc-credential" class="auto internal xref">6.3.6</a>) to range holders, and range holders <span class="bcp14">MUST</span> issue them to downstream AHs in an unbroken chain that reaches telephone number users (TNUs; see <a href="#allocation-holder" class="auto internal xref">3.1.1</a>). TNUs <span class="bcp14">MAY</span> in turn issue them to a delegate such as a call center. If aggregators or other intemediaries hold an RTU in the eyes of a regulator, then intermediate TNAlloc credentials <span class="bcp14">MUST</span> be created to track that RTU as part of the chain. On the other hand, if TNUs acquire phone numbers through aggregators, but regulators do not consider aggregators to hold allocations, then aggregators <span class="bcp14">MUST</span> work with range holders to assure that the appropriate TNAlloc credentials are issued to the TNUs.<a href="#section-6.1.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authorizing-brand-proxy">
@@ -2298,7 +2298,7 @@ Validation also includes comparing data structure and values against the declare
 <p id="section-7.2-3">This transformation from foreign evidence to ACDCs is very flexible, and allows for tremendous interoperability. On the calling side, any ecosystem that deals in cryptographic evidence can provide input to VVP, no matter what evidence mechanisms they prefer.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
 <p id="section-7.2-4">(On the receiving side, the information carried via ACDCs in VVP could be transformed again, with a second bridging party, to enable even more interoperability. However, the goals of such a secondary transformation are undefined by VVP, so the constraints and rules of the transformation are out of scope here.)<a href="#section-7.2-4" class="pilcrow">¶</a></p>
 <p id="section-7.2-5">All VVP stakeholders need to understand that accepting foreign evidence does much more than alter format. Bridging is not a simple conversion or reissuance. It replaces identifiers (e.g., DIDs as specified in <span>[<a href="#W3C-DID" class="cite xref">W3C-DID</a>]</span> with AIDs as specified in <span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>). The new identifiers have different lifecycles and different trust bases than the original. Bridging also changes the <em>meaning</em> of the credential. Foreign evidence directly asserts claims backed by the reputation of its original issuer. A new ACDC embodies a claim by the bridging party, that they personally verified foreign evidence according to foreign evidence rules, at a given moment. It cites the foreign evidence as a source, and may copy claims into the ACDC, but the bridging party is only asserting that they verified the original issuer's commitment to the claims, not that the bridging party commits to those claims.<a href="#section-7.2-5" class="pilcrow">¶</a></p>
-<p id="section-7.2-6">Verifiers <span class="bcp14">MAY</span> choose to accept such derivative ACDCs, but the indirection <span class="bcp14">SHOULD</span> color their confidence. They <span class="bcp14">MUST NOT</span> assume that identifiers in the foreign evidence and in the ACDC have the same referents or controllers. They <span class="bcp14">MUST NOT</span> hold the bridging party accountable for the claims -- only for the claim that they verified the original issuer's commitment to the claims. They <span class="bcp14">MUST</span> accept that there is no defined relationship between revocation of the foreign evidence and revocation of the ACDC.<a href="#section-7.2-6" class="pilcrow">¶</a></p>
+<p id="section-7.2-6">Verifiers <span class="bcp14">MAY</span> choose to accept such derivative ACDCs, but the indirection <span class="bcp14">SHOULD</span> color their confidence. They <span class="bcp14">MUST NOT</span> assume that identifiers in the foreign evidence and in the ACDC have the same referents or controllers. They <span class="bcp14">MUST NOT</span> hold the bridging party accountable for the claims -- only for the claim that they verified the original issuer's commitment to the claims. Unless additional governance offers guarantees beyond those explicitly provided by VVP, they <span class="bcp14">MUST</span> accept that there is no defined relationship between revocation of the foreign evidence and revocation of the ACDC.<a href="#section-7.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

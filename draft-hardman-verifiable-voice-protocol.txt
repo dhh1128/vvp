@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                            7 March 2025
-Expires: 8 September 2025
+Intended status: Standards Track                           11 March 2025
+Expires: 12 September 2025
 
 
                        Verifiable Voice Protocol
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 September 2025.
+   This Internet-Draft will expire on 12 September 2025.
 
 Copyright Notice
 
@@ -565,9 +565,10 @@ Table of Contents
 
    4.   Use the public key of the OP to verify that the signature on the
         passport is valid for that key state.  On success, the verifier
-        knows that the OP is at making an assertion about the identity
-        and authorizations of the AP.  (This is approximately the level
-        of assurance provided by existing alternatives to VVP.)
+        knows that the OP is at least making an assertion about the
+        identity and authorizations of the AP.  (This is approximately
+        the level of assurance provided by existing alternatives to
+        VVP.)
 
    5.   Extract the evd field, which references the dossier (6.3.2) that
         constitutes backing evidence.
@@ -581,7 +582,7 @@ Table of Contents
         includes checking the signature on each ACDC in the dossier's
         data graph against the key state of its respective issuer at the
         time the issuance occurred.  Key state is proved by the KEL
-        6.2.8, and checked against independent witnesses.
+        (6.2.8), and checked against independent witnesses.
 
         Issuance is recorded explicitly in the KEL's overall event
         sequence, so this check does not require guesses about how to
@@ -590,10 +591,12 @@ Table of Contents
 
         Validation also includes comparing data structure and values
         against the declared schema, plus a full traversal of all
-        chained CVD 6.2.9, back to the root of trust for each artifact.
-        The correct relationships among evidence artifacts MUST also be
-        checked (e.g., proving that the issuer of one piece is the
-        issuee of another piece).
+        chained CVD (6.2.9), back to the root of trust for each
+        artifact.  The verifier MUST accept the root of trust as a valid
+        authority on the vital question answered by each credential that
+        depends upon it.  The correct relationships among evidence
+        artifacts MUST also be checked (e.g., proving that the issuer of
+        one piece is the issuee of another piece).
 
    8.   Check to see whether the revocation status of the dossier and
         each item it depends on has been tested recently enough to
@@ -607,19 +610,20 @@ Table of Contents
    9.   Assuming that the dossier is valid and has no breakages due to
         revocation, confirm that the OP is authorized to sign the
         passport.  If there is no delegation evidence (6.3.4), the AP
-        and the OP must be identical, and the OP must be the issuee of
-        the vetting credential; otherwise, the OP must be the issuee of
+        and the OP MUST be identical, and the OP MUST be the issuee of
+        the vetting credential; otherwise, the OP MUST be the issuee of
         a delegated signing credential for which the issuer is the AP.
 
    10.  Extract the orig field and compare it to the TNAlloc credential
-        6.3.6 cited in the dossier 6.3.2 to confirm that the AP 3.1.4
-        (or, if OP is not equal to AP and OP is using their own number,
-        the OP 3.1.3) has the right to originate calls with this number.
+        (6.3.6) cited in the dossier (6.3.2) to confirm that the AP
+        (3.1.4) -- or, if OP is not equal to AP and OP is using their
+        own number, the OP (3.1.3) -- has the right to originate calls
+        with this number.
 
    11.  If the passport includes non-null values for the optional card
         or goal fields, extract that information and check that the
         brand attributes claimed for the call are justified by a brand
-        credential 6.3.7 in the dossier.
+        credential (6.3.7) in the dossier.
 
    12.  Check any business logic.  For example, if the delegated signer
         credential says that the OP can only call on behalf of the AP
@@ -655,7 +659,7 @@ Table of Contents
    its source, across jurisdictional boundaries.  Because it is fetched
    from its source, it comes with consent.  Privacy can be tuned (see
    9).  Simple opportunistic, uncoordinated reuse (e.g., in or across
-   the datacenters of TSPs will arise spontaneously and will
+   the datacenters of TSPs) will arise spontaneously and will
    dramatically improve the scale and efficiency of the system.
 
 6.  Curating
@@ -736,15 +740,16 @@ Table of Contents
    At the option of the AP and OP, VVP SHOULD prove the right to use the
    originating phone number.  When this feature is active, regulators
    MUST issue TNAlloc credentials (6.3.6) to range holders, and range
-   holders MUST issue them to telephone number users (TNUs; see 3.1.1).
-   TNUs MAY in turn issue them to a delegate such as a call center.  If
-   aggregators or other intemediaries hold an RTU in the eyes of a
-   regulator, then intermediate TNAlloc credentials MUST be created to
-   track that RTU as part of the chain.  On the other hand, if TNUs
-   acquire phone numbers through aggregators, but regulators do not
-   consider aggregators to hold allocations, then aggregators MUST work
-   with range holders to assure that the appropriate TNAlloc credentials
-   are issued to the TNUs.
+   holders MUST issue them to downstream AHs in an unbroken chain that
+   reaches telephone number users (TNUs; see 3.1.1).  TNUs MAY in turn
+   issue them to a delegate such as a call center.  If aggregators or
+   other intemediaries hold an RTU in the eyes of a regulator, then
+   intermediate TNAlloc credentials MUST be created to track that RTU as
+   part of the chain.  On the other hand, if TNUs acquire phone numbers
+   through aggregators, but regulators do not consider aggregators to
+   hold allocations, then aggregators MUST work with range holders to
+   assure that the appropriate TNAlloc credentials are issued to the
+   TNUs.
 
 6.1.5.  Authorizing brand proxy
 
@@ -1411,9 +1416,10 @@ Table of Contents
    identifiers in the foreign evidence and in the ACDC have the same
    referents or controllers.  They MUST NOT hold the bridging party
    accountable for the claims -- only for the claim that they verified
-   the original issuer's commitment to the claims.  They MUST accept
-   that there is no defined relationship between revocation of the
-   foreign evidence and revocation of the ACDC.
+   the original issuer's commitment to the claims.  Unless additional
+   governance offers guarantees beyond those explicitly provided by VVP,
+   they MUST accept that there is no defined relationship between
+   revocation of the foreign evidence and revocation of the ACDC.
 
 8.  Security Considerations
 
