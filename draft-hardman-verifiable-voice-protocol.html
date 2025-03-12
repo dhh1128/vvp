@@ -7,11 +7,12 @@
 <title>Verifiable Voice Protocol</title>
 <meta content="Daniel Hardman" name="author">
 <meta content="
-       Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making telephone calls. This eliminates trust gaps that scammers exploit. Like related technolgies such as SHAKEN, RCD, and BCID, VVP binds cryptographic evidence to a SIP INVITE, and verifies this evidence downstream. However, VVP builds from different technical and governance assumptions, and uses better evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance than alternatives. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it can justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat, as well as with other industry verticals that need verifiability in non-telco contexts. 
+       Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making telephone calls. This eliminates trust gaps that scammers exploit. Like related technolgies such as SHAKEN, RCD, and BCID, VVP binds cryptographic evidence to a SIP INVITE, and verifies this evidence downstream. However, VVP builds from different technical and governance assumptions, and uses better, richer evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance than alternatives. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat, as well as with other industry verticals that need verifiability in non-telco contexts. 
     " name="description">
 <meta content="xml2rfc 3.28.0" name="generator">
 <meta content="voip" name="keyword">
 <meta content="telecom" name="keyword">
+<meta content="telco" name="keyword">
 <meta content="telephone number" name="keyword">
 <meta content="vetting" name="keyword">
 <meta content="KYC" name="keyword">
@@ -1052,7 +1053,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Hardman</td>
-<td class="center">Expires 12 September 2025</td>
+<td class="center">Expires 13 September 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-hardman-verifiable-voice-protocol-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-11" class="published">11 March 2025</time>
+<time datetime="2025-03-12" class="published">12 March 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-12">12 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-09-13">13 September 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1083,7 +1084,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Verifiable Voice Protocol</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making telephone calls. This eliminates trust gaps that scammers exploit. Like related technolgies such as SHAKEN, RCD, and BCID, VVP binds cryptographic evidence to a SIP INVITE, and verifies this evidence downstream. However, VVP builds from different technical and governance assumptions, and uses better evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance than alternatives. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it can justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat, as well as with other industry verticals that need verifiability in non-telco contexts.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making telephone calls. This eliminates trust gaps that scammers exploit. Like related technolgies such as SHAKEN, RCD, and BCID, VVP binds cryptographic evidence to a SIP INVITE, and verifies this evidence downstream. However, VVP builds from different technical and governance assumptions, and uses better, richer evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance than alternatives. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat, as well as with other industry verticals that need verifiability in non-telco contexts.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1115,7 +1116,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1145,13 +1146,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
         </h2>
 <nav class="toc"><ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+            <p id="section-toc.1-1.1.1"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-evidence-format" class="internal xref">Evidence format</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-evidence-scope" class="internal xref">Evidence scope</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-vetting-refinements" class="internal xref">Vetting refinements</a></p>
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-evidence-format" class="internal xref">Evidence format</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
+                <p id="section-toc.1-1.1.2.3.1" class="keepWithNext"><a href="#section-1.3" class="auto internal xref">1.3</a>.  <a href="#name-vetting-refinements" class="internal xref">Vetting refinements</a></p>
 </li>
             </ul>
 </li>
@@ -1436,24 +1440,33 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <p id="section-1-3.5.1">What might work for enterprises offers few benefits and many drawbacks for individual callers.<a href="#section-1-3.5.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-4">VVP solves these problems by applying two crucial innovations.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<div id="evidence-format">
+<p id="section-1-4">VVP solves these problems by applying three crucial innovations.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<div id="evidence-scope">
 <section id="section-1.1">
-        <h3 id="name-evidence-format">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-evidence-format" class="section-name selfRef">Evidence format</a>
+        <h3 id="name-evidence-scope">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-evidence-scope" class="section-name selfRef">Evidence scope</a>
         </h3>
-<p id="section-1.1-1">VVP is rooted in an evidence format called <em>authentic chained data container</em>s (<em>ACDC</em>s) -- <span>[<a href="#TOIP-ACDC" class="cite xref">TOIP-ACDC</a>]</span>. Other forms of evidence (e.g., JWTs/STIR PASSporTs, digital signatures, and optional interoperable inputs from W3C verifiable credentials <span>[<a href="#W3C-VC" class="cite xref">W3C-VC</a>]</span> and SD-JWTs <span>[<a href="#SD-JWT-DRAFT" class="cite xref">SD-JWT-DRAFT</a>]</span>) also contribute. However, the foundation that VVP places beneath them is unique. For a discussion of the theory behind VVP evidence, see <a href="#appendix-a" class="auto internal xref">10</a>. For more about additional evidence types, see <a href="#building-blocks" class="auto internal xref">6.2</a> and <a href="#interoperability" class="auto internal xref">7</a>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">Because of innovations in format, VVP evidence is easier to create and maintain, safer, and more flexible than alternative approaches. It also lasts much longer. This drastically lowers the friction to adoption.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">Existing solutions aim to assert variable levels of confidence about a caller's identity, plus possibly some brand attributes. These assertions are testable only in the moment a call is initiated; later, they become repudiable.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">VVP proves more. It always proves the caller's legal identity, plus any authority that the caller has delegated to staff and service providers. It typically also proves brand attributes and right to use a phone number. If a call center is involved, it proves the constraints under which the call center operates as a representative. All VVP proof can be evaluated in the present or the past, guaranteeing accountability with a permanent, non-repudiable audit trail.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="evidence-format">
+<section id="section-1.2">
+        <h3 id="name-evidence-format">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-evidence-format" class="section-name selfRef">Evidence format</a>
+        </h3>
+<p id="section-1.2-1">VVP is rooted in an evidence format called <em>authentic chained data container</em>s (<em>ACDC</em>s) -- <span>[<a href="#TOIP-ACDC" class="cite xref">TOIP-ACDC</a>]</span>. Other forms of evidence (e.g., JWTs/STIR PASSporTs, digital signatures, and optional interoperable inputs from W3C verifiable credentials <span>[<a href="#W3C-VC" class="cite xref">W3C-VC</a>]</span> and SD-JWTs <span>[<a href="#SD-JWT-DRAFT" class="cite xref">SD-JWT-DRAFT</a>]</span>) also contribute. However, the foundation that VVP places beneath them is unique. For a discussion of the theory behind VVP evidence, see <a href="#appendix-a" class="auto internal xref">10</a>. For more about additional evidence types, see <a href="#building-blocks" class="auto internal xref">6.2</a> and <a href="#interoperability" class="auto internal xref">7</a>.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">Because of innovations in format, VVP evidence is easier to create and maintain, safer, and more flexible than alternative approaches. It also lasts much longer. This drastically lowers the friction to adoption.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="vetting-refinements">
-<section id="section-1.2">
+<section id="section-1.3">
         <h3 id="name-vetting-refinements">
-<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-vetting-refinements" class="section-name selfRef">Vetting refinements</a>
+<a href="#section-1.3" class="section-number selfRef">1.3. </a><a href="#name-vetting-refinements" class="section-name selfRef">Vetting refinements</a>
         </h3>
-<p id="section-1.2-1">Although VVP interoperates with governance frameworks such as SHAKEN <span>[<a href="#ATIS-1000074" class="cite xref">ATIS-1000074</a>]</span>, it allows for a dramatic upgrade of at least one core component: the foundational vetting mechanism. The evidence format used by VVP is also the format used by the Verifiable Legal Entity Identifier (vLEI) standardized in <span>[<a href="#ISO-17442-3" class="cite xref">ISO-17442-3</a>]</span>. vLEIs implement a KYC approach advocated by the G20's Financial Stability Board, and overseen by the G20's Regulatory Oversight Committee. This approach follows LEI rules for KYC (<span>[<a href="#ISO-17442-1" class="cite xref">ISO-17442-1</a>]</span>), and today it's globally required in high-security, high-regulation, cross-border banking.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
-<p id="section-1.2-2">Millions of institutions have already undergone LEI vetting, and they already use the resulting evidence of their organizational identity in day-to-day behaviors all over the world. By adopting tooling that's compatible with the vLEI ecosystem, VVP gives adopters an intriguing option: <em>just skip the task of inventing a whole new vetting regime unique to telco, with its corresponding learning curve, costs, and legal and business adoption challenges.</em><a href="#section-1.2-2" class="pilcrow">¶</a></p>
-<p id="section-1.2-3">To be clear, VVP does not <em>require</em> that vLEIs be used for vetting. However, by choosing an evidence format that is high-precision and lossless enough to accommodate vLEIs, VVP lets telecom ecosystems opt in, either wholly or partially (see <a href="#interoperability" class="auto internal xref">7</a>), to trust bases that are already adopted, and that are not limited to any particular jurisdiction or to the telecom industry. It thus offers two-way, easy bridges between identity in phone calls and identity in financial, legal, technical, logistic, regulatory, web, email, and social media contexts.<a href="#section-1.2-3" class="pilcrow">¶</a></p>
+<p id="section-1.3-1">Although VVP interoperates with governance frameworks such as SHAKEN <span>[<a href="#ATIS-1000074" class="cite xref">ATIS-1000074</a>]</span>, it allows for a dramatic upgrade of at least one core component: the foundational vetting mechanism. The evidence format used by VVP is also the format used by the Verifiable Legal Entity Identifier (vLEI) standardized in <span>[<a href="#ISO-17442-3" class="cite xref">ISO-17442-3</a>]</span>. vLEIs implement a KYC approach advocated by the G20's Financial Stability Board, and overseen by the G20's Regulatory Oversight Committee. This approach follows LEI rules for KYC (<span>[<a href="#ISO-17442-1" class="cite xref">ISO-17442-1</a>]</span>), and today it's globally required in high-security, high-regulation, cross-border banking.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
+<p id="section-1.3-2">Millions of institutions have already undergone LEI vetting, and they already use the resulting evidence of their organizational identity in day-to-day behaviors all over the world. By adopting tooling that's compatible with the vLEI ecosystem, VVP gives adopters an intriguing option: <em>just skip the task of inventing a whole new vetting regime unique to telco, with its corresponding learning curve, costs, and legal and business adoption challenges.</em><a href="#section-1.3-2" class="pilcrow">¶</a></p>
+<p id="section-1.3-3">To be clear, VVP does not <em>require</em> that vLEIs be used for vetting. However, by choosing an evidence format that is high-precision and lossless enough to accommodate vLEIs, VVP lets telco ecosystems opt in, either wholly or partially (see <a href="#interoperability" class="auto internal xref">7</a>), to trust bases that are already adopted, and that are not limited to any particular jurisdiction or to the telco industry. It thus offers two-way, easy bridges between identity in phone calls and identity in financial, legal, technical, logistic, regulatory, web, email, and social media contexts.<a href="#section-1.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1751,7 +1764,7 @@ Validation also includes comparing data structure and values against the declare
       <h2 id="name-curating">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-curating" class="section-name selfRef">Curating</a>
       </h2>
-<p id="section-6-1">The evidence that's available in today's telecom ecosystems resembles some of the evidence described here, in concept. However, existing evidence has gaps, and its format is fragile. It requires direct trust in the proximate issuer, and it is typically organized for discovery; both characteristics lead to large, centralized registries at a regional or national level. These registries become a trusted third party, which defeats some of the purpose of creating decentralized and independently verifiable evidence in the first place. Sharing such evidence across jurisdiction boundaries requires regulatory compatibility and bilateral agreements. Sharing at scale is impractical at best, if not illegal.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">The evidence that's available in today's telco ecosystems resembles some of the evidence described here, in concept. However, existing evidence has gaps, and its format is fragile. It requires direct trust in the proximate issuer, and it is typically organized for discovery; both characteristics lead to large, centralized registries at a regional or national level. These registries become a trusted third party, which defeats some of the purpose of creating decentralized and independently verifiable evidence in the first place. Sharing such evidence across jurisdiction boundaries requires regulatory compatibility and bilateral agreements. Sharing at scale is impractical at best, if not illegal.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">How evidence is issued, propagated, quality-controlled, and referenced is therefore an important concern for this specification.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <div id="activities">
 <section id="section-6.1">
@@ -1842,7 +1855,7 @@ Validation also includes comparing data structure and values against the declare
 <a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-signature" class="section-name selfRef">Signature</a>
           </h4>
 <p id="section-6.2.2-1">A digital signature over arbitrary data D constitutes evidence that the signer processed D with a signing function that took D and the signer's private key as inputs: <code>signature = sign(D, privkey)</code>. The evidence can be verified by checking that the signature is bound to D and the public key of the signer: <code>valid = verify(signature, D, pubkey)</code>. Assuming that the signer has not lost unique control of the private key, and that cryptography is appropriately strong, we are justified in the belief that the signer must have taken deliberate action that required seeing an unmodified D in its entirety.<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.2.2-2">The assumption that a signer has control over their private keys may often be true (or at least believed, by the signer) at the time a signature is created. However, after key compromise, an attacker can create and sign evidence that purports to come from the current or an earlier time period, unless signatures are anchored to a data source that detects anachronisms. Lack of attention to this detail undermines the security of many credential schemes, including in telecom. VVP explicitly addresses this concern by anchoring signatures on non-ephemeral evidence to KELs (<a href="#KEL" class="auto internal xref">6.2.8</a>).<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-2">The assumption that a signer has control over their private keys may often be true (or at least believed, by the signer) at the time a signature is created. However, after key compromise, an attacker can create and sign evidence that purports to come from the current or an earlier time period, unless signatures are anchored to a data source that detects anachronisms. Lack of attention to this detail undermines the security of many credential schemes, including in telco. VVP explicitly addresses this concern by anchoring signatures on non-ephemeral evidence to KELs (<a href="#KEL" class="auto internal xref">6.2.8</a>).<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="aid">
@@ -2973,7 +2986,7 @@ Validation also includes comparing data structure and values against the declare
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">Much of the cybersecurity infrastructure used by VVP depends on KERI, which was invented by Sam Smith, and first implemented by Sam plus Phil Fairheller, Kevin Griffin, and other technical staff at GLEIF. Thanks to logistical support from Trust Over IP and the Linux Foundation, and to a diverse community of technical experts in those communities and in the Web of Trust group.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">Techniques that apply KERI to telecom use cases were developed by Daniel Hardman, Randy Warshaw, and Ruth Choueka, with additional contributions from Dmitrii Tychinin, Yaroslav Lazarev, Arshdeep Singh, and many other staff members at Provenant, Inc. Thanks as well to Ed Eykholt for multiple editorial improvements.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">Techniques that apply KERI to telco use cases were developed by Daniel Hardman, Randy Warshaw, and Ruth Choueka, with additional contributions from Dmitrii Tychinin, Yaroslav Lazarev, Arshdeep Singh, and many other staff members at Provenant, Inc. Thanks as well to Ed Eykholt for multiple editorial improvements.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
