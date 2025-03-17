@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                           12 March 2025
-Expires: 13 September 2025
+Intended status: Standards Track                           17 March 2025
+Expires: 18 September 2025
 
 
                        Verifiable Voice Protocol
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 September 2025.
+   This Internet-Draft will expire on 18 September 2025.
 
 Copyright Notice
 
@@ -652,15 +652,14 @@ Table of Contents
 
    The complete algorithm listed above is quite rigorous.  With no
    caches, it may take several seconds, much like a thorough validation
-   of a certificate chain.  However, because ACDC-based evidence is
-   indexed by SAID (6.2.1), any given ACDC only needs to be validated
-   once in its lifespan, which persists across key rotations and may
-   last as long as an AP (3.1.4) uses a phone number -- years or
-   decades.  This allows very aggressive caching.  And since the same
-   dossier is used to justify many outbound calls -- perhaps thousands
-   or millions of calls, for busy call centers -- and many dossiers will
-   reference the same issuers and issuees and their associated key
-   states and KELs (6.2.8), caching will produce huge benefits.
+   of a certificate chain.  However, much VVP evidence is stable for
+   long periods of time and lends itself to caching, subject to the
+   proviso that revocation freshness must be managed wisely.  Since the
+   same dossier is used to justify many outbound calls -- perhaps
+   thousands or millions of calls, for busy call centers -- and many
+   dossiers will reference the same issuers and issuees and their
+   associated key states and KELs (6.2.8), caching will produce huge
+   benefits.
 
    Furthermore, because SAIDs and their associated data (including links
    to other nodes in a data graph) have a tamper-evident relationship,
