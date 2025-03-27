@@ -19,7 +19,7 @@ Abstract
    technolgies such as SHAKEN, RCD, and BCID, VVP binds cryptographic
    evidence to a SIP INVITE, and verifies this evidence downstream.
    However, VVP builds from different technical and governance
-   assumptions, and uses better, richer evidence.  This allows VVP to
+   assumptions, and uses stronger, richer evidence.  This allows VVP to
    cross jurisdictional boundaries easily and robustly.  It also makes
    VVP simpler, more decentralized, cheaper to deploy and maintain, more
    private, more scalable, and higher assurance than alternatives.
