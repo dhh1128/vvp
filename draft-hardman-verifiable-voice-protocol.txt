@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                           17 March 2025
-Expires: 18 September 2025
+Intended status: Standards Track                           27 March 2025
+Expires: 28 September 2025
 
 
                        Verifiable Voice Protocol
@@ -29,9 +29,9 @@ Abstract
    passport for branded calling, when a call originates outside SHAKEN
    or RCD ecosystems.  VVP also works well as a standalone mechanism,
    independent of other solutions.  An extra benefit is that VVP enables
-   two-way evidence sharing with verifiable text and chat, as well as
-   with other industry verticals that need verifiability in non-telco
-   contexts.
+   two-way evidence sharing with verifiable text and chat (e.g., RCS and
+   vCon), as well as with other industry verticals that need
+   verifiability in non-telco contexts.
 
 About This Document
 
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 September 2025.
+   This Internet-Draft will expire on 28 September 2025.
 
 Copyright Notice
 
@@ -133,9 +133,10 @@ Table of Contents
        6.3.9.  Delegated signer credential
    7.  Interoperability
      7.1.  Certificates
-       7.1.1.  Cascaded mode
-       7.1.2.  Foundation mode
-     7.2.  Other credential formats
+     7.2.  Chat and conversations
+       7.2.1.  Cascaded mode
+       7.2.2.  Foundation mode
+     7.3.  Other credential formats
    8.  Security Considerations
    9.  Privacy
      9.1.  Graduated Disclosure
@@ -1279,7 +1280,7 @@ Table of Contents
 
    To achieve various design goals, a TNAlloc credential MUST be an
    ACDC, but this ACDC MAY be a transformation of a credential in
-   another format (e.g., a TNAuthList from [RFC8226]).  See 7.2.
+   another format (e.g., a TNAuthList from [RFC8226]).  See 7.3.
 
    An example TNAlloc credential and its schema are described in 12.3.
 
@@ -1347,7 +1348,27 @@ Table of Contents
    on VVP implementations) and non-normative language (suggesting how
    other solutions could react).
 
-7.1.1.  Cascaded mode
+7.2.  Chat and conversations
+
+   The dossier cited in a VVP passport may also be cited by an RCS
+   verification authority (VA), may include evidence that is also
+   submitted to a VA, or may consist of evidence created by a VA.  This
+   unlocks synergies between vetting for RCS ([GSMA-RCS]) and vetting
+   for voice.  It may also allow properly vetted RCS chatbots to make
+   verifiable voice calls, including calls that carry brand information
+   (see [RCD-DRAFT] and [CTIA-BCID]), distinguishing them with 100%
+   confidence from AI-driven voice scams.
+
+   When conversations are captured in rich containers such as vCon
+   ([VCON-DRAFT]), a VVP passport may be included (e.g., in the stir
+   field of a vCon), proving the identity of a calling party.  As long
+   as signatures over the data structure assert truthfully that the
+   passport was verified at the time of attachment, no replay attack is
+   possible, and all of VVP's guarantees transfer.  A VVP dossier by
+   itself can also provide permanent evidence of assertions as
+   attachments to a conversation.
+
+7.2.1.  Cascaded mode
 
    Verifiers who prefer to operate in certificate ecosystems such as
    SHAKEN and RCD can be satisfied by having an intermediary verify
@@ -1364,7 +1385,7 @@ Table of Contents
    always be A, since VVP conclusively proves the identity of the AP and
    OP.
 
-7.1.2.  Foundation mode
+7.2.2.  Foundation mode
 
    In another pattern called _foundation mode_, a VVP passport MAY
    itself contain an x5u header.  If it does, the x5u header MUST NOT be
@@ -1385,7 +1406,7 @@ Table of Contents
    key and the owner of a cert cannot be known to be valid except at the
    current moment.
 
-7.2.  Other credential formats
+7.3.  Other credential formats
 
    The stable evidence that drives VVP -- vetting credential (6.3.5),
    TNAlloc credential (6.3.6), brand credential (6.3.7), brand proxy
@@ -2264,6 +2285,12 @@ Table of Contents
               Credentials", December 2023, <https://github.com/
               provenant-dev/public-schema/blob/main/gcd/index.md>.
 
+   [GSMA-RCS] GSMA, "Rich Communication Suite - Advanced Communications
+              Services and Client Specification, version 11.0", October
+              2019, <https://www.gsma.com/solutions-and-
+              impact/technologies/networks/wp-content/uploads/2019/10/
+              RCC.07-v11.0.pdf>.
+
    [JSON-SCHEMA]
               JSON Schema Community, "JSON Schema Specification
               2020-12", June 2022,
@@ -2277,9 +2304,9 @@ Table of Contents
    [RCD-DRAFT]
               Wendt, C. and J. Peterson, "SIP Call-Info Parameters for
               Rich Call Data", Work in Progress, Internet-Draft, draft-
-              ietf-sipcore-callinfo-rcd-15, 25 February 2025,
+              ietf-sipcore-callinfo-rcd-16, 17 March 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-sipcore-
-              callinfo-rcd-15>.
+              callinfo-rcd-16>.
 
    [RCD-PASSPORT]
               Wendt, C. and J. Peterson, "PASSporT Extension for Rich
@@ -2327,6 +2354,13 @@ Table of Contents
               Provenant, "TN Allocation Credential", December 2024,
               <https://github.com/provenant-dev/public-schema/blob/main/
               tn-alloc/tn-alloc.schema.json>.
+
+   [VCON-DRAFT]
+              Petrie, D. and T. McCarthy-Howe, "The JSON format for vCon
+              - Conversation Data Container", Work in Progress,
+              Internet-Draft, draft-ietf-vcon-vcon-container-03, 19
+              March 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-vcon-vcon-container-03>.
 
    [W3C-DID]  Guy, A., Ed., Reed, D., Ed., Sporny, M., Ed., and M.
               Sabadello, Ed., "Decentralized Identifiers (DIDs) v1.0",
