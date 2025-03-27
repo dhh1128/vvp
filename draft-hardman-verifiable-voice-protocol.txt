@@ -132,8 +132,8 @@ Table of Contents
        6.3.8.  Brand proxy credential
        6.3.9.  Delegated signer credential
    7.  Interoperability
-     7.1.  Certificates
-     7.2.  Chat and conversations
+     7.1.  Chat and conversations
+     7.2.  Certificates
        7.2.1.  Cascaded mode
        7.2.2.  Foundation mode
      7.3.  Other credential formats
@@ -930,7 +930,7 @@ Table of Contents
 
    VVP emits and verifies a STIR PASSporT [RFC8225] that is fully
    compliant in all respects, except that it MAY omit the x5u header
-   that links it to an X509 certificate (see 7.1).
+   that links it to an X509 certificate (see 7.2).
 
    The passport is a form of evidence suitable for evaluation during the
    brief interval when a call is being initiated, and it is carefully
@@ -1119,7 +1119,7 @@ Table of Contents
    parse of the JWT.
 
    The headers MUST include alg, typ, ppt, and kid, as described in 4.2.
-   They MAY include other values, notably x5u (see 7.1).  The claims
+   They MAY include other values, notably x5u (see 7.2).  The claims
    MUST include orig, dest, iat, exp, and evd, and MAY include card,
    goal, call_reason, jti, origId, and other values (also described in
    4.2).  The signature MUST use all headers and all claims as input to
@@ -1340,15 +1340,7 @@ Table of Contents
    similar mechanisms.  However, it also provides easy bridges so value
    can flow to and from other ecosystems with similar goals.
 
-7.1.  Certificates
-
-   Certificates can add value to VVP, and VVP can add value to
-   certificate-based ecosystems or stacks.  In the rest of this section,
-   note the difference between normative language (imposing requirements
-   on VVP implementations) and non-normative language (suggesting how
-   other solutions could react).
-
-7.2.  Chat and conversations
+7.1.  Chat and conversations
 
    The dossier cited in a VVP passport may also be cited by an RCS
    verification authority (VA), may include evidence that is also
@@ -1367,6 +1359,14 @@ Table of Contents
    possible, and all of VVP's guarantees transfer.  A VVP dossier by
    itself can also provide permanent evidence of assertions as
    attachments to a conversation.
+
+7.2.  Certificates
+
+   Certificates can add value to VVP, and VVP can add value to
+   certificate-based ecosystems or stacks.  In the rest of this section,
+   note the difference between normative language (imposing requirements
+   on VVP implementations) and non-normative language (suggesting how
+   other solutions could react).
 
 7.2.1.  Cascaded mode
 
