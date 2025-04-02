@@ -1315,6 +1315,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.9">
                     <p id="section-toc.1-1.6.2.3.2.9.1"><a href="#section-6.3.9" class="auto internal xref">6.3.9</a>.  <a href="#name-delegated-signer-credential" class="internal xref">Delegated signer credential</a></p>
 </li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.10">
+                    <p id="section-toc.1-1.6.2.3.2.10.1"><a href="#section-6.3.10" class="auto internal xref">6.3.10</a>. <a href="#name-additional-credential-types" class="internal xref">Additional credential types</a></p>
+</li>
                 </ul>
 </li>
             </ul>
@@ -2091,7 +2094,7 @@ Validation also includes comparing data structure and values against the declare
 <a href="#section-6.3.3" class="section-number selfRef">6.3.3. </a><a href="#name-accountable-party-evidence" class="section-name selfRef">Accountable Party Evidence</a>
           </h4>
 <p id="section-6.3.3-1">The dossier <span class="bcp14">MUST</span> include at least what is called <em>accountable party evidence</em> (<em>APE</em>).<a href="#section-6.3.3-1" class="pilcrow">¶</a></p>
-<p id="section-6.3.3-2">APE consists of several credentials, explored in detail below. It <span class="bcp14">MUST</span> include a vetting credential for the AP. It <span class="bcp14">SHOULD</span> include a TNAlloc credential that proves RTU. Normally the RTU <span class="bcp14">MUST</span> be assigned to the AP; however, if a proxy is the OP and uses their own phone number, the RTU <span class="bcp14">MUST</span> be assigned to the OP instead. If the AP intends to contextualize the call with a brand, it <span class="bcp14">MUST</span> include a brand credential for the AP. (In cases where callers are private individuals, "brand" maps to descriptive information about the individual, as imagined in mechanisms like VCard <span>[<a href="#RFC6350" class="cite xref">RFC6350</a>]</span> or JCard <span>[<a href="#RFC7095" class="cite xref">RFC7095</a>]</span>.) If no brand credential is present, verifiers <span class="bcp14">MUST NOT</span> impute a brand to the call on the basis of any VVP guarantees.<a href="#section-6.3.3-2" class="pilcrow">¶</a></p>
+<p id="section-6.3.3-2">APE consists of several credentials, explored in detail below. It <span class="bcp14">MUST</span> include a vetting credential for the AP. It <span class="bcp14">SHOULD</span> include a TNAlloc credential that proves RTU. Normally the RTU <span class="bcp14">MUST</span> be assigned to the AP; however, if a proxy is the OP and uses their own phone number, the RTU <span class="bcp14">MUST</span> be assigned to the OP instead. If the AP intends to contextualize the call with a brand, it <span class="bcp14">MUST</span> include a brand credential for the AP. (In cases where callers are private individuals, "brand" maps to descriptive information about the individual, as imagined in mechanisms like VCard <span>[<a href="#RFC6350" class="cite xref">RFC6350</a>]</span> or JCard <span>[<a href="#RFC7095" class="cite xref">RFC7095</a>]</span>.) If no brand credential is present, verifiers <span class="bcp14">MUST NOT</span> impute a brand to the call on the basis of any VVP guarantees. APE <span class="bcp14">MAY</span> also include evidence that will aid in settlement.<a href="#section-6.3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="DE">
@@ -2101,9 +2104,10 @@ Validation also includes comparing data structure and values against the declare
           </h4>
 <p id="section-6.3.4-1">When a private individual makes a call with VVP, they might be both the AP and the OP. In such cases, we expect their AID to be the recipient or issuee of all the APE, and no backing evidence beyond the APE may be necessary. However, in business contexts, it will almost always be true that the OP role is played by a delegate. In such conditions, evidence must also include proof that this indirection is valid. We call this <em>delegation evidence</em> (<em>DE</em>).<a href="#section-6.3.4-1" class="pilcrow">¶</a></p>
 <p id="section-6.3.4-2">DE is nearly always required when the AP is an organization, because the cryptographic identifier for the organization as a legal entity is typically not the same as the cryptographic identifier for the organization's automated software that prepares SIP INVITEs. DE can thus distinguish between Acme Corporation in general, and software operated by Acme's IT department for the express purpose of signing voice traffic. The former has a vetting credential and legal accountability, and can act as the company to publish press releases, prepare invoices, spend money, and make attestations to regulators; the latter should only be able to sign outbound voice calls on Acme's behalf. Failing to make this distinction creates serious cybersecurity risks.<a href="#section-6.3.4-2" class="pilcrow">¶</a></p>
+<p id="section-6.3.4-3">Delegation evidence may also be used to prove that an AI-powered agent is empowered to make phone calls on behalf of an AP.<a href="#section-6.3.4-3" class="pilcrow">¶</a></p>
 <span id="name-sample-evidence-graph-op-ki"></span><figure id="figure-3">
-            <div id="section-6.3.4-3.1">
-              <div class="alignLeft art-svg artwork" id="section-6.3.4-3.1.1">
+            <div id="section-6.3.4-4.1">
+              <div class="alignLeft art-svg artwork" id="section-6.3.4-4.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="528" width="512" viewBox="0 0 512 528" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                   <path d="M 24,32 L 24,128" fill="none" stroke="black"></path>
                   <path d="M 24,240 L 24,272" fill="none" stroke="black"></path>
@@ -2208,14 +2212,14 @@ Validation also includes comparing data structure and values against the declare
                     <text x="68" y="484">logo</text>
                     <text x="124" y="500">...more attributes</text>
                   </g>
-                </svg><a href="#section-6.3.4-3.1.1" class="pilcrow">¶</a>
+                </svg><a href="#section-6.3.4-4.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-sample-evidence-graph-op-ki" class="selfRef">Sample evidence graph; OP kid could bind to APE or DE</a>
             </figcaption></figure>
-<p id="section-6.3.4-4">Where DE exists, the APE will identify and authorize the AP, but the OOBI in the <code>kid</code> claim of the passport will identify the OP, and these two parties will be different. Therefore, the DE in the dossier <span class="bcp14">MUST</span> include a delegated signer credential that authorizes the OP to act on the AP's behalf and that stipulates the constraints that govern this delegation. In addition to the vetting credential for the AP, which is required, it <span class="bcp14">SHOULD</span> also include a vetting credential for the OP, that proves the OP's identity. If the APE includes a brand credential, then the DE <span class="bcp14">MUST</span> also include a brand proxy credential, proving that the OP not only can use the AP's allocated phone number, but has AP's permission to project the AP's brand while doing so.<a href="#section-6.3.4-4" class="pilcrow">¶</a></p>
-<p id="section-6.3.4-5">The passport-specific signature <span class="bcp14">MUST</span> come from the OP, not the OSP or any other party. The OP can generate this signature in its on-prem or cloud PBX, using keys that it controls. It is crucial that the distinction between OP and AP be transparent, with the relationship proved by strong evidence that the AP can create or revoke easily, in a self-service manner.<a href="#section-6.3.4-5" class="pilcrow">¶</a></p>
+<p id="section-6.3.4-5">Where DE exists, the APE will identify and authorize the AP, but the OOBI in the <code>kid</code> claim of the passport will identify the OP, and these two parties will be different. Therefore, the DE in the dossier <span class="bcp14">MUST</span> include a delegated signer credential that authorizes the OP to act on the AP's behalf and that stipulates the constraints that govern this delegation. In addition to the vetting credential for the AP, which is required, it <span class="bcp14">SHOULD</span> also include a vetting credential for the OP, that proves the OP's identity. If the APE includes a brand credential, then the DE <span class="bcp14">MUST</span> also include a brand proxy credential, proving that the OP not only can use the AP's allocated phone number, but has AP's permission to project the AP's brand while doing so.<a href="#section-6.3.4-5" class="pilcrow">¶</a></p>
+<p id="section-6.3.4-6">The passport-specific signature <span class="bcp14">MUST</span> come from the OP, not the OSP or any other party. The OP can generate this signature in its on-prem or cloud PBX, using keys that it controls. It is crucial that the distinction between OP and AP be transparent, with the relationship proved by strong evidence that the AP can create or revoke easily, in a self-service manner.<a href="#section-6.3.4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="vetting-credential">
@@ -2266,6 +2270,15 @@ Validation also includes comparing data structure and values against the declare
           </h4>
 <p id="section-6.3.9-1">A delegated signer credential proves that automation running under the control of the OP has been authorized by the AP to originate VVP traffic (and thus, sign VVP passports) on its behalf.<a href="#section-6.3.9-1" class="pilcrow">¶</a></p>
 <p id="section-6.3.9-2">An example delegated signer credential and its schema are shown in <a href="#dsig-cred-sample" class="auto internal xref">12.6</a>.<a href="#section-6.3.9-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="additional-credential-types">
+<section id="section-6.3.10">
+          <h4 id="name-additional-credential-types">
+<a href="#section-6.3.10" class="section-number selfRef">6.3.10. </a><a href="#name-additional-credential-types" class="section-name selfRef">Additional credential types</a>
+          </h4>
+<p id="section-6.3.10-1">New credential types can be added to a dossier, to answer novel questions for verifiers, without changing any core characteristics of VVP.<a href="#section-6.3.10-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.10-2">For example, a credential could be attached to a dossier to assist with questions about settlement (how the terminating service provider will be paid to connect the call). It might document the relationship between an AP and one or more financial clearinghouses. Or a credential could be attached to a dossier to prove that the accountable party empowered an AI powered agent to make calls on its behalf (analogous to how companies empower chatbots in RCS).<a href="#section-6.3.10-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2319,7 +2332,7 @@ Validation also includes comparing data structure and values against the declare
 <a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-other-credential-formats" class="section-name selfRef">Other credential formats</a>
         </h3>
 <p id="section-7.3-1">The stable evidence that drives VVP -- vetting credential (<a href="#vetting-credential" class="auto internal xref">6.3.5</a>), TNAlloc credential (<a href="#tnalloc-credential" class="auto internal xref">6.3.6</a>), brand credential (<a href="#brand-credential" class="auto internal xref">6.3.7</a>), brand proxy credential (<a href="#brand-proxy-credential" class="auto internal xref">6.3.8</a>), and delegated signer credential (<a href="#delegated-signer-credential" class="auto internal xref">6.3.9</a>) -- <span class="bcp14">MUST</span> all be ACDCs. This is because only when the data in these credentials is modeled as an ACDC is it associated with permanent identities that possess appropriate security guarantees.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.3-2">However, VVP can easily be driven by other approaches to evidence, treating the ACDCs as a somewhat secondary format transformation. In such a case, a <em>bridging party</em> plays a pivotal role. This party <span class="bcp14">MUST</span> verify foreign evidence (e.g., W3C verifiable credentials <span>[<a href="#W3C-VC" class="cite xref">W3C-VC</a>]</span>), and then issue ACDCs that derive from it. It <span class="bcp14">MAY</span> radically transform the data in the process (e.g., combining or splitting credentials, changing schemas or data values).<a href="#section-7.3-2" class="pilcrow">¶</a></p>
+<p id="section-7.3-2">However, VVP can easily be driven by other approaches to evidence, treating the ACDCs as a somewhat secondary format transformation. In such a case, a <em>bridging party</em> plays a pivotal role. This party <span class="bcp14">MUST</span> verify foreign evidence (e.g., W3C verifiable credentials <span>[<a href="#W3C-VC" class="cite xref">W3C-VC</a>]</span>), and then issue ACDCs that derive from it (e.g., using <span>[<a href="#CITATION-SCHEMA" class="cite xref">CITATION-SCHEMA</a>]</span>). It <span class="bcp14">MAY</span> radically transform the data in the process (e.g., combining or splitting credentials, changing schemas or data values).<a href="#section-7.3-2" class="pilcrow">¶</a></p>
 <p id="section-7.3-3">This transformation from foreign evidence to ACDCs is very flexible, and allows for tremendous interoperability. On the calling side, any ecosystem that deals in cryptographic evidence can provide input to VVP, no matter what evidence mechanisms they prefer.<a href="#section-7.3-3" class="pilcrow">¶</a></p>
 <p id="section-7.3-4">(On the receiving side, the information carried via ACDCs in VVP could be transformed again, with a second bridging party, to enable even more interoperability. However, the goals of such a secondary transformation are undefined by VVP, so the constraints and rules of the transformation are out of scope here.)<a href="#section-7.3-4" class="pilcrow">¶</a></p>
 <p id="section-7.3-5">All VVP stakeholders need to understand that accepting foreign evidence does much more than alter format. Bridging is not a simple conversion or reissuance. It replaces identifiers (e.g., DIDs as specified in <span>[<a href="#W3C-DID" class="cite xref">W3C-DID</a>]</span> with AIDs as specified in <span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>). The new identifiers have different lifecycles and different trust bases than the original. Bridging also changes the <em>meaning</em> of the credential. Foreign evidence directly asserts claims backed by the reputation of its original issuer. A new ACDC embodies a claim by the bridging party, that they personally verified foreign evidence according to foreign evidence rules, at a given moment. It cites the foreign evidence as a source, and may copy claims into the ACDC, but the bridging party is only asserting that they verified the original issuer's commitment to the claims, not that the bridging party commits to those claims.<a href="#section-7.3-5" class="pilcrow">¶</a></p>
@@ -2918,6 +2931,10 @@ Validation also includes comparing data structure and values against the declare
 <dt id="ARIES-RFC-0519">[ARIES-RFC-0519]</dt>
         <dd>
 <span class="refAuthor">Hardman, D.</span>, <span class="refTitle">"Aries RFC 0519: Goal Codes"</span>, <time datetime="2021-04" class="refDate">April 2021</time>, <span>&lt;<a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0519-goal-codes/README.md">https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0519-goal-codes/README.md</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CITATION-SCHEMA">[CITATION-SCHEMA]</dt>
+        <dd>
+<span class="refAuthor">Hardman, D.</span>, <span class="refTitle">"Citation Schema"</span>, <time datetime="2025-04" class="refDate">April 2025</time>, <span>&lt;<a href="https://github.com/provenant-dev/public-schema/blob/main/citation/index.md">https://github.com/provenant-dev/public-schema/blob/main/citation/index.md</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="CTIA-BCID">[CTIA-BCID]</dt>
         <dd>
