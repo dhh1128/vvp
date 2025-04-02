@@ -1049,11 +1049,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">VVP</td>
-<td class="right">March 2025</td>
+<td class="right">April 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Hardman</td>
-<td class="center">Expires 28 September 2025</td>
+<td class="center">Expires 4 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-hardman-verifiable-voice-protocol-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-27" class="published">27 March 2025</time>
+<time datetime="2025-04-02" class="published">2 April 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-28">28 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-10-04">4 October 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1116,7 +1116,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1520,9 +1520,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-3.1.3" class="section-number selfRef">3.1.3. </a><a href="#name-originating-party" class="section-name selfRef">Originating Party</a>
           </h4>
 <p id="section-3.1.3-1">An <em>originating party</em> (<em>OP</em>) controls the first <em>session border controller</em> (<em>SBC</em>) that processes a call, and therefore builds the VVP passport (<a href="#passport" class="auto internal xref">6.2.6</a>) that cites the evidence that authenticates and authorizes the call.<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-2">It may be tempting to equate the OP with "the caller", and in some ways this perspective might reflect truth. However, this simple equivalence lacks nuance and doesn't always hold. In a VVP context, it is more accurate to say that the OP creates a SIP INVITE <span>[<a href="#RFC3261" class="cite xref">RFC3261</a>]</span> with explicit, provable authorization from the party accountable for calls on the originating phone number.<a href="#section-3.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-2">It may be tempting to equate the OP with "the caller", and in some ways this perspective might reflect truth. However, this simple equivalence lacks nuance and doesn't always hold. In a VVP context, it is more accurate to say that the OP creates a SIP INVITE <span>[<a href="#RFC3261" class="cite xref">RFC3261</a>]</span> with explicit, provable authorization from the party accountable for calls on the originating phone number. The OP originates the VVP protocol, <em>not</em> the call on the handset.<a href="#section-3.1.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.1.3-3">It may also be tempting to associate the OP with an organizational identity like "Company X". While this is not wrong, and is in fact used in high-level descriptions in this specification, in its most careful definition, the cryptographic identity of an OP is more narrow. It typically corresponds to a single service operated by an IT department within (or outsourced but operating at the behest of) Company X, rather than to Company X generically. This narrowness limits cybersecurity risk, because a single service operated by Company X needs far fewer privileges than the company as a whole. Failing to narrow identity appropriately creates vulnerabilities in some alternative approaches. The evidence securing VVP <span class="bcp14">MUST</span> therefore prove a valid relationship between the OP's narrow identity and the broader legal entities that stakeholders more naturally assume and understand (see <a href="#DE" class="auto internal xref">6.3.4</a>).<a href="#section-3.1.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-4">The direct service provider of an OP is its <em>originating service provider</em> (<em>OSP</em>). For a given phone call, there may be complexity between the hardware that begins a call and the SBC of the OP -- and there may also be many layers, boundaries, and transitions between OSP and TSP.<a href="#section-3.1.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-4">The service provider associated with an OP is called the <em>originating service provider</em> (<em>OSP</em>). For a given phone call, there may be complexity between the hardware that begins a call and the SBC of the OP -- and there may also be many layers, boundaries, and transitions between OSP and TSP.<a href="#section-3.1.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="AP">

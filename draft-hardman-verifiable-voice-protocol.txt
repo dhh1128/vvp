@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                           27 March 2025
-Expires: 28 September 2025
+Intended status: Standards Track                            2 April 2025
+Expires: 4 October 2025
 
 
                        Verifiable Voice Protocol
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 September 2025.
+   This Internet-Draft will expire on 4 October 2025.
 
 Copyright Notice
 
@@ -310,7 +310,8 @@ Table of Contents
    equivalence lacks nuance and doesn't always hold.  In a VVP context,
    it is more accurate to say that the OP creates a SIP INVITE [RFC3261]
    with explicit, provable authorization from the party accountable for
-   calls on the originating phone number.
+   calls on the originating phone number.  The OP originates the VVP
+   protocol, _not_ the call on the handset.
 
    It may also be tempting to associate the OP with an organizational
    identity like "Company X".  While this is not wrong, and is in fact
@@ -327,11 +328,11 @@ Table of Contents
    and the broader legal entities that stakeholders more naturally
    assume and understand (see 6.3.4).
 
-   The direct service provider of an OP is its _originating service
-   provider_ (_OSP_).  For a given phone call, there may be complexity
-   between the hardware that begins a call and the SBC of the OP -- and
-   there may also be many layers, boundaries, and transitions between
-   OSP and TSP.
+   The service provider associated with an OP is called the _originating
+   service provider_ (_OSP_).  For a given phone call, there may be
+   complexity between the hardware that begins a call and the SBC of the
+   OP -- and there may also be many layers, boundaries, and transitions
+   between OSP and TSP.
 
 3.1.4.  Accountable Party
 
