@@ -1351,8 +1351,8 @@ Table of Contents
    will be paid to connect the call).  It might document the
    relationship between an AP and one or more financial clearinghouses.
    Or a credential could be attached to a dossier to prove that the AP
-   empowered an AI powered agent to make calls on its behalf (analogous
-   to how chatbots represent companies in RCS contexts).
+   empowered an AI agent to make calls on its behalf (analogous to how
+   chatbots represent companies in RCS contexts).
 
 7.  Interoperability
 
