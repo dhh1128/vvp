@@ -1347,14 +1347,14 @@ Table of Contents
    characteristics of VVP.
 
    For example, a credential could be attached to a dossier to prove
-   that the caller is a human being instead of an AI (see [F2F-SCHEMA]),
-   or a credential could be attached to a dossier to prove that the AP
-   empowered an AI agent to make calls on its behalf (analogous to how
-   chatbots represent companies in RCS contexts).  An additional
-   credential could assist with questions about settlement (how the
-   terminating service provider will be paid to connect the call).  It
-   might document the relationship between an AP and one or more
-   financial clearinghouses.
+   that the caller is a human being instead of an AI (see [F2F-SCHEMA]
+   and [PERSONHOOD-CRED]), or a credential could be attached to a
+   dossier to prove that the AP empowered an AI agent to make calls on
+   its behalf (analogous to how chatbots represent companies in RCS
+   contexts).  An additional credential could assist with questions
+   about settlement (how the terminating service provider will be paid
+   to connect the call).  It might document the relationship between an
+   AP and one or more financial clearinghouses.
 
 7.  Interoperability
 
@@ -2333,6 +2333,12 @@ Table of Contents
               GLEIF, "Legal Entity vLEI Credential", November 2023,
               <https://github.com/GLEIF-IT/vLEI-schema/blob/main/legal-
               entity-vLEI-credential.json>.
+
+   [PERSONHOOD-CRED]
+              al., S. A. et., "Personhood credentials: Artificial
+              intelligence and the value of privacy-preserving tools to
+              distinguish who is real online", August 2024,
+              <https://arxiv.org/pdf/2408.07892>.
 
    [RCD-DRAFT]
               Wendt, C. and J. Peterson, "SIP Call-Info Parameters for
