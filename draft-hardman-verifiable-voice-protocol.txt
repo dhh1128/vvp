@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                            2 April 2025
-Expires: 4 October 2025
+Intended status: Standards Track                           10 April 2025
+Expires: 12 October 2025
 
 
                        Verifiable Voice Protocol
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 October 2025.
+   This Internet-Draft will expire on 12 October 2025.
 
 Copyright Notice
 
@@ -1346,13 +1346,15 @@ Table of Contents
    of novel questions for verifiers, without changing any core
    characteristics of VVP.
 
-   For example, a credential could be attached to a dossier to assist
-   with questions about settlement (how the terminating service provider
-   will be paid to connect the call).  It might document the
-   relationship between an AP and one or more financial clearinghouses.
-   Or a credential could be attached to a dossier to prove that the AP
+   For example, a credential could be attached to a dossier to prove
+   that the caller is a human being instead of an AI (see [F2F-SCHEMA]),
+   or a credential could be attached to a dossier to prove that the AP
    empowered an AI agent to make calls on its behalf (analogous to how
-   chatbots represent companies in RCS contexts).
+   chatbots represent companies in RCS contexts).  An additional
+   credential could assist with questions about settlement (how the
+   terminating service provider will be paid to connect the call).  It
+   might document the relationship between an AP and one or more
+   financial clearinghouses.
 
 7.  Interoperability
 
@@ -2305,6 +2307,11 @@ Table of Contents
               Singh, A., "Verifiable Voice Dossier", January 2025,
               <https://github.com/provenant-dev/public-schema/blob/main/
               vvp-dossier/vvp-dossier.schema.json>.
+
+   [F2F-SCHEMA]
+              Hardman, D., "Face-to-Face Credentials", December 2023,
+              <https://github.com/provenant-dev/public-schema/blob/main/
+              face-to-face/index.md>.
 
    [GCD-SCHEMA]
               Hardman, D., "Generalized Cooperative Delegation (GCD)
