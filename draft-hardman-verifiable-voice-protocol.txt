@@ -1343,7 +1343,7 @@ Table of Contents
 6.3.10.  Additional credential types
 
    New credential types can be added to a dossier, to answer any number
-   of novel questions for verifiers, without changing any core
+   of novel questions for verifiers, without changing the core
    characteristics of VVP.
 
    For example, a credential could be attached to a dossier to prove
@@ -2335,10 +2335,17 @@ Table of Contents
               entity-vLEI-credential.json>.
 
    [PERSONHOOD-CRED]
-              al., S. A. et., "Personhood credentials: Artificial
-              intelligence and the value of privacy-preserving tools to
-              distinguish who is real online", August 2024,
-              <https://arxiv.org/pdf/2408.07892>.
+              Adler, S., Hitzig, Z., Jain, S., Brewer, C., Chang, W.,
+              DiResta, R., Lazzarin, E., McGregor, S., Seltzer, W.,
+              Siddarth, D., Soliman, N., South, T., Spelliscy, C.,
+              Sporny, M., Srivastava, V., Bailey, J., Christian, B.,
+              Critch, A., Falcon, R., Flanagan, H., Duffy, K. H., Ho,
+              E., Leibowicz, C. R., Nadhamuni, S., Rozenshtein, A. Z.,
+              Schnurr, D., Shapiro, E., Strahm, L., Trask, A., Weinberg,
+              Z., Whitney, C., and T. Zick, "Personhood credentials:
+              Artificial intelligence and the value of privacy-
+              preserving tools to distinguish who is real online",
+              August 2024, <https://arxiv.org/pdf/2408.07892>.
 
    [RCD-DRAFT]
               Wendt, C. and J. Peterson, "SIP Call-Info Parameters for
