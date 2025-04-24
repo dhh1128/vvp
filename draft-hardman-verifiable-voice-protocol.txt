@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                           10 April 2025
-Expires: 12 October 2025
+Intended status: Standards Track                           24 April 2025
+Expires: 26 October 2025
 
 
                        Verifiable Voice Protocol
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 October 2025.
+   This Internet-Draft will expire on 26 October 2025.
 
 Copyright Notice
 
@@ -98,6 +98,7 @@ Table of Contents
    5.  Verifying
      5.1.  Algorithm
      5.2.  Planning for efficiency
+     5.3.  Historical analysis
    6.  Curating
      6.1.  Activities
        6.1.1.  Witnessing and watching
@@ -567,39 +568,45 @@ Table of Contents
 5.1.  Algorithm
 
    When a verifier encounters a VVP passport, they SHOULD verify by
-   using an algorithm similar to the following.  (Optimizations may
+   using an algorithm similar to the following.  Optimizations may
    combine or reorder operations, but MUST achieve all of the same
-   guarantees, in order to be compliant implementations.)
+   guarantees, in order to be compliant implementations.
 
-   1.   Confirm that the orig and dest fields match contextual
+   1.   Analyze the iat and exp claims to evaluate timing.  Confirm that
+        exp is greater than iat and also greater than the reference time
+        for analysis (e.g., _now_), and that iat is close enough to the
+        reference time to satisfy the verifier's tolerance for replays.
+        (A replay attack would have to call from the same orig to the
+        same dest with the same iat, within whatever window the verifier
+        accepts.  Thirty seconds is a recommended default value.)
+
+   2.   Confirm that the orig, dest, and iat claims match contextual
         observations and other SIP metadata.  That is, the passport
         appears aligned with what is known about the call from external
-        sources.  This is not a cryptographic analysis.
+        sources.
 
-   2.   Extract the kid field.
+   3.   Extract the kid header.
 
-   3.   Fetch the key state for the OP from the OOBI in kid.  Caches may
-        be used to optimize this, as long as they meet the freshness
-        standards of the verifier.  Normally, the current key state is
-        checked, but the OOBI returns a data stream that also allows
-        historical analysis.
+   4.   Fetch the key state for the OP at the reference time from the
+        OOBI in kid.  Caches may be used to optimize this, as long as
+        they meet the freshness requirements of the verifier.
 
-   4.   Use the public key of the OP to verify that the signature on the
+   5.   Use the public key of the OP to verify that the signature on the
         passport is valid for that key state.  On success, the verifier
         knows that the OP is at least making an assertion about the
-        identity and authorizations of the AP.  (This is approximately
-        the level of assurance provided by existing alternatives to
-        VVP.)
+        identity and authorizations of the AP.  (When reference time is
+        now, this is approximately the level of assurance provided by
+        existing alternatives to VVP.)
 
-   5.   Extract the evd field, which references the dossier (6.3.2) that
+   6.   Extract the evd field, which references the dossier (6.3.2) that
         constitutes backing evidence.
 
-   6.   Use the SAID (6.2.1) of the dossier as a lookup key to see
+   7.   Use the SAID (6.2.1) of the dossier as a lookup key to see
         whether the dossier has already been fully validated.  Since
         dossiers are highly stable, caching dossier validations is
         recommended.
 
-   7.   If the dossier requires full validation, perform it.  Validation
+   8.   If the dossier requires full validation, perform it.  Validation
         includes checking the signature on each ACDC in the dossier's
         data graph against the key state of its respective issuer at the
         time the issuance occurred.  Key state is proved by the KEL
@@ -619,34 +626,34 @@ Table of Contents
         artifacts MUST also be checked (e.g., proving that the issuer of
         one piece is the issuee of another piece).
 
-   8.   Check to see whether the revocation status of the dossier and
-        each item it depends on has been tested recently enough to
-        satisfy the verifier's freshness standards.  If no, check for
-        revocations anywhere in the data graph of the dossier.
-        Revocations are not the same as key rotations.  They can be
-        checked much more quickly than doing a full validation.
-        Revocation checks can also be cached, possibly with a different
-        freshness threshold than the main evidence.
+   9.   Check to see whether the revocation status of the dossier and
+        each item it depends on has been tested recently enough, at the
+        reference time, to satisfy the verifier's freshness
+        requirements.  If no, check for revocations anywhere in the data
+        graph of the dossier.  Revocations are not the same as key
+        rotations.  They can be checked much more quickly than doing a
+        full validation.  Revocation checks can also be cached, possibly
+        with a different freshness threshold than the main evidence.
 
-   9.   Assuming that the dossier is valid and has no breakages due to
+   10.  Assuming that the dossier is valid and has no breakages due to
         revocation, confirm that the OP is authorized to sign the
         passport.  If there is no delegation evidence (6.3.4), the AP
         and the OP MUST be identical, and the OP MUST be the issuee of
         the vetting credential; otherwise, the OP MUST be the issuee of
         a delegated signing credential for which the issuer is the AP.
 
-   10.  Extract the orig field and compare it to the TNAlloc credential
+   11.  Extract the orig field and compare it to the TNAlloc credential
         (6.3.6) cited in the dossier (6.3.2) to confirm that the AP
         (3.1.4) -- or, if OP is not equal to AP and OP is using their
         own number, the OP (3.1.3) -- has the right to originate calls
         with this number.
 
-   11.  If the passport includes non-null values for the optional card
+   12.  If the passport includes non-null values for the optional card
         or goal fields, extract that information and check that the
         brand attributes claimed for the call are justified by a brand
         credential (6.3.7) in the dossier.
 
-   12.  Check any business logic.  For example, if the delegated signer
+   13.  Check any business logic.  For example, if the delegated signer
         credential says that the OP can only call on behalf of the AP
         during certain hours, or in certain geos, check those attributes
         of the call.
@@ -681,6 +688,30 @@ Table of Contents
    9).  Simple opportunistic, uncoordinated reuse (e.g., in or across
    the datacenters of TSPs) will arise spontaneously and will
    dramatically improve the scale and efficiency of the system.
+
+5.3.  Historical analysis
+
+   Normally, the verification algorithm determines whether the passport
+   verifies _now_. (This is the only evaluation that's valid for most
+   JWTs, because they depend on ephemeral key state fetched just in time
+   from x5u).  However, a VVP passport can do more.  Its kid header
+   references a KEL for the delegated signer's AID, and its evd header
+   references a dossier that links to the AP's AID, and thence to its
+   KEL (see 6.2.8).  These data structures provide key state transitions
+   that are timestamped -- both by the controllers of the AIDs, and by
+   their independent witnesses.  Although the timestamps are not
+   guaranteed to be perfectly synchronized, they can be compared to
+   establish fuzzy transition times and to detect duplicity.
+
+   Using this historical information, it becomes possible to ask whether
+   a VVP passport verified at an arbitrary moment in the past.  In such
+   framings, the reference time from the verification algorithm is
+   _then_, not _now_. In the normal case where _then_ falls outside a
+   fuzzy range, answers about key state are clear to all observers.  In
+   the rare cases where _then_ falls inside a fuzzy range, a state
+   transition was underway but not yet universally known, and a verifier
+   can compute the key state (and thence, the outcome of the
+   verification algorithm) according to their preferred interpretation.
 
 6.  Curating
 
@@ -2350,9 +2381,9 @@ Table of Contents
    [RCD-DRAFT]
               Wendt, C. and J. Peterson, "SIP Call-Info Parameters for
               Rich Call Data", Work in Progress, Internet-Draft, draft-
-              ietf-sipcore-callinfo-rcd-16, 17 March 2025,
+              ietf-sipcore-callinfo-rcd-19, 21 April 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-sipcore-
-              callinfo-rcd-16>.
+              callinfo-rcd-19>.
 
    [RCD-PASSPORT]
               Wendt, C. and J. Peterson, "PASSporT Extension for Rich

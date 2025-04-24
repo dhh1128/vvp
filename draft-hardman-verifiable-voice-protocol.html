@@ -19,7 +19,7 @@
 <meta content="draft-hardman-verifiable-voice-protocol-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.28.1
-    Python 3.12.9
+    Python 3.12.10
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
@@ -1053,7 +1053,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Hardman</td>
-<td class="center">Expires 12 October 2025</td>
+<td class="center">Expires 26 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-hardman-verifiable-voice-protocol-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-04-10" class="published">10 April 2025</time>
+<time datetime="2025-04-24" class="published">24 April 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-10-12">12 October 2025</time></dd>
+<dd class="expires"><time datetime="2025-10-26">26 October 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1116,7 +1116,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1209,6 +1209,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
                 <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-planning-for-efficiency" class="internal xref">Planning for efficiency</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-historical-analysis" class="internal xref">Historical analysis</a></p>
 </li>
             </ul>
 </li>
@@ -1708,47 +1711,50 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-algorithm">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-algorithm" class="section-name selfRef">Algorithm</a>
         </h3>
-<p id="section-5.1-1">When a verifier encounters a VVP passport, they <span class="bcp14">SHOULD</span> verify by using an algorithm similar to the following. (Optimizations may combine or reorder operations, but <span class="bcp14">MUST</span> achieve all of the same guarantees, in order to be compliant implementations.)<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-1">When a verifier encounters a VVP passport, they <span class="bcp14">SHOULD</span> verify by using an algorithm similar to the following. Optimizations may combine or reorder operations, but <span class="bcp14">MUST</span> achieve all of the same guarantees, in order to be compliant implementations.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-5.1-2">
 <li id="section-5.1-2.1">
-            <p id="section-5.1-2.1.1">Confirm that the <code>orig</code> and <code>dest</code> fields match contextual observations and other SIP metadata. That is, the passport appears aligned with what is known about the call from external sources. This is not a cryptographic analysis.<a href="#section-5.1-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.1.1">Analyze the <code>iat</code> and <code>exp</code> claims to evaluate timing. Confirm that <code>exp</code> is greater than <code>iat</code> and also greater than the reference time for analysis (e.g., <em>now</em>), and that <code>iat</code> is close enough to the reference time to satisfy the verifier's tolerance for replays. (A replay attack would have to call from the same <code>orig</code> to the same <code>dest</code> with the same <code>iat</code>, within whatever window the verifier accepts. Thirty seconds is a recommended default value.)<a href="#section-5.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.2">
-            <p id="section-5.1-2.2.1">Extract the <code>kid</code> field.<a href="#section-5.1-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.2.1">Confirm that the <code>orig</code>, <code>dest</code>, and <code>iat</code> claims match contextual observations and other SIP metadata. That is, the passport appears aligned with what is known about the call from external sources.<a href="#section-5.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.3">
-            <p id="section-5.1-2.3.1">Fetch the key state for the OP from the OOBI in <code>kid</code>. Caches may be used to optimize this, as long as they meet the freshness standards of the verifier. Normally, the current key state is checked, but the OOBI returns a data stream that also allows historical analysis.<a href="#section-5.1-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.3.1">Extract the <code>kid</code> header.<a href="#section-5.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.4">
-            <p id="section-5.1-2.4.1">Use the public key of the OP to verify that the signature on the passport is valid for that key state. On success, the verifier knows that the OP is at least making an assertion about the identity and authorizations of the AP. (This is approximately the level of assurance provided by existing alternatives to VVP.)<a href="#section-5.1-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.4.1">Fetch the key state for the OP at the reference time from the OOBI in <code>kid</code>. Caches may be used to optimize this, as long as they meet the freshness requirements of the verifier.<a href="#section-5.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.5">
-            <p id="section-5.1-2.5.1">Extract the <code>evd</code> field, which references the dossier (<a href="#dossier" class="auto internal xref">6.3.2</a>) that constitutes backing evidence.<a href="#section-5.1-2.5.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.5.1">Use the public key of the OP to verify that the signature on the passport is valid for that key state. On success, the verifier knows that the OP is at least making an assertion about the identity and authorizations of the AP. (When reference time is now, this is approximately the level of assurance provided by existing alternatives to VVP.)<a href="#section-5.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.6">
-            <p id="section-5.1-2.6.1">Use the SAID (<a href="#said" class="auto internal xref">6.2.1</a>) of the dossier as a lookup key to see whether the dossier has already been fully validated. Since dossiers are highly stable, caching dossier validations is recommended.<a href="#section-5.1-2.6.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.6.1">Extract the <code>evd</code> field, which references the dossier (<a href="#dossier" class="auto internal xref">6.3.2</a>) that constitutes backing evidence.<a href="#section-5.1-2.6.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.7">
-            <p id="section-5.1-2.7.1">If the dossier requires full validation, perform it. Validation includes checking the signature on each ACDC in the dossier's data graph against the key state of its respective issuer at the time the issuance occurred. Key state is proved by the KEL (<a href="#KEL" class="auto internal xref">6.2.8</a>), and checked against independent witnesses.<a href="#section-5.1-2.7.1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2.7.2">
-Issuance is recorded explicitly in the KEL's overall event sequence, so this check does not require guesses about how to map issuance timestamps to key state events. Subsequent key rotations do not invalidate this analysis.<a href="#section-5.1-2.7.2" class="pilcrow">¶</a></p>
-<p id="section-5.1-2.7.3">
-Validation also includes comparing data structure and values against the declared schema, plus a full traversal of all chained CVD (<a href="#cvd" class="auto internal xref">6.2.9</a>), back to the root of trust for each artifact. The verifier <span class="bcp14">MUST</span> accept the root of trust as a valid authority on the vital question answered by each credential that depends upon it. The correct relationships among evidence artifacts <span class="bcp14">MUST</span> also be checked (e.g., proving that the issuer of one piece is the issuee of another piece).<a href="#section-5.1-2.7.3" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.7.1">Use the SAID (<a href="#said" class="auto internal xref">6.2.1</a>) of the dossier as a lookup key to see whether the dossier has already been fully validated. Since dossiers are highly stable, caching dossier validations is recommended.<a href="#section-5.1-2.7.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.8">
-            <p id="section-5.1-2.8.1">Check to see whether the revocation status of the dossier and each item it depends on has been tested recently enough to satisfy the verifier's freshness standards. If no, check for revocations anywhere in the data graph of the dossier. Revocations are not the same as key rotations. They can be checked much more quickly than doing a full validation. Revocation checks can also be cached, possibly with a different freshness threshold than the main evidence.<a href="#section-5.1-2.8.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.8.1">If the dossier requires full validation, perform it. Validation includes checking the signature on each ACDC in the dossier's data graph against the key state of its respective issuer at the time the issuance occurred. Key state is proved by the KEL (<a href="#KEL" class="auto internal xref">6.2.8</a>), and checked against independent witnesses.<a href="#section-5.1-2.8.1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2.8.2">
+Issuance is recorded explicitly in the KEL's overall event sequence, so this check does not require guesses about how to map issuance timestamps to key state events. Subsequent key rotations do not invalidate this analysis.<a href="#section-5.1-2.8.2" class="pilcrow">¶</a></p>
+<p id="section-5.1-2.8.3">
+Validation also includes comparing data structure and values against the declared schema, plus a full traversal of all chained CVD (<a href="#cvd" class="auto internal xref">6.2.9</a>), back to the root of trust for each artifact. The verifier <span class="bcp14">MUST</span> accept the root of trust as a valid authority on the vital question answered by each credential that depends upon it. The correct relationships among evidence artifacts <span class="bcp14">MUST</span> also be checked (e.g., proving that the issuer of one piece is the issuee of another piece).<a href="#section-5.1-2.8.3" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.9">
-            <p id="section-5.1-2.9.1">Assuming that the dossier is valid and has no breakages due to revocation, confirm that the OP is authorized to sign the passport. If there is no delegation evidence (<a href="#DE" class="auto internal xref">6.3.4</a>), the AP and the OP <span class="bcp14">MUST</span> be identical, and the OP <span class="bcp14">MUST</span> be the issuee of the vetting credential; otherwise, the OP <span class="bcp14">MUST</span> be the issuee of a delegated signing credential for which the issuer is the AP.<a href="#section-5.1-2.9.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.9.1">Check to see whether the revocation status of the dossier and each item it depends on has been tested recently enough, at the reference time, to satisfy the verifier's freshness requirements. If no, check for revocations anywhere in the data graph of the dossier. Revocations are not the same as key rotations. They can be checked much more quickly than doing a full validation. Revocation checks can also be cached, possibly with a different freshness threshold than the main evidence.<a href="#section-5.1-2.9.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.10">
-            <p id="section-5.1-2.10.1">Extract the <code>orig</code> field and compare it to the TNAlloc credential (<a href="#tnalloc-credential" class="auto internal xref">6.3.6</a>) cited in the dossier (<a href="#dossier" class="auto internal xref">6.3.2</a>) to confirm that the AP (<a href="#AP" class="auto internal xref">3.1.4</a>) -- or, if OP is not equal to AP and OP is using their own number, the OP (<a href="#OP" class="auto internal xref">3.1.3</a>) -- has the right to originate calls with this number.<a href="#section-5.1-2.10.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.10.1">Assuming that the dossier is valid and has no breakages due to revocation, confirm that the OP is authorized to sign the passport. If there is no delegation evidence (<a href="#DE" class="auto internal xref">6.3.4</a>), the AP and the OP <span class="bcp14">MUST</span> be identical, and the OP <span class="bcp14">MUST</span> be the issuee of the vetting credential; otherwise, the OP <span class="bcp14">MUST</span> be the issuee of a delegated signing credential for which the issuer is the AP.<a href="#section-5.1-2.10.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.11">
-            <p id="section-5.1-2.11.1">If the passport includes non-null values for the optional <code>card</code> or <code>goal</code> fields, extract that information and check that the brand attributes claimed for the call are justified by a brand credential (<a href="#brand-credential" class="auto internal xref">6.3.7</a>) in the dossier.<a href="#section-5.1-2.11.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.11.1">Extract the <code>orig</code> field and compare it to the TNAlloc credential (<a href="#tnalloc-credential" class="auto internal xref">6.3.6</a>) cited in the dossier (<a href="#dossier" class="auto internal xref">6.3.2</a>) to confirm that the AP (<a href="#AP" class="auto internal xref">3.1.4</a>) -- or, if OP is not equal to AP and OP is using their own number, the OP (<a href="#OP" class="auto internal xref">3.1.3</a>) -- has the right to originate calls with this number.<a href="#section-5.1-2.11.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-2.12">
-            <p id="section-5.1-2.12.1">Check any business logic. For example, if the delegated signer credential says that the OP can only call on behalf of the AP during certain hours, or in certain geos, check those attributes of the call.<a href="#section-5.1-2.12.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-2.12.1">If the passport includes non-null values for the optional <code>card</code> or <code>goal</code> fields, extract that information and check that the brand attributes claimed for the call are justified by a brand credential (<a href="#brand-credential" class="auto internal xref">6.3.7</a>) in the dossier.<a href="#section-5.1-2.12.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-5.1-2.13">
+            <p id="section-5.1-2.13.1">Check any business logic. For example, if the delegated signer credential says that the OP can only call on behalf of the AP during certain hours, or in certain geos, check those attributes of the call.<a href="#section-5.1-2.13.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 </section>
@@ -1761,6 +1767,15 @@ Validation also includes comparing data structure and values against the declare
 <p id="section-5.2-1">The complete algorithm listed above is quite rigorous. With no caches, it may take several seconds, much like a thorough validation of a certificate chain. However, much VVP evidence is stable for long periods of time and lends itself to caching, subject to the proviso that revocation freshness must be managed wisely. Since the same dossier is used to justify many outbound calls -- perhaps thousands or millions of calls, for busy call centers -- and many dossiers will reference the same issuers and issuees and their associated key states and KELs (<a href="#KEL" class="auto internal xref">6.2.8</a>), caching will produce huge benefits.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">Furthermore, because SAIDs and their associated data (including links to other nodes in a data graph) have a tamper-evident relationship, any party can perform validation and compile their results, then share the data with verifiers that want to do less work. Validators like this are not oracles, because consumers of such data need not trust shared results blindly. They can always directly recompute some or all of it from a passport, to catch deception. However, they can do this lazily or occasionally, per their preferred balance of risk/effort.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.2-3"><em>In toto</em>, these characteristics mean that no centralized registry is required in any given ecosystem. Data can be fetched directly from its source, across jurisdictional boundaries. Because it is fetched from its source, it comes with consent. Privacy can be tuned (see <a href="#privacy" class="auto internal xref">9</a>). Simple opportunistic, uncoordinated reuse (e.g., in or across the datacenters of TSPs) will arise spontaneously and will dramatically improve the scale and efficiency of the system.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="historical-analysis">
+<section id="section-5.3">
+        <h3 id="name-historical-analysis">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-historical-analysis" class="section-name selfRef">Historical analysis</a>
+        </h3>
+<p id="section-5.3-1">Normally, the verification algorithm determines whether the passport verifies <em>now</em>. (This is the only evaluation that's valid for most JWTs, because they depend on ephemeral key state fetched just in time from <code>x5u</code>). However, a VVP passport can do more. Its <code>kid</code> header references a KEL for the delegated signer's AID, and its <code>evd</code> header references a dossier that links to the AP's AID, and thence to its KEL (see <a href="#KEL" class="auto internal xref">6.2.8</a>). These data structures provide key state transitions that are timestamped -- both by the controllers of the AIDs, and by their independent witnesses. Although the timestamps are not guaranteed to be perfectly synchronized, they can be compared to establish fuzzy transition times and to detect duplicity.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">Using this historical information, it becomes possible to ask whether a VVP passport verified at an arbitrary moment in the past. In such framings, the reference time from the verification algorithm is <em>then</em>, not <em>now</em>. In the normal case where <em>then</em> falls outside a fuzzy range, answers about key state are clear to all observers. In the rare cases where <em>then</em> falls inside a fuzzy range, a state transition was underway but not yet universally known, and a verifier can compute the key state (and thence, the outcome of the verification algorithm) according to their preferred interpretation.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2970,7 +2985,7 @@ Validation also includes comparing data structure and values against the declare
 <dd class="break"></dd>
 <dt id="RCD-DRAFT">[RCD-DRAFT]</dt>
         <dd>
-<span class="refAuthor">Wendt, C.</span> and <span class="refAuthor">J. Peterson</span>, <span class="refTitle">"SIP Call-Info Parameters for Rich Call Data"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-sipcore-callinfo-rcd-16</span>, <time datetime="2025-03-17" class="refDate">17 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-sipcore-callinfo-rcd-16">https://datatracker.ietf.org/doc/html/draft-ietf-sipcore-callinfo-rcd-16</a>&gt;</span>. </dd>
+<span class="refAuthor">Wendt, C.</span> and <span class="refAuthor">J. Peterson</span>, <span class="refTitle">"SIP Call-Info Parameters for Rich Call Data"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-sipcore-callinfo-rcd-19</span>, <time datetime="2025-04-21" class="refDate">21 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-sipcore-callinfo-rcd-19">https://datatracker.ietf.org/doc/html/draft-ietf-sipcore-callinfo-rcd-19</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RCD-PASSPORT">[RCD-PASSPORT]</dt>
         <dd>
