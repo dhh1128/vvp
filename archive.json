@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-10T00:08:28.983470+00:00",
+  "timestamp": "2025-06-12T00:08:35.862461+00:00",
   "repo": "dhh1128/vvp",
   "labels": [
     {
@@ -357,6 +357,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDONMB4L86ZxP5Y",
+      "title": "add callee",
+      "url": "https://github.com/dhh1128/vvp/pull/8",
+      "state": "OPEN",
+      "author": "dhh1128",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-10T01:29:10Z",
+      "updatedAt": "2025-06-10T01:34:23Z",
+      "baseRepository": "dhh1128/vvp",
+      "baseRefName": "main",
+      "baseRefOid": "0f6f1a555d2ec80198a56519389b4d52ecad584d",
+      "headRepository": "dhh1128/vvp",
+      "headRefName": "callee",
+      "headRefOid": "c4a803282962833965a29642a0496a7fd5fdc9bb",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
