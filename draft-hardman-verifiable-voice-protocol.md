@@ -336,7 +336,7 @@ APs can operate their own SBCs and therefore be their own OPs. However, APs can 
 
 In order to verify a caller, VVP requires an AP to prepare a dossier ({{<dossier}}) of evidence that documents a basis for imposing this accountability on them. Only the owner of a given dossier can prove they intend to initiate a VVP call that cites their dossier (see {{<delegating-signing-authority}}). Therefore, if a verifier confirms that a particular call properly matches its dossier, the verifier is justified in considering the owner of that dossier the AP for the call. Otherwise, someone is committing fraud. Accountability, and the basis for it, are both unambiguous.
 
-### Verified Party (#VP)
+### Verified Party {#VP}
 A *verified party* (*VP*) is a party that uses VVP to prove assertions about itself and its delegation decisions. When a VVP provides assurance about callers, the AP is a VP. When VVP provides assurance about callees, the callee is a VP. Some characteristics of proxies, delegates, and service providers may be proved by a dossier, but these parties are not VPs. They don't create dossiers, and dossiers are not focused on them.
 
 ### Verifier
