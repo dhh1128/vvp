@@ -157,6 +157,10 @@ Services and Client Specification, version 11.0"
     author:
       org: Provenant
     date: 20 Dec 2024
+  BRAND-SCHEMA:
+    target: https://github.com/provenant-dev/public-schema/blob/brand-owner/brand-owner/brand-owner.schema.json
+    author: Daniel Hardman
+    date: 31 Dec 2024
   PERSONHOOD-CRED:
     target: https://arxiv.org/pdf/2408.07892
     title: "Personhood credentials:
@@ -1299,7 +1303,10 @@ Here is a sample TNAlloc credential that meets these requirements.
 The schema used by this particular credential, `EFvn...GgSQ`, is published at {{TN-ALLOC-SCHEMA}}.
 
 ## Brand credential {#bcred-sample}
-TODO
+A brand credential ({{<brand-credential}}) is essentially a signed attestation of properties that are otherwise communicated without proof in a VCard ({{RFC6350}}). These characteristics, such as a brand name, and a logo MUST be ones that the issuee of the credential -- the VP (see {{<VP}}) -- is legally entitled to use, either because they are the legal entity that owns trademarks or associated IP, or because they have licensed them from the legal owner.
+
+An example schema is published at {{BRAND-SCHEMA}}. It is simple; besides some boilerplate, the core is an array of items in the `vcard` field, each of which represents one entry from a VCard. The `goal` field is also notable, in that it constrains the activities that the issuee can engage in while using the brand. A sample is: TODO
+
 ~~~json
 ~~~
 
