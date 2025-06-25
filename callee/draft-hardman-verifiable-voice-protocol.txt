@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                            17 June 2025
-Expires: 19 December 2025
+Intended status: Standards Track                            25 June 2025
+Expires: 27 December 2025
 
 
                        Verifiable Voice Protocol
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 December 2025.
+   This Internet-Draft will expire on 27 December 2025.
 
 Copyright Notice
 
@@ -2262,7 +2262,22 @@ Table of Contents
 
 12.4.  Brand credential
 
-   TODO ~~~json ~~~
+   A brand credential (6.3.7) is essentially a signed attestation of
+   properties that are otherwise communicated without proof in a VCard
+   ([RFC6350]).  These characteristics, such as a brand name and a logo,
+   MUST be ones that the issuee of the credential -- the VP (see 3.1.5)
+   -- is legally entitled to use, either because they are the legal
+   entity that owns the relevant trademarks or associated IP, or because
+   they have licensed them from the legal owner.
+
+   An example schema is published at [BRAND-SCHEMA].  It is simple;
+   besides some boilerplate, the core is an array of items in the vcard
+   field, each of which represents one entry from a VCard.  The goal
+   field is also notable, in that it constrains the activities that the
+   issuee can engage in while using the brand.  A sample is: TODO
+
+   (Artwork only available as JSON: see https://www.ietf.org/archive/id/
+   draft-hardman-verifiable-voice-protocol-latest.html)
 
 12.5.  Brand proxy credential
 
@@ -2540,6 +2555,11 @@ Table of Contents
               Hardman, D., "Aries RFC 0519: Goal Codes", April 2021,
               <https://github.com/hyperledger/aries-rfcs/blob/main/
               concepts/0519-goal-codes/README.md>.
+
+   [BRAND-SCHEMA]
+              Hardman, D., "Brand Credential", December 2024,
+              <https://github.com/provenant-dev/public-schema/blob/
+              brand-owner/brand-owner/brand-owner.schema.json>.
 
    [CITATION-SCHEMA]
               Hardman, D., "Citation Schema", April 2025,
