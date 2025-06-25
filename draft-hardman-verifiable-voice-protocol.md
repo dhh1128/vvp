@@ -160,7 +160,7 @@ Services and Client Specification, version 11.0"
   BRAND-SCHEMA:
     target: https://github.com/provenant-dev/public-schema/blob/brand-owner/brand-owner/brand-owner.schema.json
     title: "Brand Credential"
-    author: 
+    author:
       name: Daniel Hardman
     date: 31 Dec 2024
   PERSONHOOD-CRED:
