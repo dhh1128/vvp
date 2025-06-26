@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-24T00:08:27.837849+00:00",
+  "timestamp": "2025-06-26T00:08:40.185737+00:00",
   "repo": "dhh1128/vvp",
   "labels": [
     {
@@ -382,6 +382,34 @@
       "mergedBy": "dhh1128",
       "mergeCommit": {
         "oid": "4f02eed31151f9dd8b505d70d7b45af0ed791271"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDONMB4L86cEBtW",
+      "title": "add brand credential",
+      "url": "https://github.com/dhh1128/vvp/pull/9",
+      "state": "MERGED",
+      "author": "dhh1128",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-25T13:49:38Z",
+      "updatedAt": "2025-06-25T13:49:48Z",
+      "baseRepository": "dhh1128/vvp",
+      "baseRefName": "main",
+      "baseRefOid": "4f02eed31151f9dd8b505d70d7b45af0ed791271",
+      "headRepository": "dhh1128/vvp",
+      "headRefName": "callee",
+      "headRefOid": "f228ba5ce0a3d8704c14f494b5d5993ffe36de97",
+      "closedAt": "2025-06-25T13:49:48Z",
+      "mergedAt": "2025-06-25T13:49:48Z",
+      "mergedBy": "dhh1128",
+      "mergeCommit": {
+        "oid": "55e340f1d7449f0793f54fe2022c92c000b67e54"
       },
       "comments": [],
       "reviews": []
