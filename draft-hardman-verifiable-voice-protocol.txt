@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                            25 June 2025
-Expires: 27 December 2025
+Intended status: Standards Track                            16 July 2025
+Expires: 17 January 2026
 
 
                        Verifiable Voice Protocol
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 December 2025.
+   This Internet-Draft will expire on 17 January 2026.
 
 Copyright Notice
 
@@ -95,8 +95,9 @@ Table of Contents
        3.1.6.  Verifier
      3.2.  Lifecycle
    4.  Citing
-     4.1.  Questions answered by an AP's passport
-       4.1.1.  Sample passport
+     4.1.  Citing the AP's dossier
+       4.1.1.  Questions answered by an AP's passport
+       4.1.2.  Sample passport
      4.2.  Citing a callee's dossier
    5.  Verifying
      5.1.  Verifying the caller
@@ -401,7 +402,7 @@ Table of Contents
 3.1.5.  Verified Party
 
    A _verified party_ (_VP_) is a party that uses VVP to prove
-   assertions about itself and its delegation decisions.  When a VVP
+   assertions about itself and its delegation decisions.  When VVP
    provides assurance about callers, the AP is a VP.  When VVP provides
    assurance about callees, the callee is a VP.  Some characteristics of
    proxies, delegates, and service providers may be proved by a dossier,
@@ -457,18 +458,19 @@ Table of Contents
 
 4.  Citing
 
-   ## Citing the AP's dossier A VVP call that makes the caller
-   verifiable begins when the OP (3.1.3) generates a new VVP passport
-   (6.2.6) that complies with STIR [RFC8224] requirements.  In its
-   compact-serialized JWT [RFC7519] form, this passport is then passed
-   as an Identity header in a SIP INVITE [RFC3261].  The passport
-   _constitutes_ lightweight, direct, and ephemeral evidence; it _cites_
-   and therefore depends upon comprehensive, indirect, and long-lived
-   evidence (the AP's dossier; see 6.3.2).  Safely and efficiently
-   citing stronger evidence is one way that VVP differs from
-   alternatives.
+4.1.  Citing the AP's dossier
 
-4.1.  Questions answered by an AP's passport
+   A VVP call that makes the caller verifiable begins when the OP
+   (3.1.3) generates a new VVP passport (6.2.6) that complies with STIR
+   [RFC8224] requirements.  In its compact-serialized JWT [RFC7519]
+   form, this passport is then passed as an Identity header in a SIP
+   INVITE [RFC3261].  The passport _constitutes_ lightweight, direct,
+   and ephemeral evidence; it _cites_ and therefore depends upon
+   comprehensive, indirect, and long-lived evidence (the AP's dossier;
+   see 6.3.2).  Safely and efficiently citing stronger evidence in a
+   dossier is one way that VVP differs from alternatives.
+
+4.1.1.  Questions answered by an AP's passport
 
    The passport directly answers the following questions:
 
@@ -502,7 +504,7 @@ Table of Contents
    dynamic expansion of the scope of proof is compatible with but not
    specified by VVP.
 
-4.1.1.  Sample passport
+4.1.2.  Sample passport
 
    An example will help.  In its JSON-serialized form, a typical VVP
    passport for an AP (with some long CESR-encoded hashes shortened by
@@ -643,11 +645,12 @@ Table of Contents
    body; it does not need the same full-route auditability as the
    identity of a caller.
 
-   The callee JWT has a slightly different schema than a caller's VVP
-   passport.  It has the same headers, but kid contains the OOBI of the
-   callee, not of the OP.  Two new claims are added to the JWT payload:
-   call-id and cseq.  These MUST contain the values of the Call-ID and
-   CSeq values on the preceding SIP INVITE.  The iat claim MUST also be
+   Although dossiers are identical in either direction, the callee JWT
+   has a slightly different schema than a caller's VVP passport.  The
+   headers of the JWT match, but kid contains the OOBI of the callee,
+   not of the OP.  Two new claims are added to the JWT payload: call-id
+   and cseq.  These MUST contain the values of the Call-ID and CSeq
+   values on the preceding SIP INVITE.  The iat claim MUST also be
    present and MUST contain a value from the system clock of the callee.
    The exp field MAY also be present and use a value chosen by the
    callee; if it is missing, this communicates the callee's intention to
@@ -852,42 +855,45 @@ Table of Contents
 
 5.4.  Historical analysis
 
-   Normally, the verification algorithm determines whether the passport
+   Normally, a verification algorithm determines whether the passport
    verifies _now_. (This is the only evaluation that's valid for most
    JWTs, because they depend on ephemeral key state fetched just in time
    from x5u).  However, a VVP passport can do more.  Its kid header
    references a KEL for the signer's AID, and its evd header references
    a dossier issued by either the AID of the AP or the AID of the
-   callee.  From thence it connects to a KEL (see 6.2.8).  These data
+   callee.  Thence it connects to a KEL (see 6.2.8).  These data
    structures provide key state transitions that are timestamped -- both
    by the controllers of the AIDs, and by their independent witnesses.
    Although the timestamps are not guaranteed to be perfectly
-   synchronized, they can be compared to establish fuzzy transition
+   synchronized, they can be compared to establish rough transition
    times and to detect duplicity.
 
    Using this historical information, it becomes possible to ask whether
-   a VVP passport verified at an arbitrary moment in the past.  In such
-   framings, the reference time from the verification algorithm is
-   _then_, not _now_. In the normal case where _then_ falls outside a
-   fuzzy range, answers about key state are clear to all observers.  In
-   the rare cases where _then_ falls inside a fuzzy range, a state
-   transition was underway but not yet universally known, and a verifier
-   can compute the key state (and thence, the outcome of the
-   verification algorithm) according to their preferred interpretation.
+   a VVP passport would have verified at an arbitrary moment in the
+   past.  In such framings, the reference time from the verification
+   algorithm is _then_, not _now_. In the normal case where _then_ falls
+   outside a fuzzy range, answers about key state are clear to all
+   observers.  In the rare cases where _then_ falls inside a fuzzy
+   range, a state transition was underway but not yet universally known,
+   and a verifier can compute the key state (and thence, the outcome of
+   the verification algorithm) according to their preferred
+   interpretation.
 
 6.  Curating
 
    The evidence that's available in today's telco ecosystems resembles
    some of the evidence described here, in concept.  However, existing
-   evidence has gaps, and its format is fragile.  It requires direct
-   trust in the proximate issuer, and it typically needs to be organized
-   for discovery; both characteristics lead to large, centralized
-   registries at a regional or national level.  These registries become
-   a trusted third party, which defeats some of the purpose of creating
-   decentralized and independently verifiable evidence in the first
-   place.  Sharing such evidence across jurisdiction boundaries requires
-   regulatory compatibility and bilateral agreements.  Sharing at scale
-   is impractical at best, if not illegal.
+   evidence has gaps, and its format is fragile.  It is controlled by
+   keys having a short lifespan, and thus churns steadily.  It requires
+   direct trust in the proximate issuer, and it typically needs to be
+   organized for discovery; both characteristics lead to large,
+   centralized registries at a regional or national level.  These
+   registries become a trusted third party, which defeats some of the
+   purpose of creating decentralized and independently verifiable
+   evidence in the first place.  Sharing such evidence across
+   jurisdiction boundaries requires regulatory compatibility and
+   bilateral agreements.  Sharing at scale is impractical at best, if
+   not illegal.
 
    How evidence is issued, propagated, quality-controlled, and
    referenced is therefore an important concern for this specification.
@@ -1321,12 +1327,12 @@ Table of Contents
    to process the passport without doing a full parse of the JWT.
 
    The headers in a VVP passport MUST include alg, typ, ppt, and kid, as
-   described in 4.1.1.  They MAY include other values, notably x5u (see
+   described in 4.1.2.  They MAY include other values, notably x5u (see
    7.2).  The claims MUST always include iat and evd.  Caller passports
    MUST also include orig, dest, and exp; callee passports MUST also
    include call-id and cseq, and MAY include exp.  Passports MAY include
    card, goal, call_reason, jti, origId, and other values (also
-   described in 4.1.1).  The signature MUST use all headers and all
+   described in 4.1.2).  The signature MUST use all headers and all
    claims as input to the data stream that will be signed.
 
 6.3.2.  Dossier
