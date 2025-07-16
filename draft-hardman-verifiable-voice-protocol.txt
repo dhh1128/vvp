@@ -2073,7 +2073,7 @@ Table of Contents
    be deleted without affecting the integrity of other identifiers'
    records, satisfying regulatory requirements about erasure.  Witnesses
    only store (and thus, can only expose to the public) what a given
-   data controller has instructed them to store and publish.  Thus,
+   data controller has instructed them to retain and publish.  Thus,
    witnesses do not create difficulties with consent or privacy.
 
    In VVP, when a party shares an identifier or a piece of evidence,
@@ -2087,9 +2087,9 @@ Table of Contents
 
    An additional and optional feature in KERI is enabled by adding
    _watchers_. Watchers are lightweight services that synthesize witness
-   data.  They may MAY monitor multiple witnesses and enable hyper-
-   efficient caching.  They SHOULD also compare what multiple witnesses
-   for a given identifier are saying, which prevents controllers of an
+   data.  They MAY monitor multiple witnesses and enable hyper-efficient
+   caching.  They SHOULD also compare what multiple witnesses for a
+   given identifier are saying, which prevents controllers of an
    identifier from forking reality in a duplicitous way, and which can
    detect malicious attempts to use stolen keys.
 
@@ -2125,7 +2125,7 @@ Table of Contents
    *  v _(required)_ Contains a version statement.
 
    *  d _(required)_ Contains the SAID (6.2.1) of the ACDC.  (Nested d
-      fields contain SAIDs of nested JSON objects, as discussed in 9.1.
+      fields contain SAIDs of nested JSON objects, as discussed in 9.1.)
 
    *  i _(required)_ In the outermost structure, contains the AID
       (6.2.3) of an issuer.  Inside a, contains the AID of the issuee.
@@ -2209,7 +2209,7 @@ Table of Contents
    published at [LE-VLEI-SCHEMA].
 
    An alternate schema for vetting credentials -- one that incurs less
-   effort to quality and to perform vetting, but that offers
+   effort to perform vetting and achieve quality goals, and that offers
    correspondingly lower levels of assurance, is published at
    [ORG-VET-SCHEMA].
 
@@ -2328,11 +2328,9 @@ Table of Contents
    with the "OP" or "callee" role.  The wildcard in c_goal and the
    addition of the "callee" role in c_proto are complementary changes
    that allow this credential to justify proxying the brand on both
-   outbound and inbound calls.  (Branding on inbound calls is out of
-   scope for VVP, but is included here just to show that the same
-   credentials can be used for both VVP and non-VVP solutions.  To
-   convert this credential to a purely outbound authorization, replace
-   the wildcard with send, and limit the roles in VVP to OP.)
+   outbound and inbound calls.  (To convert this credential to a purely
+   outbound authorization, replace the wildcard with send, and limit the
+   roles in VVP to OP.)
 
    The schema for GCD credentials, and an explanation how to add
    additional constraints, is documented at [GCD-SCHEMA].
