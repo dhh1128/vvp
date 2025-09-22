@@ -146,7 +146,7 @@ Regulators have mandated protections, and industry has responded. However, exist
 * Market complexities such as the presence of aggregators, wholesalers, and call centers that proxy a brand are difficult to model safely.
 * What might work for enterprises offers few benefits and many drawbacks for individual callers.
 
-VVP solves these problems by applying crucial innovations in evidence scope, evidence format, and vetting mechanisms. These innovations profoundly upgrade what is provable in an ecosystem, as well as what is cacheable and what must be centralized. However, they have only subtle effects on the content of a STIR PASSporT, so they are explored outside this spec. 
+VVP solves these problems by applying crucial innovations in evidence scope, evidence format, and vetting mechanisms. These innovations profoundly upgrade what is provable in an ecosystem, as well as what is cacheable and what must be centralized. However, they have only subtle effects on the content of a STIR PASSporT, so they are explored outside this spec.
 
 # Conventions and Definitions
 
