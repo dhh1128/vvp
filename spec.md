@@ -38,7 +38,6 @@ normative:
   RFC4575:
   RFC4648:
   RFC5626:
-  RFC5280:
   RFC8032:
   RFC8224:
   RFC8225:
@@ -87,18 +86,6 @@ normative:
       -
         org: Trust Over IP Foundation
     date: 6 Nov 2023
-  ISO-17442-1:
-    target: https://www.iso.org/standard/78829.html
-    title: "Financial services – Legal entity identifier (LEI) – Part 1: Assignment"
-    author:
-      org: International Organization for Standardization
-    date: 2020
-  ISO-17442-3:
-    target: https://www.iso.org/standard/85628.html
-    title: "inancial services – Legal entity identifier (LEI) – Part 3: Verifiable LEIs (vLEIs)"
-    author:
-      org: International Organization for Standardization
-    date: 2024
   ATIS-1000074:
     target: https://atis.org/resources/signature-based-handling-of-asserted-information-using-tokens-shaken-atis-1000074-e/
     title: "Signature-Based Handling of Asserted Information Using toKENs (SHAKEN)"
@@ -107,44 +94,21 @@ normative:
     date: Feb 2019
 
 informative:
-  RFC3262:
-  RFC3986:
   RFC6350:
-  RFC7095:
   RFC7519:
-  RFC8226:
-  RFC8588:
-  VCON-DRAFT: I-D.ietf-vcon-vcon-container
-  GSMA-RCS:
-    target: https://www.gsma.com/solutions-and-impact/technologies/networks/wp-content/uploads/2019/10/RCC.07-v11.0.pdf
-    title: "Rich Communication Suite - Advanced Communications
-Services and Client Specification, version 11.0"
-    author:
-      org: GSMA
-    date: 16 Oct 2019
   RCD-DRAFT: I-D.ietf-sipcore-callinfo-rcd
-  RCD-PASSPORT: I-D.ietf-stir-passport-rcd
-  SD-JWT-DRAFT: I-D.ietf-oauth-selective-disclosure-jwt
   CTIA-BCID:
     target: https://api.ctia.org/wp-content/uploads/2022/11/Branded-Calling-Best-Practices.pdf
     title: "Branded Calling ID Best Practices"
     author:
       org: CTIA
     date: Nov 2022
-  W3C-DID: W3C.REC-did-core-20220719
-  W3C-VC: W3C.REC-vc-data-model-20220303
   ARIES-RFC-0519:
     target: https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0519-goal-codes/README.md
     title: "Aries RFC 0519: Goal Codes"
     author:
       name: Daniel Hardman
     date: Apr 2021
-  JSON-SCHEMA:
-    target: https://json-schema.org/specification
-    title: "JSON Schema Specification 2020-12"
-    author:
-      org: JSON Schema Community
-    date: 16 June 2022
   LE-VLEI-SCHEMA:
     target: https://github.com/GLEIF-IT/vLEI-schema/blob/main/legal-entity-vLEI-credential.json
     title: "Legal Entity vLEI Credential"
@@ -163,107 +127,6 @@ Services and Client Specification, version 11.0"
     author:
       name: Daniel Hardman
     date: 31 Dec 2024
-  PERSONHOOD-CRED:
-    target: https://arxiv.org/pdf/2408.07892
-    title: "Personhood credentials:
-Artificial intelligence and the value of
-privacy-preserving tools to distinguish who is real online"
-    author:
-      -
-        name: Steven Adler
-      -
-        name: Zoë Hitzig
-      -
-        name: Shrey Jain
-      -
-        name: Catherine Brewer
-      -
-        name: Wayne Chang
-      -
-        name: Renée DiResta
-      -
-        name: Eddy Lazzarin
-      -
-        name: Sean McGregor
-      -
-        name: Wendy Seltzer
-      -
-        name: Divya Siddarth
-      -
-        name: Nouran Soliman
-      -
-        name: Tobin South
-      -
-        name: Connor Spelliscy
-      -
-        name: Manu Sporny
-      -
-        name: Varya Srivastava
-      -
-        name: John Bailey
-      -
-        name: Brian Christian
-      -
-        name: Andrew Critch
-      -
-        name: Ronnie Falcon
-      -
-        name: Heather Flanagan
-      -
-        name: Kim Hamilton Duffy
-      -
-        name: Eric Ho
-      -
-        name: Claire R. Leibowicz
-      -
-        name: Srikanth Nadhamuni
-      -
-        name: Alan Z. Rozenshtein
-      -
-        name: David Schnurr
-      -
-        name: Evan Shapiro
-      -
-        name: Lacey Strahm
-      -
-        name: Andrew Trask
-      -
-        name: Zoe Weinberg
-      -
-        name: Cedric Whitney
-      -
-        name: Tom Zick
-    date: Aug 2024
-  F2F-SCHEMA:
-    target: https://github.com/provenant-dev/public-schema/blob/main/face-to-face/index.md
-    title: "Face-to-Face Credentials"
-    author:
-      name: Daniel Hardman
-    date: 13 Dec 2023
-  CITATION-SCHEMA:
-    target: https://github.com/provenant-dev/public-schema/blob/main/citation/index.md
-    title: "Citation Schema"
-    author:
-      name: Daniel Hardman
-    date: 2 Apr 2025
-  GCD-SCHEMA:
-    target: https://github.com/provenant-dev/public-schema/blob/main/gcd/index.md
-    title: "Generalized Cooperative Delegation (GCD) Credentials"
-    author:
-      name: Daniel Hardman
-    date: 18 Dec 2023
-  DOSSIER-SCHEMA:
-    target: https://github.com/provenant-dev/public-schema/blob/main/vvp-dossier/vvp-dossier.schema.json
-    title: "Verifiable Voice Dossier"
-    author:
-      name: Arshdeep Singh
-    date: 2 Jan 2025
-  ORG-VET-SCHEMA:
-    target: https://github.com/provenant-dev/public-schema/blob/main/org-vet/index.md
-    title: "Org Vet Credentials"
-    author:
-      name: Daniel Hardman
-    date: 17 June 2025
 
 --- abstract
 
@@ -291,7 +154,7 @@ VVP solves these problems by applying crucial innovations in evidence scope, evi
 
 # Overview
 
-Fundamentally, VVP requires identified parties (callers and/or callees) to curate ({{<curating}}) a dossier ({{<dossier}}) of stable evidence that proves things about them. This is done once or occasionally, in advance, as a configuration precondition. Then, for each call, participants decide whether to share this evidence. Callers share evidence by creating an ephemeral STIR-compatible VVP PASSporT ({{<passport}}) that cites ({{<citing}}) their preconfigured dossier. This passport travels along the delivery route as an `Identity` header in a SIP INVITE. Callees share evidence by adding an analogous passport to an attribute line in the SDP {{RFC8866}} body of their SIP response. This passes a signed citation to their dossier in the other direction. Verifiers anywhere along the route check the citation(s) and corresponding dossier(s), including realtime revocation status, to make decisions ({{<verifying}}).
+Fundamentally, VVP requires identified parties (callers and/or callees) to curate a dossier of stable evidence that proves things about them. This is done once or occasionally, in advance, as a configuration precondition. Then, for each call, participants decide whether to share this evidence. Callers share evidence by creating an ephemeral STIR-compatible VVP PASSporT ({{RFC8225}}) that cites ({{<citing}}) their preconfigured dossier. This passport travels along the delivery route as an `Identity` header in a SIP INVITE. Callees share evidence by adding an analogous passport to an attribute line in the SDP {{RFC8866}} body of their SIP response. This passes a signed citation to their dossier in the other direction. Verifiers anywhere along the route check the citation(s) and corresponding dossier(s), including realtime revocation status, to make decisions ({{<verifying}}).
 
 A VVP call may carry assurance in either or both directions. Compliant implementations may choose to support only assurance about the caller, only assurance about the callee, or both.
 
@@ -308,11 +171,11 @@ It is possible for an ecosystem to include other parties as allocation holders (
 For a given phone call, a *callee* (also referred to as a *terminating party* or *TP*) receives the call. Typically one callee is targeted, but multiparty SIP flows allow INVITEs to multiple callees, either directly or via a conference server (see {{RFC4353}} and {{RFC4575}}). A callee can be an individual consumer or an organization. The direct service provider of the callee is the *terminating service provider* (*TSP*). In many use cases for VVP, callers attempt to prove things to callees, and callees and their service providers use VVP primarily with a verifier mindset. However, enterprises or call centers that accept inbound calls from individuals may want assurance to flow the other direction; hence, VVP supports optional evidence about callees as well.
 
 ### Originating Party {#OP}
-An *originating party* (*OP*) controls the first *session border controller* (*SBC*) that processes an outbound call, and therefore builds the VVP passport ({{<passport}}) that cites evidence about the caller.
+An *originating party* (*OP*) controls the first *session border controller* (*SBC*) that processes an outbound call, and therefore builds the VVP passport that cites evidence about the caller.
 
 It may be tempting to equate the OP with "the caller", and in some perspectives this could be true. However, this simple equivalence lacks nuance and doesn't always hold. In a VVP context, it is more accurate to say that the OP creates a SIP INVITE {{RFC3261}} with explicit, provable authorization from the party accountable for calls on the originating phone number. The OP originates the VVP protocol, but not always the call on the handset.
 
-It may also be tempting to associate the OP with an organizational identity like "Company X". While this is not wrong, and is in fact used in high-level descriptions in this specification, in its most careful definition, the cryptographic identity of an OP should be more narrow. It typically corresponds to a single service operated by an IT department within (or outsourced but operating at the behest of) Company X, rather than to Company X generically. This narrowness limits cybersecurity risk, because a single service operated by Company X needs far fewer privileges than the company as a whole. Failing to narrow identity appropriately creates vulnerabilities in some alternative approaches. The evidence securing VVP MUST therefore prove a valid relationship between the OP's narrow identity and the broader legal entities that stakeholders more naturally assume and understand (see {{<DE}}).
+It may also be tempting to associate the OP with an organizational identity like "Company X". While this is not wrong, and is in fact used in high-level descriptions in this specification, in its most careful definition, the cryptographic identity of an OP should be more narrow. It typically corresponds to a single service operated by an IT department within (or outsourced but operating at the behest of) Company X, rather than to Company X generically. This narrowness limits cybersecurity risk, because a single service operated by Company X needs far fewer privileges than the company as a whole. Failing to narrow identity appropriately creates vulnerabilities in some alternative approaches. The evidence securing VVP MUST therefore prove a valid relationship between the OP's narrow identity and the broader legal entities that stakeholders more naturally assume and understand.
 
 The service provider associated with an OP is called the *originating service provider* (*OSP*). For a given phone call, there may be complexity between the hardware that begins a call and the SBC of the OP -- and there may also be many layers, boundaries, and transitions between OSP and TSP.
 
@@ -321,7 +184,7 @@ For a given call, the *accountable party* (*AP*) is the organization or individu
 
 APs can operate their own SBCs and therefore be their own OPs. However, APs can also use a UCaaS provider that makes the AP-OP relationship indirect. Going further, a business can hire a call center, and delegate to the call center the right to use its phone number. In such a case, the business is the AP, but the call center is the OP that makes calls on its behalf. None of these complexities alter the fact that, from the callee's perspective, the AP is "the caller". The callee chooses to answer or not, based on their desire to interact with the AP. If the callee's trust is abused, the regulator and the callee both want to hold the AP accountable.
 
-In order to verify a caller, VVP requires an AP to prepare a dossier ({{<dossier}}) of evidence that documents a basis for imposing this accountability on them. Only the owner of a given dossier can prove they intend to initiate a VVP call that cites their dossier (see {{<delegating-signing-authority}}). Therefore, if a verifier confirms that a particular call properly matches its dossier, the verifier is justified in considering the owner of that dossier the AP for the call. Otherwise, someone is committing fraud. Accountability, and the basis for it, are both unambiguous.
+In order to verify a caller, VVP requires an AP to prepare a dossier of evidence that documents a basis for imposing this accountability on them. Only the owner of a given dossier can prove they intend to initiate a VVP call that cites their dossier. Therefore, if a verifier confirms that a particular call properly matches its dossier, the verifier is justified in considering the owner of that dossier the AP for the call. Otherwise, someone is committing fraud. Accountability, and the basis for it, are both unambiguous.
 
 ### Verified Party {#VP}
 A *verified party* (*VP*) is a party that uses VVP to prove assertions about itself and its delegation decisions. When VVP provides assurance about callers, the AP is a VP. When VVP provides assurance about callees, the callee is a VP. Some characteristics of proxies, delegates, and service providers may be proved by a dossier, but these parties are not VPs. They don't create dossiers, and dossiers are not focused on them.
@@ -345,7 +208,7 @@ However, curating does not occur in realtime during phone calls, and is out of s
 # Citing
 
 ## Citing the AP's dossier
-A VVP call that makes the caller verifiable begins when the OP ({{<OP}}) generates a new VVP passport ({{<passport}}) that complies with STIR {{RFC8224}} requirements. In its compact-serialized JWT {{RFC7519}} form, this passport is then passed as an `Identity` header in a SIP INVITE {{RFC3261}}. The passport *constitutes* lightweight, direct, and ephemeral evidence; it *cites* and therefore depends upon comprehensive, indirect, and long-lived evidence (the AP's dossier; see {{<dossier}}). Safely and efficiently citing stronger evidence in a dossier is one way that VVP differs from alternatives.
+A VVP call that makes the caller verifiable begins when the OP ({{<OP}}) generates a new VVP passport {{RFC8225}} that complies with STIR {{RFC8224}} requirements. In its compact-serialized JWT {{RFC7519}} form, this passport is then passed as an `Identity` header in a SIP INVITE {{RFC3261}}. The passport *constitutes* lightweight, direct, and ephemeral evidence; it *cites* and therefore depends upon comprehensive, indirect, and long-lived evidence (the AP's dossier. Safely and efficiently citing stronger evidence in a dossier is one way that VVP differs from alternatives.
 
 ### Questions answered by an AP's passport
 The passport directly answers at least the following questions:
@@ -396,22 +259,20 @@ An example will help. In its JSON-serialized form, a typical VVP passport for an
 
 The semantics of the fields are:
 
-* `alg` *(required)* MUST be "EdDSA". Standardizing on one scheme prevents jurisdictions with incompatible or weaker cryptography. The RSA, HMAC, and ES256 algorithms MUST NOT be used. (This choice is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which depends on the Montgomery-to-Edwards transformation.)
+* `alg` *(required)* MUST be "EdDSA" ({{RFC8032}}, {{FIPS186-4}}). Standardizing on one scheme prevents jurisdictions with incompatible or weaker cryptography. The RSA, HMAC, and ES256 algorithms MUST NOT be used. (This choice is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which depends on the Montgomery-to-Edwards transformation.)
 * `typ` *(required)* Per {{RFC8225}}, MUST be "passport".
 * `ppt` *(required)* Per {{RFC8225}}, MUST identify the specific PASSporT type -- in this case, "vvp".
-* `kid` *(required)* MUST be the OOBI of an AID ({{<aid}}) controlled by the OP ({{<OP}}). An OOBI is a special URL that facilitates ACDC's viral discoverability goals. It returns IANA content-type `application/json+cesr`, which provides some important security guarantees. The content for this particular OOBI MUST be a KEL ({{<KEL}}). Typically the AID in question does not identify the OP as a legal entity, but rather software running on or invoked by the SBC operated by the OP. (The AID that identifies the OP as a legal entity may be controlled by a multisig scheme and thus require multiple humans to create a signature. The AID for `kid` MUST be singlesig and, in the common case where it is not the legal entity AID, MUST have a delegate relationship with the legal entity AID, proved through Delegate Evidence {{<DE}}.)
-* `orig` *(required)* Although VVP does not depend on SHAKEN, the format of this field MUST conform to SHAKEN requirements ({{ATIS-1000074}}), for interoperability reasons (see {{<interoperability}}). It MUST also satisfy one additional constraint, which is that only one phone number is allowed. Depite the fact that a containing SIP INVITE may allow multiple originating phone numbers, only one can be tied to evidence evaluated by verifiers.
+* `kid` *(required)* MUST be the OOBI of an AID ({{TOIP-KERI}}) controlled by the OP ({{<OP}}). An OOBI is a special URL that facilitates ACDC's viral discoverability goals. It returns IANA content-type `application/json+cesr`, which provides some important security guarantees. The content for this particular OOBI MUST be a KEL ({{TOIP-KERI}}). Typically the AID in question does not identify the OP as a legal entity, but rather software running on or invoked by the SBC operated by the OP. (The AID that identifies the OP as a legal entity may be controlled by a multisig scheme and thus require multiple humans to create a signature. The AID for `kid` MUST be singlesig and, in the common case where it is not the legal entity AID, MUST have a delegate relationship with the legal entity AID that's proved through formal evidence.)
+* `orig` *(required)* Although VVP does not depend on SHAKEN, the format of this field MUST conform to SHAKEN requirements ({{ATIS-1000074}}), for interoperability reasons. It MUST also satisfy one additional constraint, which is that only one phone number is allowed. Depite the fact that a containing SIP INVITE may allow multiple originating phone numbers, only one can be tied to evidence evaluated by verifiers.
 * `dest` *(required)* For interoperability reasons, MUST conform to SHAKEN requirements.
 * `card` *(optional)* Contains one or more brand attributes. These are analogous to {{RCD-DRAFT}} or {{CTIA-BCID}} data, but differ in that they MUST be justified by evidence in the dossier. Because of this strong foundation that interconnects with formal legal identity, they can be used to derive other brand evidence (e.g., an RCD passport) as needed. Individual attributes MUST conform to the VCard standard {{RFC6350}}.
 * `goal` *(optional)* A machine-readable, localizable goal code, as described informally by {{ARIES-RFC-0519}}. If present, the dossier MUST prove that the OP is authorized by the AP to initiate calls with this particular goal.
-* `call-reason` *(optional)* A human-readable, arbitrary phrase that describes the self-asserted intent of the caller. This claim is largely redundant with `goal`; most calls will either omit both, or choose one or the other. Since `call-reason` cannot be analyzed or verified in any way, and since it may communicate in a human language that is not meaningful to the callee, use of this field is discouraged. However it is not formally deprecated. It is included in VVP to facilitate the construction of derivative RCD passports which have the property (see {{<interoperability}}).
-* `evd` *(required)* MUST be the OOBI of a bespoke ACDC (the dossier, {{<dossier}}) that constitutes a verifiable data graph of all evidence justifying belief in the identity and authorization of the AP, the OP, and any relevant delegations. This URL can be hosted on any convenient web server, and is somewhat analogous to the `x5u` header in X509 contexts. See below for details.
+* `call-reason` *(optional)* A human-readable, arbitrary phrase that describes the self-asserted intent of the caller. This claim is largely redundant with `goal`; most calls will either omit both, or choose one or the other. Since `call-reason` cannot be analyzed or verified in any way, and since it may communicate in a human language that is not meaningful to the callee, use of this field is discouraged. However it is not formally deprecated. It is included in VVP to facilitate the construction of derivative RCD passports which have the property.
+* `evd` *(required)* MUST be the OOBI of a bespoke ACDC (the dossier, {{TOIP-ACDC}}) that constitutes a verifiable data graph of all evidence justifying belief in the identity and authorization of the AP, the OP, and any relevant delegations. This URL can be hosted on any convenient web server, and is somewhat analogous to the `x5u` header in X509 contexts. See below for details.
 * `origId` *(optional)* Follows SHAKEN semantics.
 * `iat` *(required)* Follows standard JWT semantics (see {{RFC7519}}).
 * `exp` *(required)* Follows standard JWT semantics. As this sets a window for potential replay attacks between the same two phone numbers, a recommended expiration should be 30 seconds, with a minimum of 10 seconds and a maximum of 300 seconds.
 * `jti` *(optional)* Follows standard JWT semantics.
-
-For information about the signature over a passport, see {{<pss}}.
 
 ## Citing a callee's dossier
 Optionally, evidence in VVP can also flow from callee to caller. For privacy reasons, individuals who receive phone calls may choose not to use VVP in this way. However, enterprises and call centers may find it useful as a reassurance to their customers about who they've reached.
@@ -434,19 +295,19 @@ When a verifier encounters a VVP passport, they SHOULD verify by using an algori
 1. Extract the `kid` header.
 1. Fetch the key state for the OP at the reference time from the OOBI in `kid`. Caches may be used to optimize this, as long as they meet the freshness requirements of the verifier.
 1. Use the public key of the OP to verify that the signature on the passport is valid for that key state. On success, the verifier knows that the OP is at least making an assertion about the identity and authorizations of the AP. (When reference time is now, this is approximately the level of assurance provided by existing alternatives to VVP.)
-1. Extract the `evd` field, which references the dossier ({{<dossier}}) that constitutes backing evidence.
-1. Use the SAID ({{<said}}) of the dossier as a lookup key to see whether the dossier has already been fully validated. Since dossiers are highly stable, caching dossier validations is recommended.
-1. If the dossier requires full validation, perform it. Validation includes checking the signature on each ACDC in the dossier's data graph against the key state of its respective issuer at the time the issuance occurred. Key state is proved by the KEL ({{<KEL}}), and checked against independent witnesses.
+2. Extract the `evd` field, which references the dossier that constitutes backing evidence.
+3. Use the SAID ({{TOIP-CESR}}) of the dossier as a lookup key to see whether the dossier has already been fully validated. Since dossiers are highly stable, caching dossier validations is recommended.
+4. If the dossier requires full validation, perform it. Validation includes checking the signature on each ACDC in the dossier's data graph against the key state of its respective issuer at the time the issuance occurred. Key state is proved by the KEL ({{TOIP-KERI}}), and checked against independent witnesses.
 
     Issuance is recorded explicitly in the KEL's overall event sequence, so this check does not require guesses about how to map issuance timestamps to key state events. Subsequent key rotations do not invalidate this analysis.
 
-    Validation also includes comparing data structure and values against the declared schema, plus a full traversal of all chained CVD ({{<cvd}}), back to the root of trust for each artifact. The verifier MUST accept the root of trust as a valid authority on the vital question answered by each credential that depends upon it. The correct relationships among evidence artifacts MUST also be checked (e.g., proving that the issuer of one piece is the issuee of another piece).
+    Validation also includes comparing data structure and values against the declared schema, plus a full traversal of all chained cryptographically verifiable evidence, back to the root of trust for each artifact. The verifier MUST accept the root of trust as a valid authority on the vital question answered by each credential that depends upon it. The correct relationships among evidence artifacts MUST also be checked (e.g., proving that the issuer of one piece is the issuee of another piece).
 
-1. Check to see whether the revocation status of the dossier and each item it depends on has been tested recently enough, at the reference time, to satisfy the verifier's freshness requirements. If no, check for revocations anywhere in the data graph of the dossier. Revocations are not the same as key rotations. They can be checked much more quickly than doing a full validation. Revocation checks can also be cached, possibly with a different freshness threshold than the main evidence.
-1. Assuming that the dossier is valid and has no breakages due to revocation, confirm that the OP is authorized to sign the passport. If there is no delegation evidence ({{<DE}}), the AP and the OP MUST be identical, and the OP MUST be the issuee of the identity credential; otherwise, the OP MUST be the issuee of a delegated signing credential for which the issuer is the AP.
-1. Extract the `orig` field and compare it to the TNAlloc credential ({{<tnalloc-credential}}) cited in the dossier ({{<dossier}}) to confirm that the AP ({{<AP}}) -- or, if OP is not equal to AP and OP is using their own number, the OP ({{<OP}}) -- has the right to originate calls with this number.
-1. If the passport includes non-null values for the optional `card` claim, extract that information and check that the brand attributes claimed for the call are justified by a brand credential ({{<brand-credential}}) in the dossier.
-1. Check any business logic. For example, if the passport includes a non-null value for the optional `goal` claim, confirm that the verifier is willing to accept a call with that goal. Or, if the delegated signer credential says that the OP can only call on behalf of the AP during certain hours, or in certain geos, check those attributes of the call.
+5. Check to see whether the revocation status of the dossier and each item it depends on has been tested recently enough, at the reference time, to satisfy the verifier's freshness requirements. If no, check for revocations anywhere in the data graph of the dossier. Revocations are not the same as key rotations. They can be checked much more quickly than doing a full validation. Revocation checks can also be cached, possibly with a different freshness threshold than the main evidence.
+6. Assuming that the dossier is valid and has no breakages due to revocation, confirm that the OP is authorized to sign the passport. If there is no delegation evidence, the AP and the OP MUST be identical, and the OP MUST be the issuee of the identity credential; otherwise, the OP MUST be the issuee of a delegated signing credential for which the issuer is the AP.
+7. Extract the `orig` field and compare it to the TNAlloc credential cited in the dossier to confirm that the AP ({{<AP}}) -- or, if OP is not equal to AP and OP is using their own number, the OP ({{<OP}}) -- has the right to originate calls with this number.
+8. If the passport includes non-null values for the optional `card` claim, extract that information and check that the brand attributes claimed for the call are justified by a brand credential in the dossier.
+9. Check any business logic. For example, if the passport includes a non-null value for the optional `goal` claim, confirm that the verifier is willing to accept a call with that goal. Or, if the delegated signer credential says that the OP can only call on behalf of the AP during certain hours, or in certain geos, check those attributes of the call.
 
 ## Verifying the callee
 
@@ -458,24 +319,24 @@ The callee is verified with an algorithm that MAY be optimized but MUST achieve 
 1. Extract the `kid` header.
 1. Fetch the key state for the callee at the reference time from the OOBI in `kid`. Caches may be used to optimize this, as long as they meet the freshness requirements of the verifier.
 1. Use the public key of the callee to verify that the signature on the passport is valid for that key state.
-1. Extract the `evd` field, which references the dossier ({{<dossier}}) that constitutes backing evidence.
-1. Use the SAID ({{<said}}) of the dossier as a lookup key to see whether the dossier has already been fully validated. Since dossiers are highly stable, caching dossier validations is recommended.
-1. Confirm that the dossier was signed (issued) by the same AID that appears in the `kid` header.
-1. If the dossier requires full validation, perform it.
-1. Check to see whether the revocation status of the dossier and each item it depends on has been tested recently enough, at the reference time, to satisfy the verifier's freshness requirements.
-1. Compare the callee's TN to the TNAlloc credential ({{<tnalloc-credential}}) cited in the dossier ({{<dossier}}) to confirm that the callee has the right to accept calls at this number.
-1. If the passport includes non-null values for the optional `card` claim, extract that information and check that the brand attributes claimed for the call are justified by a brand credential ({{<brand-credential}}) in the dossier.
-1. Check any business logic. For example, if the passport includes a non-null value for the optional `goal` claim, and the preceding INVITE included a VVP passport that also declared a goal, confirm that the callee's and caller's goals overlap (one must be a subset of the other). Or, if the delegated signer credential says that a call center or an AI can accept calls during certain hours, or in certain geos, check those attributes of the call.
+2. Extract the `evd` field, which references the dossier that constitutes backing evidence.
+3. Use the SAID ({{TOIP-CESR}}) of the dossier as a lookup key to see whether the dossier has already been fully validated. Since dossiers are highly stable, caching dossier validations is recommended.
+4. Confirm that the dossier was signed (issued) by the same AID that appears in the `kid` header.
+5. If the dossier requires full validation, perform it.
+6. Check to see whether the revocation status of the dossier and each item it depends on has been tested recently enough, at the reference time, to satisfy the verifier's freshness requirements.
+7. Compare the callee's TN to the TNAlloc credential cited in the dossier to confirm that the callee has the right to accept calls at this number.
+8. If the passport includes non-null values for the optional `card` claim, extract that information and check that the brand attributes claimed for the call are justified by a brand credential in the dossier.
+9. Check any business logic. For example, if the passport includes a non-null value for the optional `goal` claim, and the preceding INVITE included a VVP passport that also declared a goal, confirm that the callee's and caller's goals overlap (one must be a subset of the other). Or, if the delegated signer credential says that a call center or an AI can accept calls during certain hours, or in certain geos, check those attributes of the call.
 
 ## Planning for efficiency
-A complete verficiation of either caller or callee passport, from scratch, is quite rigorous. With no caches, it may take several seconds, much like a thorough validation of a certificate chain. However, much VVP evidence is stable for long periods of time and lends itself to caching, subject to the proviso that revocation freshness must be managed wisely. Since the same dossier is used to add assurance to many calls -- perhaps thousands or millions of calls, for busy call centers -- and many dossiers will reference the same issuers and issuees and their associated key states and KELs ({{<KEL}}), caching will produce huge benefits.
+A complete verficiation of either caller or callee passport, from scratch, is quite rigorous. With no caches, it may take several seconds, much like a thorough validation of a certificate chain. However, much VVP evidence is stable for long periods of time and lends itself to caching, subject to the proviso that revocation freshness must be managed wisely. Since the same dossier is used to add assurance to many calls -- perhaps thousands or millions of calls, for busy call centers -- and many dossiers will reference the same issuers and issuees and their associated key states and KELs ({{TOIP-KERI}}), caching will produce huge benefits.
 
 Furthermore, because SAIDs and their associated data (including links to other nodes in a data graph) have a tamper-evident relationship, any party can perform validation and compile their results, then share the data with verifiers that want to do less work. Validators like this are not oracles, because consumers of such data need not trust shared results blindly. They can always directly recompute some or all of it from a passport, to catch deception. However, they can do this lazily or occasionally, per their preferred balance of risk/effort.
 
 *In toto*, these characteristics mean that no centralized registry is required in any given ecosystem. Data can be fetched directly from its source, across jurisdictional boundaries. Because it is fetched from its source, it comes with consent. Privacy can be tuned (see {{<privacy}}). Simple opportunistic, uncoordinated reuse (e.g., in or across the datacenters of TSPs) will arise spontaneously and will dramatically improve the scale and efficiency of the system.
 
 ## Historical analysis
-Normally, a verification algorithm determines whether the passport verifies *now*. (This is the only evaluation that's valid for most JWTs, because they depend on ephemeral key state fetched just in time from `x5u`). However, a VVP passport can do more. Its `kid` header references a KEL for the signer's AID, and its `evd` header references a dossier issued by either the AID of the AP or the AID of the callee. Thence it connects to a KEL (see {{<KEL}}). These data structures provide key state transitions that are timestamped -- both by the controllers of the AIDs, and by their independent witnesses. Although the timestamps are not guaranteed to be perfectly synchronized, they can be compared to establish rough transition times and to detect duplicity.
+Normally, a verification algorithm determines whether the passport verifies *now*. (This is the only evaluation that's valid for most JWTs, because they depend on ephemeral key state fetched just in time from `x5u`). However, a VVP passport can do more. Its `kid` header references a KEL for the signer's AID ({{TOIP-KERI}}), and its `evd` header references a dossier issued by either the AID of the AP or the AID of the callee. Thence it connects to a KEL ({{TOIP-KERI}}). These data structures provide key state transitions that are timestamped -- both by the controllers of the AIDs, and by their independent witnesses. Although the timestamps are not guaranteed to be perfectly synchronized, they can be compared to establish rough transition times and to detect duplicity.
 
 Using this historical information, it becomes possible to ask whether a VVP passport would have verified at an arbitrary moment in the past. In such framings, the reference time from the verification algorithm is *then*, not *now*. In the normal case where *then* falls outside a fuzzy range, answers about key state are clear to all observers. In the rare cases where *then* falls inside a fuzzy range, a state transition was underway but not yet universally known, and a verifier can compute the key state (and thence, the outcome of the verification algorithm) according to their preferred interpretation.
 
@@ -484,8 +345,8 @@ Complying with a specification may forestall certain easy-to-anticipate attacks.
 
 Like most cryptographic mechanisms, VVP depends on the foundational assumption that human stakeholders will manage cryptographic keys carefully. VVP enforces this assumption more thoroughly than many existing solutions:
 
-* Parties that issue credentials MUST be identified with AIDs ({{<aid}}) that use witnesses ({{<appendix-b}}). This guarantees a non-repudiable, publicly accessible audit log of how their key state evolves, and it makes key rotation easy. It also offers compromise and duplicity detection. Via prerotation, it enables recovery from key compromise. AIDs can be upgraded to use quantum-proof signing algorithms without changing the identifier.
-* Parties that issue credentials MUST do so using ACDCs ({{<acdcs}}) signed by their AID rather than a raw key. This makes evidence revocable. It also makes it stable across key rotation, and prevents retrograde attacks by allowing verifiers to map an issuance or revocation event to an unambiguous key state in the KEL ({{<KEL}}).
+* Parties that issue credentials MUST be identified with AIDs ({{<TOIP-KERI}}) that use witnesses. This guarantees a non-repudiable, publicly accessible audit log of how their key state evolves, and it makes key rotation easy. It also offers compromise and duplicity detection. Via prerotation, it enables recovery from key compromise. AIDs can be upgraded to use quantum-proof signing algorithms without changing the identifier.
+* Parties that issue credentials MUST do so using ACDCs ({{TOIP-ACDC}}) signed by their AID rather than a raw key. This makes evidence revocable. It also makes it stable across key rotation, and prevents retrograde attacks by allowing verifiers to map an issuance or revocation event to an unambiguous key state in the KEL ({{TOIP-KERI}}).
 * Parties that issue credentials SHOULD employ threshold-based multi-signature schemes. This enhances security by distributing signing authority across multiple key holders, reducing the risk of single-point compromise. Threshold-based signatures ensure that no single key compromise undermines the system’s integrity while enabling controlled key recovery and rotation without disrupting credential validity.
 
 Nonetheless, it is still possible to make choices that weaken the security posture of the ecosystem, including at least the following:
@@ -500,7 +361,7 @@ Generally understood best practices in cybersecurity will avoid many of these pr
 
 1. Passports SHOULD have an aggressive timeout (e.g., 30 seconds). Signatures on passports are not anchored in a KEL, and must therefore be evaluated for age with respect to the time they were received. Overly old passports could be a replay attack (a purported second call with the same orig and dest numbers, using the same backing evidence, soon after the first.)
 
-2. Witnesses (which MUST be used) SHOULD be used in such a way that high availability is guaranteed, and in such a way that duplicity by the controller of an AID is detected. See {{<appendix-b}}. (Verifiers will be able to see the witness policy of each AID controller, and SHOULD decide for themselves whether the party is reliable, depending on what they observe.)
+2. Witnesses (which MUST be used) SHOULD be used in such a way that high availability is guaranteed, and in such a way that duplicity by the controller of an AID is detected. (Verifiers will be able to see the witness policy of each AID controller, and SHOULD decide for themselves whether the party is reliable, depending on what they observe.)
 
 3. Revocations SHOULD be timely, and the timeliness guarantees of issuers SHOULD be published.
 
@@ -516,7 +377,7 @@ This document defines a new SDP {{RFC8866}} session-level attribute:
    Subject to charset:  No
    Reference:           This document
 
-This specification also depends on OOBIs (see {{<aid}}) being served as web resources with IANA content type `application/json+cesr`.
+This specification also depends on OOBIs ({{TOIP-KERI}}) being served as web resources with IANA content type `application/cesr`.
 
 --- back
 
