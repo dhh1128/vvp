@@ -86,6 +86,13 @@ normative:
       -
         org: Trust Over IP Foundation
     date: 6 Nov 2023
+  TOIP-DOSSIER:
+    target: https://trustoverip.github.io/kswg-dossier-specification/
+    title: "Verifiable Dossiers"
+    author:
+      -
+        name: Daniel Hardman
+    date: 22 Sep 2025
   ATIS-1000074:
     target: https://atis.org/resources/signature-based-handling-of-asserted-information-using-tokens-shaken-atis-1000074-e/
     title: "Signature-Based Handling of Asserted Information Using toKENs (SHAKEN)"
@@ -154,7 +161,7 @@ VVP solves these problems by applying crucial innovations in evidence scope, evi
 
 # Overview
 
-Fundamentally, VVP requires identified parties (callers and/or callees) to curate a dossier of stable evidence that proves things about them. This is done once or occasionally, in advance, as a configuration precondition. Then, for each call, participants decide whether to share this evidence. Callers share evidence by creating an ephemeral STIR-compatible VVP PASSporT ({{RFC8225}}) that cites ({{<citing}}) their preconfigured dossier. This passport travels along the delivery route as an `Identity` header in a SIP INVITE. Callees share evidence by adding an analogous passport to an attribute line in the SDP {{RFC8866}} body of their SIP response. This passes a signed citation to their dossier in the other direction. Verifiers anywhere along the route check the citation(s) and corresponding dossier(s), including realtime revocation status, to make decisions ({{<verifying}}).
+Fundamentally, VVP requires identified parties (callers and/or callees) to curate a dossier ({{TOIP-DOSSIER}}) of stable evidence that proves things about them. This is done once or occasionally, in advance, as a configuration precondition. Then, for each call, participants decide whether to share this evidence. Callers share evidence by creating an ephemeral STIR-compatible VVP PASSporT ({{RFC8225}}) that cites ({{<citing}}) their preconfigured dossier. This passport travels along the delivery route as an `Identity` header in a SIP INVITE. Callees share evidence by adding an analogous passport to an attribute line in the SDP {{RFC8866}} body of their SIP response. This passes a signed citation to their dossier in the other direction. Verifiers anywhere along the route check the citation(s) and corresponding dossier(s), including realtime revocation status, to make decisions ({{<verifying}}).
 
 A VVP call may carry assurance in either or both directions. Compliant implementations may choose to support only assurance about the caller, only assurance about the callee, or both.
 
