@@ -1053,7 +1053,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Hardman</td>
-<td class="center">Expires 26 March 2026</td>
+<td class="center">Expires 27 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-hardman-verifiable-voice-protocol-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-22" class="published">22 September 2025</time>
+<time datetime="2025-09-23" class="published">23 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-03-26">26 March 2026</time></dd>
+<dd class="expires"><time datetime="2026-03-27">27 March 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1116,7 +1116,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1296,7 +1296,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-overview">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-overview" class="section-name selfRef">Overview</a>
       </h2>
-<p id="section-3-1">Fundamentally, VVP requires identified parties (callers and/or callees) to curate a dossier of stable evidence that proves things about them. This is done once or occasionally, in advance, as a configuration precondition. Then, for each call, participants decide whether to share this evidence. Callers share evidence by creating an ephemeral STIR-compatible VVP PASSporT (<span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span>) that cites (<a href="#citing" class="auto internal xref">4</a>) their preconfigured dossier. This passport travels along the delivery route as an <code>Identity</code> header in a SIP INVITE. Callees share evidence by adding an analogous passport to an attribute line in the SDP <span>[<a href="#RFC8866" class="cite xref">RFC8866</a>]</span> body of their SIP response. This passes a signed citation to their dossier in the other direction. Verifiers anywhere along the route check the citation(s) and corresponding dossier(s), including realtime revocation status, to make decisions (<a href="#verifying" class="auto internal xref">5</a>).<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">Fundamentally, VVP requires identified parties (callers and/or callees) to curate a dossier (<span>[<a href="#TOIP-DOSSIER" class="cite xref">TOIP-DOSSIER</a>]</span>) of stable evidence that proves things about them. This is done once or occasionally, in advance, as a configuration precondition. Then, for each call, participants decide whether to share this evidence. Callers share evidence by creating an ephemeral STIR-compatible VVP PASSporT (<span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span>) that cites (<a href="#citing" class="auto internal xref">4</a>) their preconfigured dossier. This passport travels along the delivery route as an <code>Identity</code> header in a SIP INVITE. Callees share evidence by adding an analogous passport to an attribute line in the SDP <span>[<a href="#RFC8866" class="cite xref">RFC8866</a>]</span> body of their SIP response. This passes a signed citation to their dossier in the other direction. Verifiers anywhere along the route check the citation(s) and corresponding dossier(s), including realtime revocation status, to make decisions (<a href="#verifying" class="auto internal xref">5</a>).<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">A VVP call may carry assurance in either or both directions. Compliant implementations may choose to support only assurance about the caller, only assurance about the callee, or both.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="roles">
 <section id="section-3.1">
@@ -1803,6 +1803,10 @@ Validation also includes comparing data structure and values against the declare
 <dt id="TOIP-CESR">[TOIP-CESR]</dt>
         <dd>
 <span class="refAuthor">Smith, S.</span>, <span class="refAuthor">Griffin, K., Ed.</span>, and <span class="refAuthor">Trust Over IP Foundation</span>, <span class="refTitle">"Composable Event Streaming Representation (CESR)"</span>, <time datetime="2023-11" class="refDate">November 2023</time>, <span>&lt;<a href="https://trustoverip.github.io/tswg-cesr-specification/">https://trustoverip.github.io/tswg-cesr-specification/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="TOIP-DOSSIER">[TOIP-DOSSIER]</dt>
+        <dd>
+<span class="refAuthor">Hardman, D.</span>, <span class="refTitle">"Verifiable Dossiers"</span>, <time datetime="2025-09" class="refDate">September 2025</time>, <span>&lt;<a href="https://trustoverip.github.io/kswg-dossier-specification/">https://trustoverip.github.io/kswg-dossier-specification/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TOIP-KERI">[TOIP-KERI]</dt>
       <dd>

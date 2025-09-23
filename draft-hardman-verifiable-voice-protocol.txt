@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                       22 September 2025
-Expires: 26 March 2026
+Intended status: Standards Track                       23 September 2025
+Expires: 27 March 2026
 
 
                        Verifiable Voice Protocol
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 March 2026.
+   This Internet-Draft will expire on 27 March 2026.
 
 Copyright Notice
 
@@ -157,18 +157,19 @@ Table of Contents
 3.  Overview
 
    Fundamentally, VVP requires identified parties (callers and/or
-   callees) to curate a dossier of stable evidence that proves things
-   about them.  This is done once or occasionally, in advance, as a
-   configuration precondition.  Then, for each call, participants decide
-   whether to share this evidence.  Callers share evidence by creating
-   an ephemeral STIR-compatible VVP PASSporT ([RFC8225]) that cites (4)
-   their preconfigured dossier.  This passport travels along the
-   delivery route as an Identity header in a SIP INVITE.  Callees share
-   evidence by adding an analogous passport to an attribute line in the
-   SDP [RFC8866] body of their SIP response.  This passes a signed
-   citation to their dossier in the other direction.  Verifiers anywhere
-   along the route check the citation(s) and corresponding dossier(s),
-   including realtime revocation status, to make decisions (5).
+   callees) to curate a dossier ([TOIP-DOSSIER]) of stable evidence that
+   proves things about them.  This is done once or occasionally, in
+   advance, as a configuration precondition.  Then, for each call,
+   participants decide whether to share this evidence.  Callers share
+   evidence by creating an ephemeral STIR-compatible VVP PASSporT
+   ([RFC8225]) that cites (4) their preconfigured dossier.  This
+   passport travels along the delivery route as an Identity header in a
+   SIP INVITE.  Callees share evidence by adding an analogous passport
+   to an attribute line in the SDP [RFC8866] body of their SIP response.
+   This passes a signed citation to their dossier in the other
+   direction.  Verifiers anywhere along the route check the citation(s)
+   and corresponding dossier(s), including realtime revocation status,
+   to make decisions (5).
 
    A VVP call may carry assurance in either or both directions.
    Compliant implementations may choose to support only assurance about
@@ -927,6 +928,11 @@ Table of Contents
               "Composable Event Streaming Representation (CESR)",
               November 2023,
               <https://trustoverip.github.io/tswg-cesr-specification/>.
+
+   [TOIP-DOSSIER]
+              Hardman, D., "Verifiable Dossiers", September 2025,
+              <https://trustoverip.github.io/kswg-dossier-
+              specification/>.
 
    [TOIP-KERI]
               Smith, S., Griffin, K., Ed., and Trust Over IP Foundation,
