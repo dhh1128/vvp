@@ -215,7 +215,7 @@ However, curating does not occur in realtime during phone calls, and is out of s
 # Citing
 
 ## Citing the AP's dossier
-A VVP call that makes the caller verifiable begins when the OP ({{<OP}}) generates a new VVP passport {{RFC8225}} that complies with STIR {{RFC8224}} requirements. In its compact-serialized JWT {{RFC7519}} form, this passport is then passed as an `Identity` header in a SIP INVITE {{RFC3261}}. The passport *constitutes* lightweight, direct, and ephemeral evidence; it *cites* and therefore depends upon comprehensive, indirect, and long-lived evidence (the AP's dossier. Safely and efficiently citing stronger evidence in a dossier is one way that VVP differs from alternatives.
+A VVP call that makes the caller verifiable begins when the OP ({{<OP}}) generates a new VVP passport {{RFC8225}} that complies with STIR {{RFC8224}} requirements. In its compact-serialized JWT {{RFC7519}} form, this passport is then passed as an `Identity` header in a SIP INVITE {{RFC3261}}. The passport *constitutes* lightweight, direct, and ephemeral evidence; it *cites* and therefore depends upon comprehensive, indirect, and long-lived evidence (the AP's dossier). Safely and efficiently citing stronger evidence in a dossier is one way that VVP differs from alternatives.
 
 ### Questions answered by an AP's passport
 The passport directly answers at least the following questions:
