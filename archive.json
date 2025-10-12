@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-09T00:07:58.240891+00:00",
+  "timestamp": "2025-10-12T00:08:10.084958+00:00",
   "repo": "dhh1128/vvp",
   "labels": [
     {
@@ -411,6 +411,32 @@
       "mergeCommit": {
         "oid": "55e340f1d7449f0793f54fe2022c92c000b67e54"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDONMB4L86szSaw",
+      "title": "Update draft-hardman-verifiable-voice-protocol.md",
+      "url": "https://github.com/dhh1128/vvp/pull/10",
+      "state": "OPEN",
+      "author": "daidoji",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "closed parenthesis",
+      "createdAt": "2025-10-09T01:33:33Z",
+      "updatedAt": "2025-10-09T01:33:33Z",
+      "baseRepository": "dhh1128/vvp",
+      "baseRefName": "main",
+      "baseRefOid": "331137a84b5760196ba1e5319820aa0c65331221",
+      "headRepository": "daidoji/vvp",
+      "headRefName": "patch-1",
+      "headRefOid": "32414f2722281048f8cb4ac079d3df5ec33f14ca",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
