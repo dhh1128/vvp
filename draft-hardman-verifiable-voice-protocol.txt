@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                       23 September 2025
-Expires: 27 March 2026
+Intended status: Standards Track                         13 October 2025
+Expires: 16 April 2026
 
 
                        Verifiable Voice Protocol
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 March 2026.
+   This Internet-Draft will expire on 16 April 2026.
 
 Copyright Notice
 
@@ -392,7 +392,7 @@ Table of Contents
    {
      "header": {
        "alg": "EdDSA",
-       "typ": "JWT",
+       "typ": "passport",
        "ppt": "vvp",
        "kid": "https://agentsrus.net/oobi/EMC.../agent/EAx..."
      },
