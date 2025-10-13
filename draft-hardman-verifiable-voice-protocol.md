@@ -243,7 +243,7 @@ An example will help. In its JSON-serialized form, a typical VVP passport for an
 {
   "header": {
     "alg": "EdDSA",
-    "typ": "JWT",
+    "typ": "passport",
     "ppt": "vvp",
     "kid": "https://agentsrus.net/oobi/EMC.../agent/EAx..."
   },
