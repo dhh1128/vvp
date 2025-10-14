@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-12T00:08:10.084958+00:00",
+  "timestamp": "2025-10-14T00:08:04.509187+00:00",
   "repo": "dhh1128/vvp",
   "labels": [
     {
@@ -439,6 +439,48 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDONMB4L86tep_y",
+      "title": "Updated vvp example to match normative requirement",
+      "url": "https://github.com/dhh1128/vvp/pull/11",
+      "state": "MERGED",
+      "author": "daidoji",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The normative requirement below this example says that `typ` should be passport so I changed the example to match.",
+      "createdAt": "2025-10-13T14:43:19Z",
+      "updatedAt": "2025-10-13T15:02:38Z",
+      "baseRepository": "dhh1128/vvp",
+      "baseRefName": "main",
+      "baseRefOid": "331137a84b5760196ba1e5319820aa0c65331221",
+      "headRepository": "daidoji/vvp",
+      "headRefName": "daidoji-patch-1",
+      "headRefOid": "6abacf447d9ff55331ad36f58cd8de06e5299153",
+      "closedAt": "2025-10-13T15:02:37Z",
+      "mergedAt": "2025-10-13T15:02:37Z",
+      "mergedBy": "dhh1128",
+      "mergeCommit": {
+        "oid": "3576b62ab4f5bf69b8ac4a7de6d51a2b1c1b9953"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONMB4L87GmhsG",
+          "commit": {
+            "abbreviatedOid": "6abacf4"
+          },
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Thanks. I fixed this somewhere else, but it looks like I missed it here. Good catch!",
+          "createdAt": "2025-10-13T15:02:20Z",
+          "updatedAt": "2025-10-13T15:02:20Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
