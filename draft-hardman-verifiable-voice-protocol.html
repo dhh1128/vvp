@@ -7,9 +7,9 @@
 <title>Verifiable Voice Protocol</title>
 <meta content="Daniel Hardman" name="author">
 <meta content="
-       Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making and/or receiving telephone calls. This eliminates trust gaps that malicious parties exploit. Like related technolgies such as SHAKEN, RCD, and BCID, VVP uses STIR to bind cryptographic evidence to a SIP INVITE, and verify this evidence downstream. VVP can also let evidence flow the other way, proving things about the callee. VVP builds from different technical and governance assumptions than alternatives, and uses stronger, richer evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat (e.g., RCS and vCon), as well as with other industry verticals that need verifiability in non-telco contexts. 
+       Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making and/or receiving telephone calls. This eliminates trust gaps that malicious parties exploit. Like related technolgies such as SHAKEN, RCD, and BCID, VVP uses STIR to bind cryptographic evidence to a SIP INVITE, and verify this evidence downstream. VVP can also let evidence flow the other way, proving things about the callee. VVP builds from different technical and governance assumptions than alternatives, and uses richer, stronger evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat (e.g., RCS and vCon), as well as with other industry verticals that need verifiability in non-telco contexts. 
     " name="description">
-<meta content="xml2rfc 3.30.2" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="voip" name="keyword">
 <meta content="telecom" name="keyword">
 <meta content="telco" name="keyword">
@@ -18,18 +18,17 @@
 <meta content="KYC" name="keyword">
 <meta content="draft-hardman-verifiable-voice-protocol-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.2
-    Python 3.12.11
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.4.0
+    platformdirs 4.5.0
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.5
-    setuptools 80.9.0
     wcwidth 0.2.14
 -->
 <link href="draft-hardman-verifiable-voice-protocol.xml" rel="alternate" type="application/rfc+xml">
@@ -1053,7 +1052,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Hardman</td>
-<td class="center">Expires 16 April 2026</td>
+<td class="center">Expires 27 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-hardman-verifiable-voice-protocol-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-13" class="published">13 October 2025</time>
+<time datetime="2025-10-24" class="published">24 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-16">16 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-27">27 April 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1084,7 +1083,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Verifiable Voice Protocol</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making and/or receiving telephone calls. This eliminates trust gaps that malicious parties exploit. Like related technolgies such as SHAKEN, RCD, and BCID, VVP uses STIR to bind cryptographic evidence to a SIP INVITE, and verify this evidence downstream. VVP can also let evidence flow the other way, proving things about the callee. VVP builds from different technical and governance assumptions than alternatives, and uses stronger, richer evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat (e.g., RCS and vCon), as well as with other industry verticals that need verifiability in non-telco contexts.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making and/or receiving telephone calls. This eliminates trust gaps that malicious parties exploit. Like related technolgies such as SHAKEN, RCD, and BCID, VVP uses STIR to bind cryptographic evidence to a SIP INVITE, and verify this evidence downstream. VVP can also let evidence flow the other way, proving things about the callee. VVP builds from different technical and governance assumptions than alternatives, and uses richer, stronger evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat (e.g., RCS and vCon), as well as with other industry verticals that need verifiability in non-telco contexts.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1116,7 +1115,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1158,22 +1157,19 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-roles" class="internal xref">Roles</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
-                    <p id="section-toc.1-1.3.2.1.2.1.1" class="keepWithNext"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-allocation-holder" class="internal xref">Allocation Holder</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.1.1" class="keepWithNext"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-callee" class="internal xref">Callee</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.2">
-                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="auto internal xref">3.1.2</a>.  <a href="#name-callee" class="internal xref">Callee</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="auto internal xref">3.1.2</a>.  <a href="#name-originating-party" class="internal xref">Originating Party</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.3">
-                    <p id="section-toc.1-1.3.2.1.2.3.1"><a href="#section-3.1.3" class="auto internal xref">3.1.3</a>.  <a href="#name-originating-party" class="internal xref">Originating Party</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.3.1"><a href="#section-3.1.3" class="auto internal xref">3.1.3</a>.  <a href="#name-accountable-party" class="internal xref">Accountable Party</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.4">
-                    <p id="section-toc.1-1.3.2.1.2.4.1"><a href="#section-3.1.4" class="auto internal xref">3.1.4</a>.  <a href="#name-accountable-party" class="internal xref">Accountable Party</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.4.1"><a href="#section-3.1.4" class="auto internal xref">3.1.4</a>.  <a href="#name-verified-party" class="internal xref">Verified Party</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.5">
-                    <p id="section-toc.1-1.3.2.1.2.5.1"><a href="#section-3.1.5" class="auto internal xref">3.1.5</a>.  <a href="#name-verified-party" class="internal xref">Verified Party</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.6">
-                    <p id="section-toc.1-1.3.2.1.2.6.1"><a href="#section-3.1.6" class="auto internal xref">3.1.6</a>.  <a href="#name-verifier" class="internal xref">Verifier</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.5.1"><a href="#section-3.1.5" class="auto internal xref">3.1.5</a>.  <a href="#name-verifier" class="internal xref">Verifier</a></p>
 </li>
                 </ul>
 </li>
@@ -1304,59 +1300,50 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-roles" class="section-name selfRef">Roles</a>
         </h3>
 <p id="section-3.1-1">Understanding the workflow in VVP requires a careful definition of roles related to the protocol. The terms that follow have deep implications for the mental model, and their meaning in VVP may not match casual usage.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<div id="allocation-holder">
+<div id="callee">
 <section id="section-3.1.1">
-          <h4 id="name-allocation-holder">
-<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-allocation-holder" class="section-name selfRef">Allocation Holder</a>
-          </h4>
-<p id="section-3.1.1-1">An <em>allocation holder</em> controls how a phone number is used, in the eyes of a regulator. Enterprises and consumers that make and receive calls with phone numbers they legitimately control are the most obvious category of allocation holders, and are called direct <em>telephone number users</em> (<em>TNUs</em>). Range holders hold allocations for numbers that have not yet been assigned; they don't make or receive calls with these numbers, and are therefore not TNUs, but they are still allocation holders.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-2">It is possible for an ecosystem to include other parties as allocation holders (e.g., wholesalers, aggregators). However, many regulators dislike this outcome, and prefer that such parties broker allocations without actually holding the allocations directly.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="TP">
-<section id="section-3.1.2">
           <h4 id="name-callee">
-<a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-callee" class="section-name selfRef">Callee</a>
+<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-callee" class="section-name selfRef">Callee</a>
           </h4>
-<p id="section-3.1.2-1">For a given phone call, a <em>callee</em> (also referred to as a <em>terminating party</em> or <em>TP</em>) receives the call. Typically one callee is targeted, but multiparty SIP flows allow INVITEs to multiple callees, either directly or via a conference server (see <span>[<a href="#RFC4353" class="cite xref">RFC4353</a>]</span> and <span>[<a href="#RFC4575" class="cite xref">RFC4575</a>]</span>). A callee can be an individual consumer or an organization. The direct service provider of the callee is the <em>terminating service provider</em> (<em>TSP</em>). In many use cases for VVP, callers attempt to prove things to callees, and callees and their service providers use VVP primarily with a verifier mindset. However, enterprises or call centers that accept inbound calls from individuals may want assurance to flow the other direction; hence, VVP supports optional evidence about callees as well.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-1">For a given phone call, a <em>callee</em> receives the SIP INVITE. Typically one callee is targeted, but multiparty SIP flows allow INVITEs to multiple callees, either directly or via a conference server (see <span>[<a href="#RFC4353" class="cite xref">RFC4353</a>]</span> and <span>[<a href="#RFC4575" class="cite xref">RFC4575</a>]</span>). A callee can be an individual consumer or an organization. The direct service provider of the callee is the <em>terminating service provider</em> (<em>TSP</em>). In many use cases for VVP, callers attempt to prove things to callees, and callees and their service providers use VVP primarily with a verifier mindset. However, enterprises or call centers that accept inbound calls from individuals may want assurance to flow the other direction; hence, VVP supports optional evidence about callees as well.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="OP">
-<section id="section-3.1.3">
+<section id="section-3.1.2">
           <h4 id="name-originating-party">
-<a href="#section-3.1.3" class="section-number selfRef">3.1.3. </a><a href="#name-originating-party" class="section-name selfRef">Originating Party</a>
+<a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-originating-party" class="section-name selfRef">Originating Party</a>
           </h4>
-<p id="section-3.1.3-1">An <em>originating party</em> (<em>OP</em>) controls the first <em>session border controller</em> (<em>SBC</em>) that processes an outbound call, and therefore builds the VVP passport that cites evidence about the caller.<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-2">It may be tempting to equate the OP with "the caller", and in some perspectives this could be true. However, this simple equivalence lacks nuance and doesn't always hold. In a VVP context, it is more accurate to say that the OP creates a SIP INVITE <span>[<a href="#RFC3261" class="cite xref">RFC3261</a>]</span> with explicit, provable authorization from the party accountable for calls on the originating phone number. The OP originates the VVP protocol, but not always the call on the handset.<a href="#section-3.1.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-3">It may also be tempting to associate the OP with an organizational identity like "Company X". While this is not wrong, and is in fact used in high-level descriptions in this specification, in its most careful definition, the cryptographic identity of an OP should be more narrow. It typically corresponds to a single service operated by an IT department within (or outsourced but operating at the behest of) Company X, rather than to Company X generically. This narrowness limits cybersecurity risk, because a single service operated by Company X needs far fewer privileges than the company as a whole. Failing to narrow identity appropriately creates vulnerabilities in some alternative approaches. The evidence securing VVP <span class="bcp14">MUST</span> therefore prove a valid relationship between the OP's narrow identity and the broader legal entities that stakeholders more naturally assume and understand.<a href="#section-3.1.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-4">The service provider associated with an OP is called the <em>originating service provider</em> (<em>OSP</em>). For a given phone call, there may be complexity between the hardware that begins a call and the SBC of the OP -- and there may also be many layers, boundaries, and transitions between OSP and TSP.<a href="#section-3.1.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-1">An <em>originating party</em> (<em>OP</em>) controls the first <em>session border controller</em> (<em>SBC</em>) that processes an outbound call, and therefore builds the VVP passport that cites evidence about the caller.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-2">It may be tempting to equate the OP with "the caller", and in some perspectives this could be true. However, this simple equivalence lacks nuance and doesn't always hold. In a VVP context, it is more accurate to say that the OP creates a SIP INVITE <span>[<a href="#RFC3261" class="cite xref">RFC3261</a>]</span> with explicit, provable authorization from the party accountable for calls on the originating phone number. The OP originates the VVP protocol, but not always the call on the handset.<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-3">It may also be tempting to associate the OP with an organizational identity like "Company X". While this is not wrong, the precise cryptographic identity of an OP should be narrower. It typically corresponds to a single service operated by an IT department within (or outsourced but operating at the behest of) Company X, rather than to Company X generically. This narrowness limits cybersecurity risk, because a single service operated by Company X needs far fewer privileges than the company as a whole. Failing to narrow identity appropriately creates vulnerabilities in some alternative approaches. The evidence securing VVP <span class="bcp14">MUST</span> therefore prove a valid relationship between the OP's narrow identity and the broader legal entities that stakeholders more naturally assume and understand.<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-4">The service provider associated with an OP is called the <em>originating service provider</em> (<em>OSP</em>). For a given phone call, there may be complexity between the hardware that begins a call and the SBC of the OP -- and there may also be many layers, boundaries, and transitions between OSP and TSP.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="AP">
-<section id="section-3.1.4">
+<section id="section-3.1.3">
           <h4 id="name-accountable-party">
-<a href="#section-3.1.4" class="section-number selfRef">3.1.4. </a><a href="#name-accountable-party" class="section-name selfRef">Accountable Party</a>
+<a href="#section-3.1.3" class="section-number selfRef">3.1.3. </a><a href="#name-accountable-party" class="section-name selfRef">Accountable Party</a>
           </h4>
-<p id="section-3.1.4-1">For a given call, the <em>accountable party</em> (<em>AP</em>) is the organization or individual (the TNU) that has the right to use the originating phone number, according to the regulator of that number. When a callee asks, "Who's calling?", they have little interest in the technicalities of the OP, and it is almost always the AP that they want to identify. The AP is accountable for the call, and thus "the caller", as far as the regulator and the callee are concerned.<a href="#section-3.1.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.4-2">APs can operate their own SBCs and therefore be their own OPs. However, APs can also use a UCaaS provider that makes the AP-OP relationship indirect. Going further, a business can hire a call center, and delegate to the call center the right to use its phone number. In such a case, the business is the AP, but the call center is the OP that makes calls on its behalf. None of these complexities alter the fact that, from the callee's perspective, the AP is "the caller". The callee chooses to answer or not, based on their desire to interact with the AP. If the callee's trust is abused, the regulator and the callee both want to hold the AP accountable.<a href="#section-3.1.4-2" class="pilcrow">¶</a></p>
-<p id="section-3.1.4-3">In order to verify a caller, VVP requires an AP to prepare a dossier of evidence that documents a basis for imposing this accountability on them. Only the owner of a given dossier can prove they intend to initiate a VVP call that cites their dossier. Therefore, if a verifier confirms that a particular call properly matches its dossier, the verifier is justified in considering the owner of that dossier the AP for the call. Otherwise, someone is committing fraud. Accountability, and the basis for it, are both unambiguous.<a href="#section-3.1.4-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-1">For a given call, the <em>accountable party</em> (<em>AP</em>) is the organization or individual that has the right to use the originating phone number, according to the regulator of that number. When a callee asks, "Who's calling?", they have little interest in the technicalities of the OP, and it is almost always the AP that they want to identify. The AP is accountable for the call, and thus "the caller", as far as the regulator and the callee are concerned.<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-2">APs can operate their own SBCs and therefore be their own OPs. However, APs can also use a UCaaS provider that makes the AP-OP relationship indirect. Going further, a business can hire a call center, and delegate to the call center the right to use its phone number. In such a case, the business is the AP, but the call center is the OP that makes calls on its behalf. None of these complexities alter the fact that, from the callee's perspective, the AP is "the caller". The callee chooses to answer or not, based on their desire to interact with the AP. If the callee's trust is abused, the regulator and the callee both want to hold the AP accountable.<a href="#section-3.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-3">In order to verify a caller, VVP requires an AP to prepare a dossier of evidence that documents a basis for imposing this accountability on them. Only the owner of a given dossier can prove they intend to initiate a VVP call that cites their dossier. Therefore, if a verifier confirms that a particular call properly matches its dossier, the verifier is justified in considering the owner of that dossier the AP for the call. Otherwise, someone is committing fraud. Accountability, and the basis for it, are both unambiguous.<a href="#section-3.1.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="VP">
-<section id="section-3.1.5">
+<section id="section-3.1.4">
           <h4 id="name-verified-party">
-<a href="#section-3.1.5" class="section-number selfRef">3.1.5. </a><a href="#name-verified-party" class="section-name selfRef">Verified Party</a>
+<a href="#section-3.1.4" class="section-number selfRef">3.1.4. </a><a href="#name-verified-party" class="section-name selfRef">Verified Party</a>
           </h4>
-<p id="section-3.1.5-1">A <em>verified party</em> (<em>VP</em>) is a party that uses VVP to prove assertions about itself and its delegation decisions. When VVP provides assurance about callers, the AP is a VP. When VVP provides assurance about callees, the callee is a VP. Some characteristics of proxies, delegates, and service providers may be proved by a dossier, but these parties are not VPs. They don't create dossiers, and dossiers are not focused on them.<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-1">A <em>verified party</em> (<em>VP</em>) is a party that uses VVP to prove assertions about itself and its delegation decisions. When VVP provides assurance about callers, the AP is a VP. When VVP provides assurance about callees, the callee is a VP. Some characteristics of proxies, delegates, and service providers may be proved by a dossier, but these parties are not VPs. They don't create dossiers, and dossiers are not focused on them.<a href="#section-3.1.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="verifier">
-<section id="section-3.1.6">
+<section id="section-3.1.5">
           <h4 id="name-verifier">
-<a href="#section-3.1.6" class="section-number selfRef">3.1.6. </a><a href="#name-verifier" class="section-name selfRef">Verifier</a>
+<a href="#section-3.1.5" class="section-number selfRef">3.1.5. </a><a href="#name-verifier" class="section-name selfRef">Verifier</a>
           </h4>
-<p id="section-3.1.6-1">A <em>verifier</em> is a party that wants to know who's calling or being called, and maybe why -- and that evaluates the answers to these questions by examining formal evidence. Callees, callers, TSPs, OSPs, government regulators, law enforcement doing lawful intercept, auditors, and even APs or OPs can be verifiers. Each may need to see different views of the evidence about a particular phone call, and it may be impossible to comply with various regulations unless these views are kept distinct -- yet each wants similar and compatible assurance.<a href="#section-3.1.6-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-2">In addition to checking the validity of cryptographic evidence, the verifier role in VVP <span class="bcp14">MAY</span> also consider how that evidence matches business rules and external conditions. For example, a verifier can begin its analysis by deciding whether Call Center Y has the right, in the abstract, to make or receive calls on behalf of Organization X using a given phone number. However, VVP evidence allows a verifier to go further: it can also consider whether Y is allowed to exercise this right at the particular time of day when a call occurs, or in a particular jurisdiction, given the business purpose asserted in a particular call.<a href="#section-3.1.6-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-1">A <em>verifier</em> is a party that wants to know who's calling or being called, and maybe why -- and that evaluates the answers to these questions by examining formal evidence. Callees, callers, TSPs, OSPs, government regulators, law enforcement doing lawful intercept, auditors, and even APs or OPs can be verifiers. Each may need to see different views of the evidence about a particular phone call, and it may be impossible to comply with various regulations unless these views are kept distinct -- yet each wants similar and compatible assurance.<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-2">In addition to checking the validity of cryptographic evidence, the verifier role in VVP <span class="bcp14">MAY</span> also consider how that evidence matches business rules and external conditions. For example, a verifier can begin its analysis by deciding whether Call Center Y has the right, in the abstract, to make or receive calls on behalf of Organization X using a given phone number. However, VVP evidence allows a verifier to go further: it can also consider whether Y is allowed to exercise this right at the particular time of day when a call occurs, or in a particular jurisdiction, given the business purpose asserted in a particular call.<a href="#section-3.1.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1379,7 +1366,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </li>
         </ul>
 <p id="section-3.2-3">Chronologically, evidence must be curated before it can be cited or verified. In addition, some vulnerabilities in existing approaches occur because evidence requirements are too loose. Therefore, understanding the nature of backing evidence, and how that evidence is created and maintained, is a crucial consideration for VVP.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">However, curating does not occur in realtime during phone calls, and is out of scope for a network protocol specification. Citing and verifying are the heart of VVP, and implementers will approach VVP from the standpoint of SIP flows <span>[<a href="#RFC3261" class="cite xref">RFC3261</a>]</span>, <span>[<a href="#RFC5626" class="cite xref">RFC5626</a>]</span>. Therefore, we leave the question of curation to a separate document. Where not-yet-explained evidence concepts are used, inline references allow easy cross-reference to formal definitions that come later.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-4">However, curating does not occur in realtime during phone calls, and is out of scope for a network protocol specification. Citing and verifying are the heart of VVP, and implementers will approach VVP from the standpoint of SIP flows <span>[<a href="#RFC3261" class="cite xref">RFC3261</a>]</span>, <span>[<a href="#RFC5626" class="cite xref">RFC5626</a>]</span>. Therefore, we leave the question of curation to separate document (for example, <span>[<a href="#TOIP-DOSSIER" class="cite xref">TOIP-DOSSIER</a>]</span>).<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1394,7 +1381,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-citing-the-aps-dossier">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-citing-the-aps-dossier" class="section-name selfRef">Citing the AP's dossier</a>
         </h3>
-<p id="section-4.1-1">A VVP call that makes the caller verifiable begins when the OP (<a href="#OP" class="auto internal xref">3.1.3</a>) generates a new VVP passport <span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span> that complies with STIR <span>[<a href="#RFC8224" class="cite xref">RFC8224</a>]</span> requirements. In its compact-serialized JWT <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> form, this passport is then passed as an <code>Identity</code> header in a SIP INVITE <span>[<a href="#RFC3261" class="cite xref">RFC3261</a>]</span>. The passport <em>constitutes</em> lightweight, direct, and ephemeral evidence; it <em>cites</em> and therefore depends upon comprehensive, indirect, and long-lived evidence (the AP's dossier. Safely and efficiently citing stronger evidence in a dossier is one way that VVP differs from alternatives.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">A VVP call that makes the caller verifiable begins when the OP (<a href="#OP" class="auto internal xref">3.1.2</a>) generates a new VVP passport <span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span> that complies with STIR <span>[<a href="#RFC8224" class="cite xref">RFC8224</a>]</span> requirements. In its compact-serialized JWT <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> form, this passport is then passed as an <code>Identity</code> header in a SIP INVITE <span>[<a href="#RFC3261" class="cite xref">RFC3261</a>]</span>. The passport <em>constitutes</em> lightweight, direct, and ephemeral evidence; it <em>cites</em> and therefore depends upon comprehensive, indirect, and long-lived evidence (the AP's dossier). Safely and efficiently citing stronger evidence in a dossier is one way that VVP differs from alternatives.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">If the caller intends to use DTLS-SRTP, the SIP INVITE <span class="bcp14">MUST</span> also contain an attribute line that contains the DTLS <code>fingerprint</code> attribute. Because VVP proves the prevents man-in-the-middle attacks and allows the When combined with VVP, DTLS-SRTP  <code>a=callee-passport:X</code> attribute line to the SDP <span>[<a href="#RFC8866" class="cite xref">RFC8866</a>]</span> body of the callee's<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 <div id="questions-answered-by-an-aps-passport">
 <section id="section-4.1.1">
           <h4 id="name-questions-answered-by-an-ap">
@@ -1469,7 +1457,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-4.1.2-3">The semantics of the fields are:<a href="#section-4.1.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1.2-4.1">
-              <p id="section-4.1.2-4.1.1"><code>alg</code> <em>(required)</em> <span class="bcp14">MUST</span> be "EdDSA" (<span>[<a href="#RFC8032" class="cite xref">RFC8032</a>]</span>, <span>[<a href="#FIPS186-4" class="cite xref">FIPS186-4</a>]</span>). Standardizing on one scheme prevents jurisdictions with incompatible or weaker cryptography. The RSA, HMAC, and ES256 algorithms <span class="bcp14">MUST NOT</span> be used. (This choice is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which depends on the Montgomery-to-Edwards transformation.)<a href="#section-4.1.2-4.1.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.2-4.1.1"><code>alg</code> <em>(required)</em> <span class="bcp14">MUST</span> be "EdDSA" (<span>[<a href="#RFC8032" class="cite xref">RFC8032</a>]</span>, <span>[<a href="#FIPS186-4" class="cite xref">FIPS186-4</a>]</span>). Standardizing on one scheme prevents parties weaker cryptography from degrading the security guarantees of the ecosystem. The RSA, HMAC, and ES256 algorithms <span class="bcp14">MUST NOT</span> be used. (This choice is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which currently uses the Montgomery-to-Edwards transformation.)<a href="#section-4.1.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.2">
               <p id="section-4.1.2-4.2.1"><code>typ</code> <em>(required)</em> Per <span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span>, <span class="bcp14">MUST</span> be "passport".<a href="#section-4.1.2-4.2.1" class="pilcrow">¶</a></p>
@@ -1478,7 +1466,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
               <p id="section-4.1.2-4.3.1"><code>ppt</code> <em>(required)</em> Per <span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span>, <span class="bcp14">MUST</span> identify the specific PASSporT type -- in this case, "vvp".<a href="#section-4.1.2-4.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.4">
-              <p id="section-4.1.2-4.4.1"><code>kid</code> <em>(required)</em> <span class="bcp14">MUST</span> be the OOBI of an AID (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>) controlled by the OP (<a href="#OP" class="auto internal xref">3.1.3</a>). An OOBI is a special URL that facilitates ACDC's viral discoverability goals. It returns IANA content-type <code>application/json+cesr</code>, which provides some important security guarantees. The content for this particular OOBI <span class="bcp14">MUST</span> be a KEL (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>). Typically the AID in question does not identify the OP as a legal entity, but rather software running on or invoked by the SBC operated by the OP. (The AID that identifies the OP as a legal entity may be controlled by a multisig scheme and thus require multiple humans to create a signature. The AID for <code>kid</code> <span class="bcp14">MUST</span> be singlesig and, in the common case where it is not the legal entity AID, <span class="bcp14">MUST</span> have a delegate relationship with the legal entity AID that's proved through formal evidence.)<a href="#section-4.1.2-4.4.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.2-4.4.1"><code>kid</code> <em>(required)</em> <span class="bcp14">MUST</span> be the OOBI of an AID (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>) controlled by the OP (<a href="#OP" class="auto internal xref">3.1.2</a>). An OOBI is a special URL that facilitates ACDC's viral discoverability goals. It returns IANA content-type <code>application/json+cesr</code>, which provides some important security guarantees. The content for this particular OOBI <span class="bcp14">MUST</span> be a KEL (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>). Typically the AID in question does not identify the OP as a legal entity, but rather software running on or invoked by the SBC operated by the OP. (The AID that identifies the OP as a legal entity may be controlled by a multisig scheme and thus require multiple humans to create a signature. The AID for <code>kid</code> <span class="bcp14">MUST</span> be singlesig and, in the common case where it is not the legal entity AID, <span class="bcp14">MUST</span> have a delegate relationship with the legal entity AID that's proved through formal evidence.)<a href="#section-4.1.2-4.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.5">
               <p id="section-4.1.2-4.5.1"><code>orig</code> <em>(required)</em> Although VVP does not depend on SHAKEN, the format of this field <span class="bcp14">MUST</span> conform to SHAKEN requirements (<span>[<a href="#ATIS-1000074" class="cite xref">ATIS-1000074</a>]</span>), for interoperability reasons. It <span class="bcp14">MUST</span> also satisfy one additional constraint, which is that only one phone number is allowed. Depite the fact that a containing SIP INVITE may allow multiple originating phone numbers, only one can be tied to evidence evaluated by verifiers.<a href="#section-4.1.2-4.5.1" class="pilcrow">¶</a></p>
@@ -1505,7 +1493,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
               <p id="section-4.1.2-4.12.1"><code>iat</code> <em>(required)</em> Follows standard JWT semantics (see <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>).<a href="#section-4.1.2-4.12.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.13">
-              <p id="section-4.1.2-4.13.1"><code>exp</code> <em>(required)</em> Follows standard JWT semantics. As this sets a window for potential replay attacks between the same two phone numbers, a recommended expiration should be 30 seconds, with a minimum of 10 seconds and a maximum of 300 seconds.<a href="#section-4.1.2-4.13.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.2-4.13.1"><code>exp</code> <em>(required)</em> Follows standard JWT semantics. As this sets a window for potential replay attacks between the same two phone numbers, a recommended expiration <span class="bcp14">SHOULD</span> be 15 seconds (just long enough for an INVITE to be routed and trigger ringing on a handset), with a maximum of 60 seconds.<a href="#section-4.1.2-4.13.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.14">
               <p id="section-4.1.2-4.14.1"><code>jti</code> <em>(optional)</em> Follows standard JWT semantics.<a href="#section-4.1.2-4.14.1" class="pilcrow">¶</a></p>
@@ -1580,7 +1568,7 @@ Validation also includes comparing data structure and values against the declare
               <p id="section-5.1.1-2.10.1">Assuming that the dossier is valid and has no breakages due to revocation, confirm that the OP is authorized to sign the passport. If there is no delegation evidence, the AP and the OP <span class="bcp14">MUST</span> be identical, and the OP <span class="bcp14">MUST</span> be the issuee of the identity credential; otherwise, the OP <span class="bcp14">MUST</span> be the issuee of a delegated signing credential for which the issuer is the AP.<a href="#section-5.1.1-2.10.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-5.1.1-2.11">
-              <p id="section-5.1.1-2.11.1">Extract the <code>orig</code> field and compare it to the TNAlloc credential cited in the dossier to confirm that the AP (<a href="#AP" class="auto internal xref">3.1.4</a>) -- or, if OP is not equal to AP and OP is using their own number, the OP (<a href="#OP" class="auto internal xref">3.1.3</a>) -- has the right to originate calls with this number.<a href="#section-5.1.1-2.11.1" class="pilcrow">¶</a></p>
+              <p id="section-5.1.1-2.11.1">Extract the <code>orig</code> field and compare it to the TNAlloc credential cited in the dossier to confirm that the AP (<a href="#AP" class="auto internal xref">3.1.3</a>) -- or, if OP is not equal to AP and OP is using their own number, the OP (<a href="#OP" class="auto internal xref">3.1.2</a>) -- has the right to originate calls with this number.<a href="#section-5.1.1-2.11.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-5.1.1-2.12">
               <p id="section-5.1.1-2.12.1">If the passport includes non-null values for the optional <code>card</code> claim, extract that information and check that the brand attributes claimed for the call are justified by a brand credential in the dossier.<a href="#section-5.1.1-2.12.1" class="pilcrow">¶</a></p>
@@ -1775,6 +1763,14 @@ Validation also includes comparing data structure and values against the declare
 <dt id="RFC5626">[RFC5626]</dt>
         <dd>
 <span class="refAuthor">Jennings, C., Ed.</span>, <span class="refAuthor">Mahy, R., Ed.</span>, and <span class="refAuthor">F. Audet, Ed.</span>, <span class="refTitle">"Managing Client-Initiated Connections in the Session Initiation Protocol (SIP)"</span>, <span class="seriesInfo">RFC 5626</span>, <span class="seriesInfo">DOI 10.17487/RFC5626</span>, <time datetime="2009-10" class="refDate">October 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5626">https://www.rfc-editor.org/rfc/rfc5626</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5763">[RFC5763]</dt>
+        <dd>
+<span class="refAuthor">Fischl, J.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"Framework for Establishing a Secure Real-time Transport Protocol (SRTP) Security Context Using Datagram Transport Layer Security (DTLS)"</span>, <span class="seriesInfo">RFC 5763</span>, <span class="seriesInfo">DOI 10.17487/RFC5763</span>, <time datetime="2010-05" class="refDate">May 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5763">https://www.rfc-editor.org/rfc/rfc5763</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5764">[RFC5764]</dt>
+        <dd>
+<span class="refAuthor">McGrew, D.</span> and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"Datagram Transport Layer Security (DTLS) Extension to Establish Keys for the Secure Real-time Transport Protocol (SRTP)"</span>, <span class="seriesInfo">RFC 5764</span>, <span class="seriesInfo">DOI 10.17487/RFC5764</span>, <time datetime="2010-05" class="refDate">May 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5764">https://www.rfc-editor.org/rfc/rfc5764</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8032">[RFC8032]</dt>
         <dd>
