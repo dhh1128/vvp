@@ -38,6 +38,8 @@ normative:
   RFC4575:
   RFC4648:
   RFC5626:
+  RFC5763:
+  RFC5764:
   RFC8032:
   RFC8224:
   RFC8225:
@@ -137,7 +139,7 @@ informative:
 
 --- abstract
 
-Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making and/or receiving telephone calls. This eliminates trust gaps that malicious parties exploit. Like related technolgies such as SHAKEN, RCD, and BCID, VVP uses STIR to bind cryptographic evidence to a SIP INVITE, and verify this evidence downstream. VVP can also let evidence flow the other way, proving things about the callee. VVP builds from different technical and governance assumptions than alternatives, and uses stronger, richer evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat (e.g., RCS and vCon), as well as with other industry verticals that need verifiability in non-telco contexts.
+Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making and/or receiving telephone calls. This eliminates trust gaps that malicious parties exploit. Like related technolgies such as SHAKEN, RCD, and BCID, VVP uses STIR to bind cryptographic evidence to a SIP INVITE, and verify this evidence downstream. VVP can also let evidence flow the other way, proving things about the callee. VVP builds from different technical and governance assumptions than alternatives, and uses richer, stronger evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat (e.g., RCS and vCon), as well as with other industry verticals that need verifiability in non-telco contexts.
 
 --- middle
 
@@ -169,25 +171,20 @@ A VVP call may carry assurance in either or both directions. Compliant implement
 
 Understanding the workflow in VVP requires a careful definition of roles related to the protocol. The terms that follow have deep implications for the mental model, and their meaning in VVP may not match casual usage.
 
-### Allocation Holder
-An *allocation holder* controls how a phone number is used, in the eyes of a regulator. Enterprises and consumers that make and receive calls with phone numbers they legitimately control are the most obvious category of allocation holders, and are called direct *telephone number users* (*TNUs*). Range holders hold allocations for numbers that have not yet been assigned; they don't make or receive calls with these numbers, and are therefore not TNUs, but they are still allocation holders.
-
-It is possible for an ecosystem to include other parties as allocation holders (e.g., wholesalers, aggregators). However, many regulators dislike this outcome, and prefer that such parties broker allocations without actually holding the allocations directly.
-
-### Callee {#TP}
-For a given phone call, a *callee* (also referred to as a *terminating party* or *TP*) receives the call. Typically one callee is targeted, but multiparty SIP flows allow INVITEs to multiple callees, either directly or via a conference server (see {{RFC4353}} and {{RFC4575}}). A callee can be an individual consumer or an organization. The direct service provider of the callee is the *terminating service provider* (*TSP*). In many use cases for VVP, callers attempt to prove things to callees, and callees and their service providers use VVP primarily with a verifier mindset. However, enterprises or call centers that accept inbound calls from individuals may want assurance to flow the other direction; hence, VVP supports optional evidence about callees as well.
+### Callee
+For a given phone call, a *callee* receives the SIP INVITE. Typically one callee is targeted, but multiparty SIP flows allow INVITEs to multiple callees, either directly or via a conference server (see {{RFC4353}} and {{RFC4575}}). A callee can be an individual consumer or an organization. The direct service provider of the callee is the *terminating service provider* (*TSP*). In many use cases for VVP, callers attempt to prove things to callees, and callees and their service providers use VVP primarily with a verifier mindset. However, enterprises or call centers that accept inbound calls from individuals may want assurance to flow the other direction; hence, VVP supports optional evidence about callees as well.
 
 ### Originating Party {#OP}
 An *originating party* (*OP*) controls the first *session border controller* (*SBC*) that processes an outbound call, and therefore builds the VVP passport that cites evidence about the caller.
 
 It may be tempting to equate the OP with "the caller", and in some perspectives this could be true. However, this simple equivalence lacks nuance and doesn't always hold. In a VVP context, it is more accurate to say that the OP creates a SIP INVITE {{RFC3261}} with explicit, provable authorization from the party accountable for calls on the originating phone number. The OP originates the VVP protocol, but not always the call on the handset.
 
-It may also be tempting to associate the OP with an organizational identity like "Company X". While this is not wrong, and is in fact used in high-level descriptions in this specification, in its most careful definition, the cryptographic identity of an OP should be more narrow. It typically corresponds to a single service operated by an IT department within (or outsourced but operating at the behest of) Company X, rather than to Company X generically. This narrowness limits cybersecurity risk, because a single service operated by Company X needs far fewer privileges than the company as a whole. Failing to narrow identity appropriately creates vulnerabilities in some alternative approaches. The evidence securing VVP MUST therefore prove a valid relationship between the OP's narrow identity and the broader legal entities that stakeholders more naturally assume and understand.
+It may also be tempting to associate the OP with an organizational identity like "Company X". While this is not wrong, the precise cryptographic identity of an OP should be narrower. It typically corresponds to a single service operated by an IT department within (or outsourced but operating at the behest of) Company X, rather than to Company X generically. This narrowness limits cybersecurity risk, because a single service operated by Company X needs far fewer privileges than the company as a whole. Failing to narrow identity appropriately creates vulnerabilities in some alternative approaches. The evidence securing VVP MUST therefore prove a valid relationship between the OP's narrow identity and the broader legal entities that stakeholders more naturally assume and understand.
 
 The service provider associated with an OP is called the *originating service provider* (*OSP*). For a given phone call, there may be complexity between the hardware that begins a call and the SBC of the OP -- and there may also be many layers, boundaries, and transitions between OSP and TSP.
 
 ### Accountable Party {#AP}
-For a given call, the *accountable party* (*AP*) is the organization or individual (the TNU) that has the right to use the originating phone number, according to the regulator of that number. When a callee asks, "Who's calling?", they have little interest in the technicalities of the OP, and it is almost always the AP that they want to identify. The AP is accountable for the call, and thus "the caller", as far as the regulator and the callee are concerned.
+For a given call, the *accountable party* (*AP*) is the organization or individual that has the right to use the originating phone number, according to the regulator of that number. When a callee asks, "Who's calling?", they have little interest in the technicalities of the OP, and it is almost always the AP that they want to identify. The AP is accountable for the call, and thus "the caller", as far as the regulator and the callee are concerned.
 
 APs can operate their own SBCs and therefore be their own OPs. However, APs can also use a UCaaS provider that makes the AP-OP relationship indirect. Going further, a business can hire a call center, and delegate to the call center the right to use its phone number. In such a case, the business is the AP, but the call center is the OP that makes calls on its behalf. None of these complexities alter the fact that, from the callee's perspective, the AP is "the caller". The callee chooses to answer or not, based on their desire to interact with the AP. If the callee's trust is abused, the regulator and the callee both want to hold the AP accountable.
 
@@ -210,12 +207,14 @@ VVP depends on three interrelated activities with evidence:
 
 Chronologically, evidence must be curated before it can be cited or verified. In addition, some vulnerabilities in existing approaches occur because evidence requirements are too loose. Therefore, understanding the nature of backing evidence, and how that evidence is created and maintained, is a crucial consideration for VVP.
 
-However, curating does not occur in realtime during phone calls, and is out of scope for a network protocol specification. Citing and verifying are the heart of VVP, and implementers will approach VVP from the standpoint of SIP flows {{RFC3261}}, {{RFC5626}}. Therefore, we leave the question of curation to a separate document. Where not-yet-explained evidence concepts are used, inline references allow easy cross-reference to formal definitions that come later.
+However, curating does not occur in realtime during phone calls, and is out of scope for a network protocol specification. Citing and verifying are the heart of VVP, and implementers will approach VVP from the standpoint of SIP flows {{RFC3261}}, {{RFC5626}}. Therefore, we leave the question of curation to separate document (for example, {{TOIP-DOSSIER}}).
 
 # Citing
 
 ## Citing the AP's dossier
-A VVP call that makes the caller verifiable begins when the OP ({{<OP}}) generates a new VVP passport {{RFC8225}} that complies with STIR {{RFC8224}} requirements. In its compact-serialized JWT {{RFC7519}} form, this passport is then passed as an `Identity` header in a SIP INVITE {{RFC3261}}. The passport *constitutes* lightweight, direct, and ephemeral evidence; it *cites* and therefore depends upon comprehensive, indirect, and long-lived evidence (the AP's dossier. Safely and efficiently citing stronger evidence in a dossier is one way that VVP differs from alternatives.
+A VVP call that makes the caller verifiable begins when the OP ({{<OP}}) generates a new VVP passport {{RFC8225}} that complies with STIR {{RFC8224}} requirements. In its compact-serialized JWT {{RFC7519}} form, this passport is then passed as an `Identity` header in a SIP INVITE {{RFC3261}}. The passport *constitutes* lightweight, direct, and ephemeral evidence; it *cites* and therefore depends upon comprehensive, indirect, and long-lived evidence (the AP's dossier). Safely and efficiently citing stronger evidence in a dossier is one way that VVP differs from alternatives.
+
+If the caller intends to use DTLS-SRTP, the SIP INVITE MUST also contain an attribute line that contains the DTLS `fingerprint` attribute. Because VVP proves the prevents man-in-the-middle attacks and allows the When combined with VVP, DTLS-SRTP  `a=callee-passport:X` attribute line to the SDP {{RFC8866}} body of the callee's
 
 ### Questions answered by an AP's passport
 The passport directly answers at least the following questions:
@@ -266,7 +265,7 @@ An example will help. In its JSON-serialized form, a typical VVP passport for an
 
 The semantics of the fields are:
 
-* `alg` *(required)* MUST be "EdDSA" ({{RFC8032}}, {{FIPS186-4}}). Standardizing on one scheme prevents jurisdictions with incompatible or weaker cryptography. The RSA, HMAC, and ES256 algorithms MUST NOT be used. (This choice is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which depends on the Montgomery-to-Edwards transformation.)
+* `alg` *(required)* MUST be "EdDSA" ({{RFC8032}}, {{FIPS186-4}}). Standardizing on one scheme prevents parties weaker cryptography from degrading the security guarantees of the ecosystem. The RSA, HMAC, and ES256 algorithms MUST NOT be used. (This choice is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which currently uses the Montgomery-to-Edwards transformation.)
 * `typ` *(required)* Per {{RFC8225}}, MUST be "passport".
 * `ppt` *(required)* Per {{RFC8225}}, MUST identify the specific PASSporT type -- in this case, "vvp".
 * `kid` *(required)* MUST be the OOBI of an AID ({{TOIP-KERI}}) controlled by the OP ({{<OP}}). An OOBI is a special URL that facilitates ACDC's viral discoverability goals. It returns IANA content-type `application/json+cesr`, which provides some important security guarantees. The content for this particular OOBI MUST be a KEL ({{TOIP-KERI}}). Typically the AID in question does not identify the OP as a legal entity, but rather software running on or invoked by the SBC operated by the OP. (The AID that identifies the OP as a legal entity may be controlled by a multisig scheme and thus require multiple humans to create a signature. The AID for `kid` MUST be singlesig and, in the common case where it is not the legal entity AID, MUST have a delegate relationship with the legal entity AID that's proved through formal evidence.)
@@ -278,7 +277,7 @@ The semantics of the fields are:
 * `evd` *(required)* MUST be the OOBI of a bespoke ACDC (the dossier, {{TOIP-ACDC}}) that constitutes a verifiable data graph of all evidence justifying belief in the identity and authorization of the AP, the OP, and any relevant delegations. This URL can be hosted on any convenient web server, and is somewhat analogous to the `x5u` header in X509 contexts. See below for details.
 * `origId` *(optional)* Follows SHAKEN semantics.
 * `iat` *(required)* Follows standard JWT semantics (see {{RFC7519}}).
-* `exp` *(required)* Follows standard JWT semantics. As this sets a window for potential replay attacks between the same two phone numbers, a recommended expiration should be 30 seconds, with a minimum of 10 seconds and a maximum of 300 seconds.
+* `exp` *(required)* Follows standard JWT semantics. As this sets a window for potential replay attacks between the same two phone numbers, a recommended expiration SHOULD be 15 seconds (just long enough for an INVITE to be routed and trigger ringing on a handset), with a maximum of 60 seconds.
 * `jti` *(optional)* Follows standard JWT semantics.
 
 ## Citing a callee's dossier
