@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-13T00:08:39.815963+00:00",
+  "timestamp": "2025-11-16T00:08:52.024554+00:00",
   "repo": "dhh1128/vvp",
   "labels": [
     {
@@ -49,7 +49,101 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 12,
+      "id": "I_kwDONMB4L87YMGN1",
+      "title": "4.1 confusing language about man-in-the-middle attacks",
+      "url": "https://github.com/dhh1128/vvp/issues/12",
+      "state": "OPEN",
+      "author": "kentbull",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I found the following current language of section 4.1 confusing. It seems like the last sentence of the paragraph is unfinished.\n\n> If the caller intends to use DTLS-SRTP, the SIP INVITE MUST also contain an attribute line that contains the DTLS fingerprint attribute. Because VVP proves the prevents man-in-the-middle attacks and allows the When combined with VVP, DTLS-SRTP a=callee-passport:X attribute line to the SDP [[RFC8866](https://dhh1128.github.io/vvp/draft-hardman-verifiable-voice-protocol.html#RFC8866)] body of the callee's",
+      "createdAt": "2025-11-14T20:21:58Z",
+      "updatedAt": "2025-11-14T20:54:20Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "body": "Good catch, @kentbull ! Yes, this is garbled. I'll get this fixed. Thanks for reading.",
+          "createdAt": "2025-11-14T20:54:20Z",
+          "updatedAt": "2025-11-14T20:54:20Z"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "I_kwDONMB4L87YMe3M",
+      "title": "Possible inconsistent content type for application/cesr and application/json+cesr",
+      "url": "https://github.com/dhh1128/vvp/issues/13",
+      "state": "OPEN",
+      "author": "kentbull",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Is the usage of `\"application/json+cesr,\"` in section [4.1.2](https://dhh1128.github.io/vvp/draft-hardman-verifiable-voice-protocol.html#section-4.1.2) for \"It returns IANA content-type application/json+cesr,\" and then later `application/cesr` in section [7](https://dhh1128.github.io/vvp/draft-hardman-verifiable-voice-protocol.html#section-7) intentionally different or was the first part of this spec written before the KERI community came to consensus on using `application/cesr`?\n\nIf they are different intentionally it may make sense to say why.",
+      "createdAt": "2025-11-14T21:03:03Z",
+      "updatedAt": "2025-11-14T21:36:06Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "body": "Another good catch. I should update to `application/cesr` everywhere...",
+          "createdAt": "2025-11-14T21:20:29Z",
+          "updatedAt": "2025-11-14T21:20:29Z"
+        },
+        {
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "body": "(Or feel free to submit a PR if you prefer.)",
+          "createdAt": "2025-11-14T21:20:48Z",
+          "updatedAt": "2025-11-14T21:20:48Z"
+        },
+        {
+          "author": "kentbull",
+          "authorAssociation": "NONE",
+          "body": "Thanks, though I would only submit a PR if I had a substantial contribution.",
+          "createdAt": "2025-11-14T21:36:06Z",
+          "updatedAt": "2025-11-14T21:36:06Z"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "I_kwDONMB4L87YNI4d",
+      "title": "Missing sample dossier?",
+      "url": "https://github.com/dhh1128/vvp/issues/14",
+      "state": "OPEN",
+      "author": "kentbull",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "[Section 9.1](https://trustoverip.github.io/kswg-dossier-specification/#referencing-acdc-native-evidence) of the dossier specification refers to a \"sample dossier in the VVP specification.\"\n\n> This pattern is exemplified by the sample dossier in the VVP specification.\n\nHowever, I only saw a sample SIP JWT that references a dossier. It would be useful to see a full sample dossier even if just referenced. I looked through the references at the end of the VVP spec and did not see a reference to a sample dossier.",
+      "createdAt": "2025-11-14T22:01:25Z",
+      "updatedAt": "2025-11-14T22:44:28Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "kentbull",
+          "authorAssociation": "NONE",
+          "body": "Actually, was [section 13.1.1](https://trustoverip.github.io/kswg-dossier-specification/#verifiable-voice-protocol-vvp) of the VD spec intended to be this? Maybe I answered my own question.",
+          "createdAt": "2025-11-14T22:42:05Z",
+          "updatedAt": "2025-11-14T22:42:05Z"
+        },
+        {
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "body": "The VD spec is definitely the right place for a sample VVP dossier. You are reading a version of the VVP spec, I think which was created after I did surgery to separate out the dossier topic into its own spec -- but I may not have done it very cleanly. Sorry that you're seeing loose ends -- but I'm really grateful to have some issues to help me clean up!",
+          "createdAt": "2025-11-14T22:44:28Z",
+          "updatedAt": "2025-11-14T22:44:28Z"
+        }
+      ]
+    }
+  ],
   "pulls": [
     {
       "number": 1,
