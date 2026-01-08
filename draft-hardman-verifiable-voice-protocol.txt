@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                         24 October 2025
-Expires: 27 April 2026
+Intended status: Standards Track                          8 January 2026
+Expires: 12 July 2026
 
 
                        Verifiable Voice Protocol
@@ -16,8 +16,8 @@ Abstract
    Verifiable Voice Protocol (VVP) authenticates and authorizes
    organizations and individuals making and/or receiving telephone
    calls.  This eliminates trust gaps that malicious parties exploit.
-   Like related technolgies such as SHAKEN, RCD, and BCID, VVP uses STIR
-   to bind cryptographic evidence to a SIP INVITE, and verify this
+   Like related technologies such as SHAKEN, RCD, and BCID, VVP uses
+   STIR to bind cryptographic evidence to a SIP INVITE, and verify this
    evidence downstream.  VVP can also let evidence flow the other way,
    proving things about the callee.  VVP builds from different technical
    and governance assumptions than alternatives, and uses richer,
@@ -62,11 +62,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 April 2026.
+   This Internet-Draft will expire on 12 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -423,7 +423,7 @@ Table of Contents
       or invoked by the SBC operated by the OP.  (The AID that
       identifies the OP as a legal entity may be controlled by a
       multisig scheme and thus require multiple humans to create a
-      signature.  The AID for kid MUST be singlesig and, in the common
+      signature.  The AID for kid MUST be single-sig and, in the common
       case where it is not the legal entity AID, MUST have a delegate
       relationship with the legal entity AID that's proved through
       formal evidence.)
@@ -432,7 +432,7 @@ Table of Contents
       format of this field MUST conform to SHAKEN requirements
       ([ATIS-1000074]), for interoperability reasons.  It MUST also
       satisfy one additional constraint, which is that only one phone
-      number is allowed.  Depite the fact that a containing SIP INVITE
+      number is allowed.  Despite the fact that a containing SIP INVITE
       may allow multiple originating phone numbers, only one can be tied
       to evidence evaluated by verifiers.
 
@@ -477,7 +477,7 @@ Table of Contents
       window for potential replay attacks between the same two phone
       numbers, a recommended expiration SHOULD be 15 seconds (just long
       enough for an INVITE to be routed and trigger ringing on a
-      handset), with a maximum of 60 seconds.
+      handset), and MUST NOT exceed 60 seconds.
 
    *  jti _(optional)_ Follows standard JWT semantics.
 
@@ -689,7 +689,7 @@ Table of Contents
 
 5.3.  Planning for efficiency
 
-   A complete verficiation of either caller or callee passport, from
+   A complete verification of either caller or callee passport, from
    scratch, is quite rigorous.  With no caches, it may take several
    seconds, much like a thorough validation of a certificate chain.
    However, much VVP evidence is stable for long periods of time and

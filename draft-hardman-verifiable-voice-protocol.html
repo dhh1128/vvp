@@ -7,7 +7,7 @@
 <title>Verifiable Voice Protocol</title>
 <meta content="Daniel Hardman" name="author">
 <meta content="
-       Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making and/or receiving telephone calls. This eliminates trust gaps that malicious parties exploit. Like related technolgies such as SHAKEN, RCD, and BCID, VVP uses STIR to bind cryptographic evidence to a SIP INVITE, and verify this evidence downstream. VVP can also let evidence flow the other way, proving things about the callee. VVP builds from different technical and governance assumptions than alternatives, and uses richer, stronger evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat (e.g., RCS and vCon), as well as with other industry verticals that need verifiability in non-telco contexts. 
+       Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making and/or receiving telephone calls. This eliminates trust gaps that malicious parties exploit. Like related technologies such as SHAKEN, RCD, and BCID, VVP uses STIR to bind cryptographic evidence to a SIP INVITE, and verify this evidence downstream. VVP can also let evidence flow the other way, proving things about the callee. VVP builds from different technical and governance assumptions than alternatives, and uses richer, stronger evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat (e.g., RCS and vCon), as well as with other industry verticals that need verifiability in non-telco contexts. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="voip" name="keyword">
@@ -22,12 +22,12 @@
     Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
-    intervaltree 3.1.0
+    intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 5.3.1
-    platformdirs 4.5.0
+    lxml 6.0.2
+    platformdirs 4.5.1
     pycountry 24.6.1
-    PyYAML 6.0.2
+    PyYAML 6.0.3
     requests 2.32.5
     wcwidth 0.2.14
 -->
@@ -1048,11 +1048,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">VVP</td>
-<td class="right">October 2025</td>
+<td class="right">January 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Hardman</td>
-<td class="center">Expires 27 April 2026</td>
+<td class="center">Expires 12 July 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-hardman-verifiable-voice-protocol-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-24" class="published">24 October 2025</time>
+<time datetime="2026-01-08" class="published">8 January 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-27">27 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-07-12">12 July 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1083,7 +1083,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Verifiable Voice Protocol</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making and/or receiving telephone calls. This eliminates trust gaps that malicious parties exploit. Like related technolgies such as SHAKEN, RCD, and BCID, VVP uses STIR to bind cryptographic evidence to a SIP INVITE, and verify this evidence downstream. VVP can also let evidence flow the other way, proving things about the callee. VVP builds from different technical and governance assumptions than alternatives, and uses richer, stronger evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat (e.g., RCS and vCon), as well as with other industry verticals that need verifiability in non-telco contexts.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making and/or receiving telephone calls. This eliminates trust gaps that malicious parties exploit. Like related technologies such as SHAKEN, RCD, and BCID, VVP uses STIR to bind cryptographic evidence to a SIP INVITE, and verify this evidence downstream. VVP can also let evidence flow the other way, proving things about the callee. VVP builds from different technical and governance assumptions than alternatives, and uses richer, stronger evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat (e.g., RCS and vCon), as well as with other industry verticals that need verifiability in non-telco contexts.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1115,7 +1115,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1124,7 +1124,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2025 IETF Trust and the persons identified as the
+            Copyright (c) 2026 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1466,10 +1466,10 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
               <p id="section-4.1.2-4.3.1"><code>ppt</code> <em>(required)</em> Per <span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span>, <span class="bcp14">MUST</span> identify the specific PASSporT type -- in this case, "vvp".<a href="#section-4.1.2-4.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.4">
-              <p id="section-4.1.2-4.4.1"><code>kid</code> <em>(required)</em> <span class="bcp14">MUST</span> be the OOBI of an AID (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>) controlled by the OP (<a href="#OP" class="auto internal xref">3.1.2</a>). An OOBI is a special URL that facilitates ACDC's viral discoverability goals. It returns IANA content-type <code>application/json+cesr</code>, which provides some important security guarantees. The content for this particular OOBI <span class="bcp14">MUST</span> be a KEL (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>). Typically the AID in question does not identify the OP as a legal entity, but rather software running on or invoked by the SBC operated by the OP. (The AID that identifies the OP as a legal entity may be controlled by a multisig scheme and thus require multiple humans to create a signature. The AID for <code>kid</code> <span class="bcp14">MUST</span> be singlesig and, in the common case where it is not the legal entity AID, <span class="bcp14">MUST</span> have a delegate relationship with the legal entity AID that's proved through formal evidence.)<a href="#section-4.1.2-4.4.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.2-4.4.1"><code>kid</code> <em>(required)</em> <span class="bcp14">MUST</span> be the OOBI of an AID (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>) controlled by the OP (<a href="#OP" class="auto internal xref">3.1.2</a>). An OOBI is a special URL that facilitates ACDC's viral discoverability goals. It returns IANA content-type <code>application/json+cesr</code>, which provides some important security guarantees. The content for this particular OOBI <span class="bcp14">MUST</span> be a KEL (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>). Typically the AID in question does not identify the OP as a legal entity, but rather software running on or invoked by the SBC operated by the OP. (The AID that identifies the OP as a legal entity may be controlled by a multisig scheme and thus require multiple humans to create a signature. The AID for <code>kid</code> <span class="bcp14">MUST</span> be single-sig and, in the common case where it is not the legal entity AID, <span class="bcp14">MUST</span> have a delegate relationship with the legal entity AID that's proved through formal evidence.)<a href="#section-4.1.2-4.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.5">
-              <p id="section-4.1.2-4.5.1"><code>orig</code> <em>(required)</em> Although VVP does not depend on SHAKEN, the format of this field <span class="bcp14">MUST</span> conform to SHAKEN requirements (<span>[<a href="#ATIS-1000074" class="cite xref">ATIS-1000074</a>]</span>), for interoperability reasons. It <span class="bcp14">MUST</span> also satisfy one additional constraint, which is that only one phone number is allowed. Depite the fact that a containing SIP INVITE may allow multiple originating phone numbers, only one can be tied to evidence evaluated by verifiers.<a href="#section-4.1.2-4.5.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.2-4.5.1"><code>orig</code> <em>(required)</em> Although VVP does not depend on SHAKEN, the format of this field <span class="bcp14">MUST</span> conform to SHAKEN requirements (<span>[<a href="#ATIS-1000074" class="cite xref">ATIS-1000074</a>]</span>), for interoperability reasons. It <span class="bcp14">MUST</span> also satisfy one additional constraint, which is that only one phone number is allowed. Despite the fact that a containing SIP INVITE may allow multiple originating phone numbers, only one can be tied to evidence evaluated by verifiers.<a href="#section-4.1.2-4.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.6">
               <p id="section-4.1.2-4.6.1"><code>dest</code> <em>(required)</em> For interoperability reasons, <span class="bcp14">MUST</span> conform to SHAKEN requirements.<a href="#section-4.1.2-4.6.1" class="pilcrow">¶</a></p>
@@ -1493,7 +1493,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
               <p id="section-4.1.2-4.12.1"><code>iat</code> <em>(required)</em> Follows standard JWT semantics (see <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>).<a href="#section-4.1.2-4.12.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.13">
-              <p id="section-4.1.2-4.13.1"><code>exp</code> <em>(required)</em> Follows standard JWT semantics. As this sets a window for potential replay attacks between the same two phone numbers, a recommended expiration <span class="bcp14">SHOULD</span> be 15 seconds (just long enough for an INVITE to be routed and trigger ringing on a handset), with a maximum of 60 seconds.<a href="#section-4.1.2-4.13.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.2-4.13.1"><code>exp</code> <em>(required)</em> Follows standard JWT semantics. As this sets a window for potential replay attacks between the same two phone numbers, a recommended expiration <span class="bcp14">SHOULD</span> be 15 seconds (just long enough for an INVITE to be routed and trigger ringing on a handset), and <span class="bcp14">MUST NOT</span> exceed 60 seconds.<a href="#section-4.1.2-4.13.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.14">
               <p id="section-4.1.2-4.14.1"><code>jti</code> <em>(optional)</em> Follows standard JWT semantics.<a href="#section-4.1.2-4.14.1" class="pilcrow">¶</a></p>
@@ -1638,7 +1638,7 @@ Validation also includes comparing data structure and values against the declare
         <h3 id="name-planning-for-efficiency">
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-planning-for-efficiency" class="section-name selfRef">Planning for efficiency</a>
         </h3>
-<p id="section-5.3-1">A complete verficiation of either caller or callee passport, from scratch, is quite rigorous. With no caches, it may take several seconds, much like a thorough validation of a certificate chain. However, much VVP evidence is stable for long periods of time and lends itself to caching, subject to the proviso that revocation freshness must be managed wisely. Since the same dossier is used to add assurance to many calls -- perhaps thousands or millions of calls, for busy call centers -- and many dossiers will reference the same issuers and issuees and their associated key states and KELs (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>), caching will produce huge benefits.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-1">A complete verification of either caller or callee passport, from scratch, is quite rigorous. With no caches, it may take several seconds, much like a thorough validation of a certificate chain. However, much VVP evidence is stable for long periods of time and lends itself to caching, subject to the proviso that revocation freshness must be managed wisely. Since the same dossier is used to add assurance to many calls -- perhaps thousands or millions of calls, for busy call centers -- and many dossiers will reference the same issuers and issuees and their associated key states and KELs (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>), caching will produce huge benefits.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">Furthermore, because SAIDs and their associated data (including links to other nodes in a data graph) have a tamper-evident relationship, any party can perform validation and compile their results, then share the data with verifiers that want to do less work. Validators like this are not oracles, because consumers of such data need not trust shared results blindly. They can always directly recompute some or all of it from a passport, to catch deception. However, they can do this lazily or occasionally, per their preferred balance of risk/effort.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.3-3"><em>In toto</em>, these characteristics mean that no centralized registry is required in any given ecosystem. Data can be fetched directly from its source, across jurisdictional boundaries. Because it is fetched from its source, it comes with consent. Privacy can be tuned. Simple opportunistic, uncoordinated reuse (e.g., in or across the datacenters of TSPs) will arise spontaneously and will dramatically improve the scale and efficiency of the system.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 </section>
