@@ -105,7 +105,7 @@ normative:
 informative:
   RFC6350:
   RFC7519:
-  RCD-DRAFT: I-D.ietf-sipcore-callinfo-rcd
+  RFC9796:
   CTIA-BCID:
     target: https://api.ctia.org/wp-content/uploads/2022/11/Branded-Calling-Best-Practices.pdf
     title: "Branded Calling ID Best Practices"
