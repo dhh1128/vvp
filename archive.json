@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-16T00:08:52.024554+00:00",
+  "timestamp": "2026-02-26T00:11:05.559495+00:00",
   "repo": "dhh1128/vvp",
   "labels": [
     {
@@ -575,6 +575,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDONMB4L87GOLoN",
+      "title": "RCD-DRAFT is RFC9796 now",
+      "url": "https://github.com/dhh1128/vvp/pull/15",
+      "state": "OPEN",
+      "author": "rartych",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "RCD-DRAFT: I-D.ietf-sipcore-callinfo-rcd was published as [RFC9796](https://datatracker.ietf.org/doc/rfc9796/) in July 2025",
+      "createdAt": "2026-02-25T12:52:39Z",
+      "updatedAt": "2026-02-25T12:52:39Z",
+      "baseRepository": "dhh1128/vvp",
+      "baseRefName": "main",
+      "baseRefOid": "0fbf7cba665a93345c3e0323ca5a43129890f53c",
+      "headRepository": "rartych/vvp",
+      "headRefName": "rfc9796",
+      "headRefOid": "b275579a59938f97ef131418cd68f4f602fae185",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
