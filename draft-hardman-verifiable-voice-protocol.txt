@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                          8 January 2026
-Expires: 12 July 2026
+Intended status: Standards Track                           18 March 2026
+Expires: 19 September 2026
 
 
                        Verifiable Voice Protocol
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 July 2026.
+   This Internet-Draft will expire on 19 September 2026.
 
 Copyright Notice
 
@@ -400,13 +400,13 @@ Table of Contents
 
    The semantics of the fields are:
 
-   *  alg _(required)_ MUST be "EdDSA" ([RFC8032], [FIPS186-4]).
-      Standardizing on one scheme prevents parties weaker cryptography
-      from degrading the security guarantees of the ecosystem.  The RSA,
-      HMAC, and ES256 algorithms MUST NOT be used.  (This choice is
-      motivated by compatibility with the vLEI and its associated ACDC
-      ecosystem, which currently uses the Montgomery-to-Edwards
-      transformation.)
+   *  alg _(required)_ MUST be either "EdDSA" ([RFC8032], [FIPS186-4]),
+      or (for post-quantum) "FN-DSA-512", "FN-DSA-1024".  Standardizing
+      on best-in-class schemes prevents parties weaker cryptography from
+      degrading the security guarantees of the ecosystem.  The RSA,
+      HMAC, and ES256 algorithms MUST NOT be used.  (EdDSA is motivated
+      by compatibility with the vLEI and its associated ACDC ecosystem,
+      which currently uses the Montgomery-to-Edwards transformation.)
 
    *  typ _(required)_ Per [RFC8225], MUST be "passport".
 
