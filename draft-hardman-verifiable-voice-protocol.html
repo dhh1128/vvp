@@ -1384,7 +1384,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-citing-the-aps-dossier" class="section-name selfRef">Citing the AP's dossier</a>
         </h3>
 <p id="section-4.1-1">A VVP call that makes the caller verifiable begins when the OP (<a href="#OP" class="auto internal xref">3.1.2</a>) generates a new VVP passport <span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span> that complies with STIR <span>[<a href="#RFC8224" class="cite xref">RFC8224</a>]</span> requirements. In its compact-serialized JWT <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> form, this passport is then passed as an <code>Identity</code> header in a SIP INVITE <span>[<a href="#RFC3261" class="cite xref">RFC3261</a>]</span>. The passport <em>constitutes</em> lightweight, direct, and ephemeral evidence; it <em>cites</em> and therefore depends upon comprehensive, indirect, and long-lived evidence (the AP's dossier). Safely and efficiently citing stronger evidence in a dossier is one way that VVP differs from alternatives.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">If the caller intends to use DTLS-SRTP, the SIP INVITE <span class="bcp14">MUST</span> also contain an attribute line that contains the DTLS <code>fingerprint</code> attribute. Because VVP proves the prevents man-in-the-middle attacks and allows the When combined with VVP, DTLS-SRTP  <code>a=callee-passport:X</code> attribute line to the SDP <span>[<a href="#RFC8866" class="cite xref">RFC8866</a>]</span> body of the callee's<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 <div id="questions-answered-by-an-aps-passport">
 <section id="section-4.1.1">
           <h4 id="name-questions-answered-by-an-ap">
@@ -1459,7 +1458,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-4.1.2-3">The semantics of the fields are:<a href="#section-4.1.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1.2-4.1">
-              <p id="section-4.1.2-4.1.1"><code>alg</code> <em>(required)</em> <span class="bcp14">MUST</span> be either "EdDSA" (<span>[<a href="#RFC8032" class="cite xref">RFC8032</a>]</span>, <span>[<a href="#FIPS186-4" class="cite xref">FIPS186-4</a>]</span>), or (for post-quantum) "FN-DSA-512", "FN-DSA-1024". Standardizing on best-in-class schemes prevents parties weaker cryptography from degrading the security guarantees of the ecosystem. The RSA, HMAC, and ES256 algorithms <span class="bcp14">MUST NOT</span> be used. (EdDSA is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which currently uses the Montgomery-to-Edwards transformation.)<a href="#section-4.1.2-4.1.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.2-4.1.1"><code>alg</code> <em>(required)</em> <span class="bcp14">MUST</span> be either "EdDSA" (<span>[<a href="#RFC8032" class="cite xref">RFC8032</a>]</span>, <span>[<a href="#FIPS186-4" class="cite xref">FIPS186-4</a>]</span>), or (for post-quantum) "FN-DSA-512" or "FN-DSA-1024" (<span>[<a href="#FN-DSA" class="cite xref">FN-DSA</a>]</span>). Standardizing on best-in-class schemes prevents weaker cryptography from degrading the security guarantees of the ecosystem. The RSA, HMAC, and ES256 algorithms <span class="bcp14">MUST NOT</span> be used. (EdDSA is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which currently uses the Montgomery-to-Edwards transformation.)<a href="#section-4.1.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.2">
               <p id="section-4.1.2-4.2.1"><code>typ</code> <em>(required)</em> Per <span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span>, <span class="bcp14">MUST</span> be "passport".<a href="#section-4.1.2-4.2.1" class="pilcrow">¶</a></p>
@@ -1477,7 +1476,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
               <p id="section-4.1.2-4.6.1"><code>dest</code> <em>(required)</em> For interoperability reasons, <span class="bcp14">MUST</span> conform to SHAKEN requirements.<a href="#section-4.1.2-4.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.7">
-              <p id="section-4.1.2-4.7.1"><code>card</code> <em>(optional)</em> Contains one or more brand attributes. These are analogous to <span>[<a href="#RCD-DRAFT" class="cite xref">RCD-DRAFT</a>]</span> or <span>[<a href="#CTIA-BCID" class="cite xref">CTIA-BCID</a>]</span> data, but differ in that they <span class="bcp14">MUST</span> be justified by evidence in the dossier. Because of this strong foundation that interconnects with formal legal identity, they can be used to derive other brand evidence (e.g., an RCD passport) as needed. Individual attributes <span class="bcp14">MUST</span> conform to the VCard standard <span>[<a href="#RFC6350" class="cite xref">RFC6350</a>]</span>.<a href="#section-4.1.2-4.7.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.2-4.7.1"><code>card</code> <em>(optional)</em> Contains one or more brand attributes. These are analogous to <span>[<a href="#RFC9796" class="cite xref">RFC9796</a>]</span> or <span>[<a href="#CTIA-BCID" class="cite xref">CTIA-BCID</a>]</span> data, but differ in that they <span class="bcp14">MUST</span> be justified by evidence in the dossier. Because of this strong foundation that interconnects with formal legal identity, they can be used to derive other brand evidence (e.g., an RCD passport) as needed. Individual attributes <span class="bcp14">MUST</span> conform to the VCard standard <span>[<a href="#RFC6350" class="cite xref">RFC6350</a>]</span>.<a href="#section-4.1.2-4.7.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.8">
               <p id="section-4.1.2-4.8.1"><code>goal</code> <em>(optional)</em> A machine-readable, localizable goal code, as described informally by <span>[<a href="#ARIES-RFC-0519" class="cite xref">ARIES-RFC-0519</a>]</span>. If present, the dossier <span class="bcp14">MUST</span> prove that the OP is authorized by the AP to initiate calls with this particular goal.<a href="#section-4.1.2-4.8.1" class="pilcrow">¶</a></p>
@@ -1831,13 +1830,13 @@ Validation also includes comparing data structure and values against the declare
         <dd>
 <span class="refAuthor">CTIA</span>, <span class="refTitle">"Branded Calling ID Best Practices"</span>, <time datetime="2022-11" class="refDate">November 2022</time>, <span>&lt;<a href="https://api.ctia.org/wp-content/uploads/2022/11/Branded-Calling-Best-Practices.pdf">https://api.ctia.org/wp-content/uploads/2022/11/Branded-Calling-Best-Practices.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="FN-DSA">[FN-DSA]</dt>
+        <dd>
+<span class="refAuthor">NIST</span>, <span class="refTitle">"FIPS 206: FN-DSA (Falcon)"</span>, <time datetime="2025-09" class="refDate">September 2025</time>, <span>&lt;<a href="https://csrc.nist.gov/presentations/2025/fips-206-fn-dsa-falcon">https://csrc.nist.gov/presentations/2025/fips-206-fn-dsa-falcon</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="LE-VLEI-SCHEMA">[LE-VLEI-SCHEMA]</dt>
         <dd>
 <span class="refAuthor">GLEIF</span>, <span class="refTitle">"Legal Entity vLEI Credential"</span>, <time datetime="2023-11" class="refDate">November 2023</time>, <span>&lt;<a href="https://github.com/GLEIF-IT/vLEI-schema/blob/main/legal-entity-vLEI-credential.json">https://github.com/GLEIF-IT/vLEI-schema/blob/main/legal-entity-vLEI-credential.json</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RCD-DRAFT">[RCD-DRAFT]</dt>
-        <dd>
-<span class="refAuthor">Wendt, C.</span> and <span class="refAuthor">J. Peterson</span>, <span class="refTitle">"SIP Call-Info Parameters for Rich Call Data"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-sipcore-callinfo-rcd-19</span>, <time datetime="2025-04-21" class="refDate">21 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-sipcore-callinfo-rcd-19">https://datatracker.ietf.org/doc/html/draft-ietf-sipcore-callinfo-rcd-19</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6350">[RFC6350]</dt>
         <dd>
@@ -1846,6 +1845,10 @@ Validation also includes comparing data structure and values against the declare
 <dt id="RFC7519">[RFC7519]</dt>
         <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Token (JWT)"</span>, <span class="seriesInfo">RFC 7519</span>, <span class="seriesInfo">DOI 10.17487/RFC7519</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7519">https://www.rfc-editor.org/rfc/rfc7519</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9796">[RFC9796]</dt>
+        <dd>
+<span class="refAuthor">Wendt, C.</span> and <span class="refAuthor">J. Peterson</span>, <span class="refTitle">"SIP Call-Info Parameters for Rich Call Data"</span>, <span class="seriesInfo">RFC 9796</span>, <span class="seriesInfo">DOI 10.17487/RFC9796</span>, <time datetime="2025-07" class="refDate">July 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9796">https://www.rfc-editor.org/rfc/rfc9796</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TN-ALLOC-SCHEMA">[TN-ALLOC-SCHEMA]</dt>
       <dd>

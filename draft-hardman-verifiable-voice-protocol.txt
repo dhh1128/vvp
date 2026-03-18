@@ -329,12 +329,6 @@ Table of Contents
    Safely and efficiently citing stronger evidence in a dossier is one
    way that VVP differs from alternatives.
 
-   If the caller intends to use DTLS-SRTP, the SIP INVITE MUST also
-   contain an attribute line that contains the DTLS fingerprint
-   attribute.  Because VVP proves the prevents man-in-the-middle attacks
-   and allows the When combined with VVP, DTLS-SRTP a=callee-passport:X
-   attribute line to the SDP [RFC8866] body of the callee's
-
 4.1.1.  Questions answered by an AP's passport
 
    The passport directly answers at least the following questions:
@@ -401,12 +395,13 @@ Table of Contents
    The semantics of the fields are:
 
    *  alg _(required)_ MUST be either "EdDSA" ([RFC8032], [FIPS186-4]),
-      or (for post-quantum) "FN-DSA-512", "FN-DSA-1024".  Standardizing
-      on best-in-class schemes prevents parties weaker cryptography from
-      degrading the security guarantees of the ecosystem.  The RSA,
-      HMAC, and ES256 algorithms MUST NOT be used.  (EdDSA is motivated
-      by compatibility with the vLEI and its associated ACDC ecosystem,
-      which currently uses the Montgomery-to-Edwards transformation.)
+      or (for post-quantum) "FN-DSA-512" or "FN-DSA-1024" ([FN-DSA]).
+      Standardizing on best-in-class schemes prevents weaker
+      cryptography from degrading the security guarantees of the
+      ecosystem.  The RSA, HMAC, and ES256 algorithms MUST NOT be used.
+      (EdDSA is motivated by compatibility with the vLEI and its
+      associated ACDC ecosystem, which currently uses the Montgomery-to-
+      Edwards transformation.)
 
    *  typ _(required)_ Per [RFC8225], MUST be "passport".
 
@@ -440,9 +435,9 @@ Table of Contents
       SHAKEN requirements.
 
    *  card _(optional)_ Contains one or more brand attributes.  These
-      are analogous to [RCD-DRAFT] or [CTIA-BCID] data, but differ in
-      that they MUST be justified by evidence in the dossier.  Because
-      of this strong foundation that interconnects with formal legal
+      are analogous to [RFC9796] or [CTIA-BCID] data, but differ in that
+      they MUST be justified by evidence in the dossier.  Because of
+      this strong foundation that interconnects with formal legal
       identity, they can be used to derive other brand evidence (e.g.,
       an RCD passport) as needed.  Individual attributes MUST conform to
       the VCard standard [RFC6350].
@@ -956,17 +951,14 @@ Table of Contents
               <https://api.ctia.org/wp-content/uploads/2022/11/Branded-
               Calling-Best-Practices.pdf>.
 
+   [FN-DSA]   NIST, "FIPS 206: FN-DSA (Falcon)", September 2025,
+              <https://csrc.nist.gov/presentations/2025/fips-206-fn-dsa-
+              falcon>.
+
    [LE-VLEI-SCHEMA]
               GLEIF, "Legal Entity vLEI Credential", November 2023,
               <https://github.com/GLEIF-IT/vLEI-schema/blob/main/legal-
               entity-vLEI-credential.json>.
-
-   [RCD-DRAFT]
-              Wendt, C. and J. Peterson, "SIP Call-Info Parameters for
-              Rich Call Data", Work in Progress, Internet-Draft, draft-
-              ietf-sipcore-callinfo-rcd-19, 21 April 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-sipcore-
-              callinfo-rcd-19>.
 
    [RFC6350]  Perreault, S., "vCard Format Specification", RFC 6350,
               DOI 10.17487/RFC6350, August 2011,
@@ -975,6 +967,10 @@ Table of Contents
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7519>.
+
+   [RFC9796]  Wendt, C. and J. Peterson, "SIP Call-Info Parameters for
+              Rich Call Data", RFC 9796, DOI 10.17487/RFC9796, July
+              2025, <https://www.rfc-editor.org/rfc/rfc9796>.
 
    [TN-ALLOC-SCHEMA]
               Provenant, "TN Allocation Credential", December 2024,
