@@ -36,10 +36,7 @@ normative:
   RFC3261:
   RFC4353:
   RFC4575:
-  RFC4648:
   RFC5626:
-  RFC5763:
-  RFC5764:
   RFC8032:
   RFC8224:
   RFC8225:
@@ -124,24 +121,6 @@ informative:
     author:
       name: Daniel Hardman
     date: Apr 2021
-  LE-VLEI-SCHEMA:
-    target: https://github.com/GLEIF-IT/vLEI-schema/blob/main/legal-entity-vLEI-credential.json
-    title: "Legal Entity vLEI Credential"
-    author:
-      org: GLEIF
-    date: 20 Nov 2023
-  TN-ALLOC-SCHEMA:
-    target: https://github.com/provenant-dev/public-schema/blob/main/tn-alloc/tn-alloc.schema.json
-    title: "TN Allocation Credential"
-    author:
-      org: Provenant
-    date: 20 Dec 2024
-  BRAND-SCHEMA:
-    target: https://github.com/provenant-dev/public-schema/blob/brand-owner/brand-owner/brand-owner.schema.json
-    title: "Brand Credential"
-    author:
-      name: Daniel Hardman
-    date: 31 Dec 2024
 
 --- abstract
 
