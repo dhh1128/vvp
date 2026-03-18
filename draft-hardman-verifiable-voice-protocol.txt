@@ -774,7 +774,7 @@ Table of Contents
       multi-signature schemes.  This enhances security by distributing
       signing authority across multiple key holders, reducing the risk
       of single-point compromise.  Threshold-based signatures ensure
-      that no single key compromise undermines the system’s integrity
+      that no single key compromise undermines the system's integrity
       while enabling controlled key recovery and rotation without
       disrupting credential validity.
 
