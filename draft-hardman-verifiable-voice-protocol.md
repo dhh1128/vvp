@@ -103,6 +103,12 @@ normative:
     date: Feb 2019
 
 informative:
+  FN-DSA:
+    target: https://csrc.nist.gov/presentations/2025/fips-206-fn-dsa-falcon
+    title: "FIPS 206: FN-DSA (Falcon)"
+    author:
+      org: NIST
+    date: Sep 2025
   RFC6350:
   RFC7519:
   RCD-DRAFT: I-D.ietf-sipcore-callinfo-rcd
@@ -214,8 +220,6 @@ However, curating does not occur in realtime during phone calls, and is out of s
 ## Citing the AP's dossier
 A VVP call that makes the caller verifiable begins when the OP ({{<OP}}) generates a new VVP passport {{RFC8225}} that complies with STIR {{RFC8224}} requirements. In its compact-serialized JWT {{RFC7519}} form, this passport is then passed as an `Identity` header in a SIP INVITE {{RFC3261}}. The passport *constitutes* lightweight, direct, and ephemeral evidence; it *cites* and therefore depends upon comprehensive, indirect, and long-lived evidence (the AP's dossier). Safely and efficiently citing stronger evidence in a dossier is one way that VVP differs from alternatives.
 
-If the caller intends to use DTLS-SRTP, the SIP INVITE MUST also contain an attribute line that contains the DTLS `fingerprint` attribute. Because VVP proves the prevents man-in-the-middle attacks and allows the When combined with VVP, DTLS-SRTP  `a=callee-passport:X` attribute line to the SDP {{RFC8866}} body of the callee's
-
 ### Questions answered by an AP's passport
 The passport directly answers at least the following questions:
 
@@ -265,7 +269,7 @@ An example will help. In its JSON-serialized form, a typical VVP passport for an
 
 The semantics of the fields are:
 
-* `alg` *(required)* MUST be either "EdDSA" ({{RFC8032}}, {{FIPS186-4}}), or (for post-quantum) "FN-DSA-512", "FN-DSA-1024". Standardizing on best-in-class schemes prevents parties weaker cryptography from degrading the security guarantees of the ecosystem. The RSA, HMAC, and ES256 algorithms MUST NOT be used. (EdDSA is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which currently uses the Montgomery-to-Edwards transformation.)
+* `alg` *(required)* MUST be either "EdDSA" ({{RFC8032}}, {{FIPS186-4}}), or (for post-quantum) "FN-DSA-512" or "FN-DSA-1024" ({{FN-DSA}}). Standardizing on best-in-class schemes prevents weaker cryptography from degrading the security guarantees of the ecosystem. The RSA, HMAC, and ES256 algorithms MUST NOT be used. (EdDSA is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which currently uses the Montgomery-to-Edwards transformation.)
 * `typ` *(required)* Per {{RFC8225}}, MUST be "passport".
 * `ppt` *(required)* Per {{RFC8225}}, MUST identify the specific PASSporT type -- in this case, "vvp".
 * `kid` *(required)* MUST be the OOBI of an AID ({{TOIP-KERI}}) controlled by the OP ({{<OP}}). An OOBI is a special URL that facilitates ACDC's viral discoverability goals. It returns IANA content-type `application/json+cesr`, which provides some important security guarantees. The content for this particular OOBI MUST be a KEL ({{TOIP-KERI}}). Typically the AID in question does not identify the OP as a legal entity, but rather software running on or invoked by the SBC operated by the OP. (The AID that identifies the OP as a legal entity may be controlled by a multisig scheme and thus require multiple humans to create a signature. The AID for `kid` MUST be single-sig and, in the common case where it is not the legal entity AID, MUST have a delegate relationship with the legal entity AID that's proved through formal evidence.)
