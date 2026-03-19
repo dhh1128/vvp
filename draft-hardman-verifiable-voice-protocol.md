@@ -34,19 +34,13 @@ author:
 
 normative:
   RFC3261:
-  RFC4353:
   RFC4575:
   RFC5626:
   RFC8032:
   RFC8224:
   RFC8225:
+  RFC8588:
   RFC8866:
-  FIPS186-4:
-    target: https://doi.org/10.6028/NIST.FIPS.186-4
-    title: Digital Signature Standard (DSS)
-    author:
-      org: National Institute of Standards and Technology (NIST)
-    date: July 2013
   TOIP-CESR:
     target: https://trustoverip.github.io/tswg-cesr-specification/
     title: "Composable Event Streaming Representation (CESR)"
@@ -92,12 +86,6 @@ normative:
       -
         name: Daniel Hardman
     date: 22 Sep 2025
-  ATIS-1000074:
-    target: https://atis.org/resources/signature-based-handling-of-asserted-information-using-tokens-shaken-atis-1000074-e/
-    title: "Signature-Based Handling of Asserted Information Using toKENs (SHAKEN)"
-    author:
-      org: Alliance for Telecommunications Industry Solutions
-    date: Feb 2019
 
 informative:
   FN-DSA:
@@ -106,6 +94,7 @@ informative:
     author:
       org: NIST
     date: Sep 2025
+  RFC4353:
   RFC6350:
   RFC7519:
   RFC9796:
@@ -248,11 +237,11 @@ An example will help. In its JSON-serialized form, a typical VVP passport for an
 
 The semantics of the fields are:
 
-* `alg` *(required)* MUST be either "EdDSA" ({{RFC8032}}, {{FIPS186-4}}), or (for post-quantum) "FN-DSA-512" or "FN-DSA-1024" ({{FN-DSA}}). Standardizing on best-in-class schemes prevents weaker cryptography from degrading the security guarantees of the ecosystem. The RSA, HMAC, and ES256 algorithms MUST NOT be used. (EdDSA is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which currently uses the Montgomery-to-Edwards transformation.)
+* `alg` *(required)* MUST be either "EdDSA" ({{RFC8032}}), or (for post-quantum) "FN-DSA-512" ({{FN-DSA}}). Standardizing on best-in-class schemes prevents weaker cryptography from degrading the security guarantees of the ecosystem. The RSA, HMAC, and ES256 algorithms MUST NOT be used. (EdDSA is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which currently uses the Montgomery-to-Edwards transformation.)
 * `typ` *(required)* Per {{RFC8225}}, MUST be "passport".
 * `ppt` *(required)* Per {{RFC8225}}, MUST identify the specific PASSporT type -- in this case, "vvp".
 * `kid` *(required)* MUST be the OOBI of an AID ({{TOIP-KERI}}) controlled by the OP ({{<OP}}). An OOBI is a special URL that facilitates ACDC's viral discoverability goals. It returns IANA content-type `application/json+cesr`, which provides some important security guarantees. The content for this particular OOBI MUST be a KEL ({{TOIP-KERI}}). Typically the AID in question does not identify the OP as a legal entity, but rather software running on or invoked by the SBC operated by the OP. (The AID that identifies the OP as a legal entity may be controlled by a multisig scheme and thus require multiple humans to create a signature. The AID for `kid` MUST be single-sig and, in the common case where it is not the legal entity AID, MUST have a delegate relationship with the legal entity AID that's proved through formal evidence.)
-* `orig` *(required)* Although VVP does not depend on SHAKEN, the format of this field MUST conform to SHAKEN requirements ({{ATIS-1000074}}), for interoperability reasons. It MUST also satisfy one additional constraint, which is that only one phone number is allowed. Despite the fact that a containing SIP INVITE may allow multiple originating phone numbers, only one can be tied to evidence evaluated by verifiers.
+* `orig` *(required)* Although VVP does not depend on SHAKEN, the format of this field MUST conform to SHAKEN requirements ({{RFC8588}}), for interoperability reasons. It MUST also satisfy one additional constraint, which is that only one phone number is allowed. Despite the fact that a containing SIP INVITE may allow multiple originating phone numbers, only one can be tied to evidence evaluated by verifiers.
 * `dest` *(required)* For interoperability reasons, MUST conform to SHAKEN requirements.
 * `card` *(optional)* Contains one or more brand attributes. These are analogous to {{RFC9796}} or {{CTIA-BCID}} data, but differ in that they MUST be justified by evidence in the dossier. Because of this strong foundation that interconnects with formal legal identity, they can be used to derive other brand evidence (e.g., an RCD passport) as needed. Individual attributes MUST conform to the VCard standard {{RFC6350}}.
 * `goal` *(optional)* A machine-readable, localizable goal code, as described informally by {{ARIES-RFC-0519}}. If present, the dossier MUST prove that the OP is authorized by the AP to initiate calls with this particular goal.
