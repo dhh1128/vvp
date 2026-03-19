@@ -4,8 +4,8 @@
 
 Network Working Group                                         D. Hardman
 Internet-Draft                                            Provenant, Inc
-Intended status: Standards Track                           18 March 2026
-Expires: 19 September 2026
+Intended status: Standards Track                           19 March 2026
+Expires: 20 September 2026
 
 
                        Verifiable Voice Protocol
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 September 2026.
+   This Internet-Draft will expire on 20 September 2026.
 
 Copyright Notice
 
@@ -394,14 +394,13 @@ Table of Contents
 
    The semantics of the fields are:
 
-   *  alg _(required)_ MUST be either "EdDSA" ([RFC8032], [FIPS186-4]),
-      or (for post-quantum) "FN-DSA-512" or "FN-DSA-1024" ([FN-DSA]).
-      Standardizing on best-in-class schemes prevents weaker
-      cryptography from degrading the security guarantees of the
-      ecosystem.  The RSA, HMAC, and ES256 algorithms MUST NOT be used.
-      (EdDSA is motivated by compatibility with the vLEI and its
-      associated ACDC ecosystem, which currently uses the Montgomery-to-
-      Edwards transformation.)
+   *  alg _(required)_ MUST be either "EdDSA" ([RFC8032]), or (for post-
+      quantum) "FN-DSA-512" ([FN-DSA]).  Standardizing on best-in-class
+      schemes prevents weaker cryptography from degrading the security
+      guarantees of the ecosystem.  The RSA, HMAC, and ES256 algorithms
+      MUST NOT be used.  (EdDSA is motivated by compatibility with the
+      vLEI and its associated ACDC ecosystem, which currently uses the
+      Montgomery-to-Edwards transformation.)
 
    *  typ _(required)_ Per [RFC8225], MUST be "passport".
 
@@ -425,11 +424,11 @@ Table of Contents
 
    *  orig _(required)_ Although VVP does not depend on SHAKEN, the
       format of this field MUST conform to SHAKEN requirements
-      ([ATIS-1000074]), for interoperability reasons.  It MUST also
-      satisfy one additional constraint, which is that only one phone
-      number is allowed.  Despite the fact that a containing SIP INVITE
-      may allow multiple originating phone numbers, only one can be tied
-      to evidence evaluated by verifiers.
+      ([RFC8588]), for interoperability reasons.  It MUST also satisfy
+      one additional constraint, which is that only one phone number is
+      allowed.  Despite the fact that a containing SIP INVITE may allow
+      multiple originating phone numbers, only one can be tied to
+      evidence evaluated by verifiers.
 
    *  dest _(required)_ For interoperability reasons, MUST conform to
       SHAKEN requirements.
@@ -833,18 +832,6 @@ Table of Contents
 
 8.1.  Normative References
 
-   [ATIS-1000074]
-              Alliance for Telecommunications Industry Solutions,
-              "Signature-Based Handling of Asserted Information Using
-              toKENs (SHAKEN)", February 2019,
-              <https://atis.org/resources/signature-based-handling-of-
-              asserted-information-using-tokens-shaken-atis-1000074-e/>.
-
-   [FIPS186-4]
-              National Institute of Standards and Technology (NIST),
-              "Digital Signature Standard (DSS)", July 2013,
-              <https://doi.org/10.6028/NIST.FIPS.186-4>.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -856,37 +843,16 @@ Table of Contents
               DOI 10.17487/RFC3261, June 2002,
               <https://www.rfc-editor.org/rfc/rfc3261>.
 
-   [RFC4353]  Rosenberg, J., "A Framework for Conferencing with the
-              Session Initiation Protocol (SIP)", RFC 4353,
-              DOI 10.17487/RFC4353, February 2006,
-              <https://www.rfc-editor.org/rfc/rfc4353>.
-
    [RFC4575]  Rosenberg, J., Schulzrinne, H., and O. Levin, Ed., "A
               Session Initiation Protocol (SIP) Event Package for
               Conference State", RFC 4575, DOI 10.17487/RFC4575, August
               2006, <https://www.rfc-editor.org/rfc/rfc4575>.
-
-   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
-              Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
-              <https://www.rfc-editor.org/rfc/rfc4648>.
 
    [RFC5626]  Jennings, C., Ed., Mahy, R., Ed., and F. Audet, Ed.,
               "Managing Client-Initiated Connections in the Session
               Initiation Protocol (SIP)", RFC 5626,
               DOI 10.17487/RFC5626, October 2009,
               <https://www.rfc-editor.org/rfc/rfc5626>.
-
-   [RFC5763]  Fischl, J., Tschofenig, H., and E. Rescorla, "Framework
-              for Establishing a Secure Real-time Transport Protocol
-              (SRTP) Security Context Using Datagram Transport Layer
-              Security (DTLS)", RFC 5763, DOI 10.17487/RFC5763, May
-              2010, <https://www.rfc-editor.org/rfc/rfc5763>.
-
-   [RFC5764]  McGrew, D. and E. Rescorla, "Datagram Transport Layer
-              Security (DTLS) Extension to Establish Keys for the Secure
-              Real-time Transport Protocol (SRTP)", RFC 5764,
-              DOI 10.17487/RFC5764, May 2010,
-              <https://www.rfc-editor.org/rfc/rfc5764>.
 
    [RFC8032]  Josefsson, S. and I. Liusvaara, "Edwards-Curve Digital
               Signature Algorithm (EdDSA)", RFC 8032,
@@ -906,6 +872,12 @@ Table of Contents
    [RFC8225]  Wendt, C. and J. Peterson, "PASSporT: Personal Assertion
               Token", RFC 8225, DOI 10.17487/RFC8225, February 2018,
               <https://www.rfc-editor.org/rfc/rfc8225>.
+
+   [RFC8588]  Wendt, C. and M. Barnes, "Personal Assertion Token
+              (PaSSporT) Extension for Signature-based Handling of
+              Asserted information using toKENs (SHAKEN)", RFC 8588,
+              DOI 10.17487/RFC8588, May 2019,
+              <https://www.rfc-editor.org/rfc/rfc8588>.
 
    [RFC8866]  Begen, A., Kyzivat, P., Perkins, C., and M. Handley, "SDP:
               Session Description Protocol", RFC 8866,
@@ -941,11 +913,6 @@ Table of Contents
               <https://github.com/hyperledger/aries-rfcs/blob/main/
               concepts/0519-goal-codes/README.md>.
 
-   [BRAND-SCHEMA]
-              Hardman, D., "Brand Credential", December 2024,
-              <https://github.com/provenant-dev/public-schema/blob/
-              brand-owner/brand-owner/brand-owner.schema.json>.
-
    [CTIA-BCID]
               CTIA, "Branded Calling ID Best Practices", November 2022,
               <https://api.ctia.org/wp-content/uploads/2022/11/Branded-
@@ -955,10 +922,10 @@ Table of Contents
               <https://csrc.nist.gov/presentations/2025/fips-206-fn-dsa-
               falcon>.
 
-   [LE-VLEI-SCHEMA]
-              GLEIF, "Legal Entity vLEI Credential", November 2023,
-              <https://github.com/GLEIF-IT/vLEI-schema/blob/main/legal-
-              entity-vLEI-credential.json>.
+   [RFC4353]  Rosenberg, J., "A Framework for Conferencing with the
+              Session Initiation Protocol (SIP)", RFC 4353,
+              DOI 10.17487/RFC4353, February 2006,
+              <https://www.rfc-editor.org/rfc/rfc4353>.
 
    [RFC6350]  Perreault, S., "vCard Format Specification", RFC 6350,
               DOI 10.17487/RFC6350, August 2011,
@@ -971,11 +938,6 @@ Table of Contents
    [RFC9796]  Wendt, C. and J. Peterson, "SIP Call-Info Parameters for
               Rich Call Data", RFC 9796, DOI 10.17487/RFC9796, July
               2025, <https://www.rfc-editor.org/rfc/rfc9796>.
-
-   [TN-ALLOC-SCHEMA]
-              Provenant, "TN Allocation Credential", December 2024,
-              <https://github.com/provenant-dev/public-schema/blob/main/
-              tn-alloc/tn-alloc.schema.json>.
 
 Acknowledgments
 

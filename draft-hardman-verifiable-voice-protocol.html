@@ -1054,7 +1054,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Hardman</td>
-<td class="center">Expires 19 September 2026</td>
+<td class="center">Expires 20 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-hardman-verifiable-voice-protocol-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-03-18" class="published">18 March 2026</time>
+<time datetime="2026-03-19" class="published">19 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-09-19">19 September 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-20">20 September 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1117,7 +1117,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 19 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 20 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1458,7 +1458,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-4.1.2-3">The semantics of the fields are:<a href="#section-4.1.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1.2-4.1">
-              <p id="section-4.1.2-4.1.1"><code>alg</code> <em>(required)</em> <span class="bcp14">MUST</span> be either "EdDSA" (<span>[<a href="#RFC8032" class="cite xref">RFC8032</a>]</span>, <span>[<a href="#FIPS186-4" class="cite xref">FIPS186-4</a>]</span>), or (for post-quantum) "FN-DSA-512" or "FN-DSA-1024" (<span>[<a href="#FN-DSA" class="cite xref">FN-DSA</a>]</span>). Standardizing on best-in-class schemes prevents weaker cryptography from degrading the security guarantees of the ecosystem. The RSA, HMAC, and ES256 algorithms <span class="bcp14">MUST NOT</span> be used. (EdDSA is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which currently uses the Montgomery-to-Edwards transformation.)<a href="#section-4.1.2-4.1.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.2-4.1.1"><code>alg</code> <em>(required)</em> <span class="bcp14">MUST</span> be either "EdDSA" (<span>[<a href="#RFC8032" class="cite xref">RFC8032</a>]</span>), or (for post-quantum) "FN-DSA-512" (<span>[<a href="#FN-DSA" class="cite xref">FN-DSA</a>]</span>). Standardizing on best-in-class schemes prevents weaker cryptography from degrading the security guarantees of the ecosystem. The RSA, HMAC, and ES256 algorithms <span class="bcp14">MUST NOT</span> be used. (EdDSA is motivated by compatibility with the vLEI and its associated ACDC ecosystem, which currently uses the Montgomery-to-Edwards transformation.)<a href="#section-4.1.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.2">
               <p id="section-4.1.2-4.2.1"><code>typ</code> <em>(required)</em> Per <span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span>, <span class="bcp14">MUST</span> be "passport".<a href="#section-4.1.2-4.2.1" class="pilcrow">¶</a></p>
@@ -1470,7 +1470,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
               <p id="section-4.1.2-4.4.1"><code>kid</code> <em>(required)</em> <span class="bcp14">MUST</span> be the OOBI of an AID (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>) controlled by the OP (<a href="#OP" class="auto internal xref">3.1.2</a>). An OOBI is a special URL that facilitates ACDC's viral discoverability goals. It returns IANA content-type <code>application/json+cesr</code>, which provides some important security guarantees. The content for this particular OOBI <span class="bcp14">MUST</span> be a KEL (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>). Typically the AID in question does not identify the OP as a legal entity, but rather software running on or invoked by the SBC operated by the OP. (The AID that identifies the OP as a legal entity may be controlled by a multisig scheme and thus require multiple humans to create a signature. The AID for <code>kid</code> <span class="bcp14">MUST</span> be single-sig and, in the common case where it is not the legal entity AID, <span class="bcp14">MUST</span> have a delegate relationship with the legal entity AID that's proved through formal evidence.)<a href="#section-4.1.2-4.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.5">
-              <p id="section-4.1.2-4.5.1"><code>orig</code> <em>(required)</em> Although VVP does not depend on SHAKEN, the format of this field <span class="bcp14">MUST</span> conform to SHAKEN requirements (<span>[<a href="#ATIS-1000074" class="cite xref">ATIS-1000074</a>]</span>), for interoperability reasons. It <span class="bcp14">MUST</span> also satisfy one additional constraint, which is that only one phone number is allowed. Despite the fact that a containing SIP INVITE may allow multiple originating phone numbers, only one can be tied to evidence evaluated by verifiers.<a href="#section-4.1.2-4.5.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.2-4.5.1"><code>orig</code> <em>(required)</em> Although VVP does not depend on SHAKEN, the format of this field <span class="bcp14">MUST</span> conform to SHAKEN requirements (<span>[<a href="#RFC8588" class="cite xref">RFC8588</a>]</span>), for interoperability reasons. It <span class="bcp14">MUST</span> also satisfy one additional constraint, which is that only one phone number is allowed. Despite the fact that a containing SIP INVITE may allow multiple originating phone numbers, only one can be tied to evidence evaluated by verifiers.<a href="#section-4.1.2-4.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.6">
               <p id="section-4.1.2-4.6.1"><code>dest</code> <em>(required)</em> For interoperability reasons, <span class="bcp14">MUST</span> conform to SHAKEN requirements.<a href="#section-4.1.2-4.6.1" class="pilcrow">¶</a></p>
@@ -1733,14 +1733,6 @@ Validation also includes comparing data structure and values against the declare
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
-<dt id="ATIS-1000074">[ATIS-1000074]</dt>
-        <dd>
-<span class="refAuthor">Alliance for Telecommunications Industry Solutions</span>, <span class="refTitle">"Signature-Based Handling of Asserted Information Using toKENs (SHAKEN)"</span>, <time datetime="2019-02" class="refDate">February 2019</time>, <span>&lt;<a href="https://atis.org/resources/signature-based-handling-of-asserted-information-using-tokens-shaken-atis-1000074-e/">https://atis.org/resources/signature-based-handling-of-asserted-information-using-tokens-shaken-atis-1000074-e/</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="FIPS186-4">[FIPS186-4]</dt>
-        <dd>
-<span class="refAuthor">National Institute of Standards and Technology (NIST)</span>, <span class="refTitle">"Digital Signature Standard (DSS)"</span>, <time datetime="2013-07" class="refDate">July 2013</time>, <span>&lt;<a href="https://doi.org/10.6028/NIST.FIPS.186-4">https://doi.org/10.6028/NIST.FIPS.186-4</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
@@ -1749,29 +1741,13 @@ Validation also includes comparing data structure and values against the declare
         <dd>
 <span class="refAuthor">Rosenberg, J.</span>, <span class="refAuthor">Schulzrinne, H.</span>, <span class="refAuthor">Camarillo, G.</span>, <span class="refAuthor">Johnston, A.</span>, <span class="refAuthor">Peterson, J.</span>, <span class="refAuthor">Sparks, R.</span>, <span class="refAuthor">Handley, M.</span>, and <span class="refAuthor">E. Schooler</span>, <span class="refTitle">"SIP: Session Initiation Protocol"</span>, <span class="seriesInfo">RFC 3261</span>, <span class="seriesInfo">DOI 10.17487/RFC3261</span>, <time datetime="2002-06" class="refDate">June 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3261">https://www.rfc-editor.org/rfc/rfc3261</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC4353">[RFC4353]</dt>
-        <dd>
-<span class="refAuthor">Rosenberg, J.</span>, <span class="refTitle">"A Framework for Conferencing with the Session Initiation Protocol (SIP)"</span>, <span class="seriesInfo">RFC 4353</span>, <span class="seriesInfo">DOI 10.17487/RFC4353</span>, <time datetime="2006-02" class="refDate">February 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4353">https://www.rfc-editor.org/rfc/rfc4353</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC4575">[RFC4575]</dt>
         <dd>
 <span class="refAuthor">Rosenberg, J.</span>, <span class="refAuthor">Schulzrinne, H.</span>, and <span class="refAuthor">O. Levin, Ed.</span>, <span class="refTitle">"A Session Initiation Protocol (SIP) Event Package for Conference State"</span>, <span class="seriesInfo">RFC 4575</span>, <span class="seriesInfo">DOI 10.17487/RFC4575</span>, <time datetime="2006-08" class="refDate">August 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4575">https://www.rfc-editor.org/rfc/rfc4575</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC4648">[RFC4648]</dt>
-        <dd>
-<span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"The Base16, Base32, and Base64 Data Encodings"</span>, <span class="seriesInfo">RFC 4648</span>, <span class="seriesInfo">DOI 10.17487/RFC4648</span>, <time datetime="2006-10" class="refDate">October 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4648">https://www.rfc-editor.org/rfc/rfc4648</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC5626">[RFC5626]</dt>
         <dd>
 <span class="refAuthor">Jennings, C., Ed.</span>, <span class="refAuthor">Mahy, R., Ed.</span>, and <span class="refAuthor">F. Audet, Ed.</span>, <span class="refTitle">"Managing Client-Initiated Connections in the Session Initiation Protocol (SIP)"</span>, <span class="seriesInfo">RFC 5626</span>, <span class="seriesInfo">DOI 10.17487/RFC5626</span>, <time datetime="2009-10" class="refDate">October 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5626">https://www.rfc-editor.org/rfc/rfc5626</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC5763">[RFC5763]</dt>
-        <dd>
-<span class="refAuthor">Fischl, J.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"Framework for Establishing a Secure Real-time Transport Protocol (SRTP) Security Context Using Datagram Transport Layer Security (DTLS)"</span>, <span class="seriesInfo">RFC 5763</span>, <span class="seriesInfo">DOI 10.17487/RFC5763</span>, <time datetime="2010-05" class="refDate">May 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5763">https://www.rfc-editor.org/rfc/rfc5763</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC5764">[RFC5764]</dt>
-        <dd>
-<span class="refAuthor">McGrew, D.</span> and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"Datagram Transport Layer Security (DTLS) Extension to Establish Keys for the Secure Real-time Transport Protocol (SRTP)"</span>, <span class="seriesInfo">RFC 5764</span>, <span class="seriesInfo">DOI 10.17487/RFC5764</span>, <time datetime="2010-05" class="refDate">May 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5764">https://www.rfc-editor.org/rfc/rfc5764</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8032">[RFC8032]</dt>
         <dd>
@@ -1788,6 +1764,10 @@ Validation also includes comparing data structure and values against the declare
 <dt id="RFC8225">[RFC8225]</dt>
         <dd>
 <span class="refAuthor">Wendt, C.</span> and <span class="refAuthor">J. Peterson</span>, <span class="refTitle">"PASSporT: Personal Assertion Token"</span>, <span class="seriesInfo">RFC 8225</span>, <span class="seriesInfo">DOI 10.17487/RFC8225</span>, <time datetime="2018-02" class="refDate">February 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8225">https://www.rfc-editor.org/rfc/rfc8225</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8588">[RFC8588]</dt>
+        <dd>
+<span class="refAuthor">Wendt, C.</span> and <span class="refAuthor">M. Barnes</span>, <span class="refTitle">"Personal Assertion Token (PaSSporT) Extension for Signature-based Handling of Asserted information using toKENs (SHAKEN)"</span>, <span class="seriesInfo">RFC 8588</span>, <span class="seriesInfo">DOI 10.17487/RFC8588</span>, <time datetime="2019-05" class="refDate">May 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8588">https://www.rfc-editor.org/rfc/rfc8588</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8866">[RFC8866]</dt>
         <dd>
@@ -1822,10 +1802,6 @@ Validation also includes comparing data structure and values against the declare
         <dd>
 <span class="refAuthor">Hardman, D.</span>, <span class="refTitle">"Aries RFC 0519: Goal Codes"</span>, <time datetime="2021-04" class="refDate">April 2021</time>, <span>&lt;<a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0519-goal-codes/README.md">https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0519-goal-codes/README.md</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="BRAND-SCHEMA">[BRAND-SCHEMA]</dt>
-        <dd>
-<span class="refAuthor">Hardman, D.</span>, <span class="refTitle">"Brand Credential"</span>, <time datetime="2024-12" class="refDate">December 2024</time>, <span>&lt;<a href="https://github.com/provenant-dev/public-schema/blob/brand-owner/brand-owner/brand-owner.schema.json">https://github.com/provenant-dev/public-schema/blob/brand-owner/brand-owner/brand-owner.schema.json</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="CTIA-BCID">[CTIA-BCID]</dt>
         <dd>
 <span class="refAuthor">CTIA</span>, <span class="refTitle">"Branded Calling ID Best Practices"</span>, <time datetime="2022-11" class="refDate">November 2022</time>, <span>&lt;<a href="https://api.ctia.org/wp-content/uploads/2022/11/Branded-Calling-Best-Practices.pdf">https://api.ctia.org/wp-content/uploads/2022/11/Branded-Calling-Best-Practices.pdf</a>&gt;</span>. </dd>
@@ -1834,9 +1810,9 @@ Validation also includes comparing data structure and values against the declare
         <dd>
 <span class="refAuthor">NIST</span>, <span class="refTitle">"FIPS 206: FN-DSA (Falcon)"</span>, <time datetime="2025-09" class="refDate">September 2025</time>, <span>&lt;<a href="https://csrc.nist.gov/presentations/2025/fips-206-fn-dsa-falcon">https://csrc.nist.gov/presentations/2025/fips-206-fn-dsa-falcon</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="LE-VLEI-SCHEMA">[LE-VLEI-SCHEMA]</dt>
+<dt id="RFC4353">[RFC4353]</dt>
         <dd>
-<span class="refAuthor">GLEIF</span>, <span class="refTitle">"Legal Entity vLEI Credential"</span>, <time datetime="2023-11" class="refDate">November 2023</time>, <span>&lt;<a href="https://github.com/GLEIF-IT/vLEI-schema/blob/main/legal-entity-vLEI-credential.json">https://github.com/GLEIF-IT/vLEI-schema/blob/main/legal-entity-vLEI-credential.json</a>&gt;</span>. </dd>
+<span class="refAuthor">Rosenberg, J.</span>, <span class="refTitle">"A Framework for Conferencing with the Session Initiation Protocol (SIP)"</span>, <span class="seriesInfo">RFC 4353</span>, <span class="seriesInfo">DOI 10.17487/RFC4353</span>, <time datetime="2006-02" class="refDate">February 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4353">https://www.rfc-editor.org/rfc/rfc4353</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6350">[RFC6350]</dt>
         <dd>
@@ -1847,12 +1823,8 @@ Validation also includes comparing data structure and values against the declare
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Token (JWT)"</span>, <span class="seriesInfo">RFC 7519</span>, <span class="seriesInfo">DOI 10.17487/RFC7519</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7519">https://www.rfc-editor.org/rfc/rfc7519</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9796">[RFC9796]</dt>
-        <dd>
-<span class="refAuthor">Wendt, C.</span> and <span class="refAuthor">J. Peterson</span>, <span class="refTitle">"SIP Call-Info Parameters for Rich Call Data"</span>, <span class="seriesInfo">RFC 9796</span>, <span class="seriesInfo">DOI 10.17487/RFC9796</span>, <time datetime="2025-07" class="refDate">July 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9796">https://www.rfc-editor.org/rfc/rfc9796</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="TN-ALLOC-SCHEMA">[TN-ALLOC-SCHEMA]</dt>
       <dd>
-<span class="refAuthor">Provenant</span>, <span class="refTitle">"TN Allocation Credential"</span>, <time datetime="2024-12" class="refDate">December 2024</time>, <span>&lt;<a href="https://github.com/provenant-dev/public-schema/blob/main/tn-alloc/tn-alloc.schema.json">https://github.com/provenant-dev/public-schema/blob/main/tn-alloc/tn-alloc.schema.json</a>&gt;</span>. </dd>
+<span class="refAuthor">Wendt, C.</span> and <span class="refAuthor">J. Peterson</span>, <span class="refTitle">"SIP Call-Info Parameters for Rich Call Data"</span>, <span class="seriesInfo">RFC 9796</span>, <span class="seriesInfo">DOI 10.17487/RFC9796</span>, <time datetime="2025-07" class="refDate">July 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9796">https://www.rfc-editor.org/rfc/rfc9796</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
