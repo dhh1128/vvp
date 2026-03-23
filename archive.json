@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-26T00:11:05.559495+00:00",
+  "timestamp": "2026-03-23T03:55:49.580235+00:00",
   "repo": "dhh1128/vvp",
   "labels": [
     {
@@ -513,26 +513,42 @@
       "id": "PR_kwDONMB4L86szSaw",
       "title": "Update draft-hardman-verifiable-voice-protocol.md",
       "url": "https://github.com/dhh1128/vvp/pull/10",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "daidoji",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "closed parenthesis",
       "createdAt": "2025-10-09T01:33:33Z",
-      "updatedAt": "2025-10-09T01:33:33Z",
+      "updatedAt": "2026-03-18T14:21:30Z",
       "baseRepository": "dhh1128/vvp",
       "baseRefName": "main",
       "baseRefOid": "331137a84b5760196ba1e5319820aa0c65331221",
       "headRepository": "daidoji/vvp",
       "headRefName": "patch-1",
       "headRefOid": "32414f2722281048f8cb4ac079d3df5ec33f14ca",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-18T14:21:29Z",
+      "mergedAt": "2026-03-18T14:21:29Z",
+      "mergedBy": "dhh1128",
+      "mergeCommit": {
+        "oid": "98157ea1f87a8f2a1a9417e9289f13f4edc895e7"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDONMB4L87shhti",
+          "commit": {
+            "abbreviatedOid": "32414f2"
+          },
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Thanks!",
+          "createdAt": "2026-03-18T14:21:20Z",
+          "updatedAt": "2026-03-18T14:21:20Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 11,
@@ -581,26 +597,42 @@
       "id": "PR_kwDONMB4L87GOLoN",
       "title": "RCD-DRAFT is RFC9796 now",
       "url": "https://github.com/dhh1128/vvp/pull/15",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rartych",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "RCD-DRAFT: I-D.ietf-sipcore-callinfo-rcd was published as [RFC9796](https://datatracker.ietf.org/doc/rfc9796/) in July 2025",
       "createdAt": "2026-02-25T12:52:39Z",
-      "updatedAt": "2026-02-25T12:52:39Z",
+      "updatedAt": "2026-03-18T14:02:26Z",
       "baseRepository": "dhh1128/vvp",
       "baseRefName": "main",
       "baseRefOid": "0fbf7cba665a93345c3e0323ca5a43129890f53c",
       "headRepository": "rartych/vvp",
       "headRefName": "rfc9796",
       "headRefOid": "b275579a59938f97ef131418cd68f4f602fae185",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-18T14:02:26Z",
+      "mergedAt": "2026-03-18T14:02:26Z",
+      "mergedBy": "dhh1128",
+      "mergeCommit": {
+        "oid": "1ef82f3f497db31856f5428cf8315fde1a0a3934"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDONMB4L87shBaL",
+          "commit": {
+            "abbreviatedOid": "b275579"
+          },
+          "author": "dhh1128",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Excellent! Thank you for the contribution!",
+          "createdAt": "2026-03-18T14:01:58Z",
+          "updatedAt": "2026-03-18T14:01:58Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
