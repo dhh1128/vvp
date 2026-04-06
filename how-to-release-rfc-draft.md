@@ -5,6 +5,8 @@
 2. Get a commit that is cleanly accepted after push.
 
 3. `$ make next`
+   If this doesn't work, you may need to run a more specific `make` target -- the specific xml file you're going to need:<br>
+   `make versioned/draft-hardman-verifiable-voice-protocol-07.xml` OR `make .targets.mk && make next`
 
 4. [Submit the .xml file](https://datatracker.ietf.org/submit/) that was produced in the versioned folder (NOT the .txt file).
 
