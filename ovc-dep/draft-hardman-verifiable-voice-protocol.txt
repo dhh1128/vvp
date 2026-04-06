@@ -1,0 +1,854 @@
+
+
+
+
+Network Working Group                                         D. Hardman
+Internet-Draft                                            Provenant, Inc
+Intended status: Standards Track                            6 April 2026
+Expires: 8 October 2026
+
+
+                       Verifiable Voice Protocol
+             draft-hardman-verifiable-voice-protocol-latest
+
+Abstract
+
+   The Verifiable Voice Protocol (VVP) is a profile of the Open
+   Verifiable Communications (OVC) framework [OVC] for voice calls
+   carried over SIP [RFC3261].  VVP encodes OVC citations as STIR
+   PASSporTs [RFC8225] in SIP signaling, binding rich, independently
+   verifiable identity evidence to individual calls.  Evidence about
+   callers travels in the SIP Identity header of an INVITE; evidence
+   about callees travels in an SDP attribute of the response.  VVP
+   interoperates with SHAKEN [RFC8588], RCD [RFC9796], and vCon, and can
+   justify SHAKEN A attestations for calls originating outside SHAKEN
+   ecosystems.  This document defines the voice-specific transport
+   binding, PASSporT encoding, channel-binding fields, replay
+   mitigation, and security considerations.  Transport-agnostic concerns
+   — citation data model, verification algorithm, dossier structure,
+   evidence theory — are defined in [OVC] and [TOIP-DOSSIER].
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at
+   https://dhh1128.github.io/vvp/draft-hardman-verifiable-voice-
+   protocol.html.  Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-hardman-verifiable-voice-
+   protocol/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/dhh1128/vvp.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 8 October 2026.
+
+Copyright Notice
+
+   Copyright (c) 2026 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  Overview
+     3.1.  Role Mapping
+   4.  Transport Identification
+   5.  Serialization Format
+     5.1.  Mapping of OVC Abstract Fields to JWT Structure
+       5.1.1.  Sample Passport
+   6.  Channel-Binding Fields
+     6.1.  Caller-Direction Binding
+     6.2.  Callee-Direction Binding
+   7.  Replay Mitigation
+   8.  Citation Encoding
+     8.1.  Caller Direction
+     8.2.  Callee Direction
+   9.  Directionality
+   10. Additional Voice-Specific Fields
+   11. OOBI Resolution
+   12. Verification
+   13. Relationship to Existing Trust Mechanisms
+     13.1.  SHAKEN
+     13.2.  RCD and Branded Calling
+     13.3.  vCon
+   14. Security Considerations
+     14.1.  SIP B2BUA Intermediaries
+     14.2.  TN Spoofing in SIP
+     14.3.  SRTP and Media Integrity
+     14.4.  Robocall Threat Model
+     14.5.  Key Compromise
+   15. IANA Considerations
+     15.1.  PASSporT Type Registration
+     15.2.  SDP Attribute Registration
+     15.3.  Content Type
+   16. References
+     16.1.  Normative References
+     16.2.  Informative References
+   Acknowledgments
+   Author's Address
+
+1.  Introduction
+
+   When we get phone calls, we want to know who is calling and why.
+   Existing solutions — SHAKEN, RCD, branded calling — address parts of
+   this problem.  Their common limitation is shallow evidence: assurance
+   derives from a service provider's signature alone, without
+   independently verifiable proof of what that signature asserts.  They
+   are jurisdiction-specific.  They do not prove things about callees.
+   They are expensive to deploy.
+
+   VVP addresses these limitations by applying the OVC framework to
+   voice.  OVC's curate-once-cite-ephemerally architecture means that
+   the deep evidence work — acquiring vetting credentials, number
+   allocation proofs, brand rights, and delegation chains — is done once
+   and amortized across every subsequent call.  The per-call artifact is
+   a compact PASSporT [RFC8225] that references the evidence rather than
+   containing it.  Any verifier anywhere along the call route can
+   independently fetch and validate the full evidence graph.
+
+   This document defines VVP as a conformant OVC profile.  It satisfies
+   the eleven profile requirements in [OVC] Section 10 ("Writing an OVC
+   Profile").  Transport-agnostic concerns are not repeated here; they
+   are defined in [OVC] and [TOIP-DOSSIER] and incorporated by
+   reference.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   The terms "citation", "dossier", "profile", "Accountable Party (AP)",
+   "Citing Party (CP)", "Verified Party (VP)", "Verifier", "AID", "KEL",
+   "OOBI", "SAID", "ACDC", "CESR", "witness", and "watcher" are as
+   defined in [OVC] and the specifications it references.
+
+   The following additional terms are used in this document:
+
+   Originating Party (OP):  The VVP-specific instantiation of the OVC
+      Citing Party (CP).  The OP controls the session border controller
+      (SBC) that generates the VVP passport in the SIP INVITE.  See
+      Section 3.1.
+
+   Accountable Party (AP):  As defined in [OVC].  In voice contexts, the
+      AP holds the right to use the originating telephone number.  The
+      callee and any regulator hold the AP accountable for the call.
+
+   Originating Service Provider (OSP):  The service provider associated
+      with the OP.
+
+   Terminating Service Provider (TSP):  The service provider of the
+      callee.
+
+3.  Overview
+
+   VVP requires identified parties — callers and optionally callees — to
+   curate a dossier ([TOIP-DOSSIER]) of stable evidence in advance.  For
+   each call, they issue an ephemeral VVP passport: a JWT [RFC7519] in
+   JWS Compact Serialization, encoded as a STIR PASSporT [RFC8225], that
+   cites their dossier.  A caller's passport travels as an Identity
+   header in a SIP INVITE [RFC3261].  A callee's passport travels as an
+   a=callee-passport: attribute in the SDP [RFC8866] body of the
+   response.  Verifiers anywhere along the route — TSPs, regulatory
+   monitors, analytics engines, the recipient — extract and verify the
+   passport(s) per the algorithm in [OVC] Section 5.
+
+   VVP inherits all transport-agnostic properties of OVC: independent
+   verifiability, cross-jurisdictional operation, historical
+   auditability, privacy-preserving graduated disclosure, and the
+   ability to bridge certificate-based ecosystems such as SHAKEN.
+
+3.1.  Role Mapping
+
+   OVC defines generic roles.  The following table maps them to VVP and
+   SIP entities.
+
+      +=============+====================+==========================+
+      | OVC Role    | VVP Role           | SIP Entity               |
+      +=============+====================+==========================+
+      | Citing      | Originating Party  | Entity controlling the   |
+      | Party (CP)  | (OP)               | originating SBC          |
+      +-------------+--------------------+--------------------------+
+      | Accountable | Accountable Party  | The legal entity         |
+      | Party (AP)  | (AP)               | accountable for the call |
+      +-------------+--------------------+--------------------------+
+      | Verified    | AP (caller         | —                        |
+      | Party (VP)  | direction); callee |                          |
+      |             | (callee direction) |                          |
+      +-------------+--------------------+--------------------------+
+      | Verifier    | Verifier           | TSP, regulatory monitor, |
+      |             |                    | analytics engine, caller |
+      |             |                    | or callee                |
+      +-------------+--------------------+--------------------------+
+
+                                  Table 1
+
+   The OP is the entity that builds and signs the VVP passport.  The AP
+   is the entity accountable for the call, whose rights are proved by
+   the dossier.  In many deployments these are the same entity.  Where
+   they differ — for example, when a call center acts on behalf of an
+   enterprise — the delegation MUST be proved by a delegation credential
+   in the dossier per [OVC] Section 3.
+
+   The callee role in VVP is both a potential VP (when providing a
+   callee passport) and a potential Verifier (when checking the caller's
+   passport).  Enterprises running inbound call centers commonly occupy
+   both roles simultaneously.
+
+   A full description of OVC roles, the delegation model, and the
+   dossier evidence graph is in [OVC] Sections 3 and 4.  Credential type
+   definitions — vetting credentials, TNAlloc credentials, brand
+   credentials, brand proxy credentials, and delegated signer
+   credentials — are defined in [TOIP-DOSSIER].
+
+4.  Transport Identification
+
+   VVP operates over SIP [RFC3261], including deployments using SIP
+   outbound [RFC5626] and conference-extended SIP ([RFC4353],
+   [RFC4575]).  The transport carries OVC citations as STIR PASSporTs
+   per [RFC8224] and [RFC8225].
+
+   VVP is a PASSporT extension type.  The ppt header value "vvp"
+   identifies a VVP passport in any STIR-aware infrastructure.
+
+5.  Serialization Format
+
+   VVP uses JWT [RFC7519] in JWS Compact Serialization
+   (header.payload.signature, Base64url-encoded).  No alternative
+   serialization is defined for this profile; the full OOBI URLs in kid
+   and evd are sufficient for the bandwidth of SIP signaling.
+
+5.1.  Mapping of OVC Abstract Fields to JWT Structure
+
+   The mapping from the OVC abstract citation data model ([OVC]
+   Section 4.1) to JWT structure is:
+
+   *JWT header:*
+
+   *  alg — MUST be "EdDSA" ([RFC8032]) or "FN-DSA-512" ([FN-DSA]).
+      RSA, HMAC, and ES256 MUST NOT be used.  This restriction is
+      inherited from OVC and MUST NOT be weakened.
+
+   *  typ — MUST be "passport" per [RFC8225].
+
+   *  ppt — MUST be "vvp".
+
+   *  kid — MUST be the OOBI of an AID ([TOIP-KERI]) controlled by the
+      OP.  The OOBI resolves to the OP's KEL ([TOIP-KERI]), which
+      provides key state at any reference time.  Typically the AID
+      identifies a single SBC service rather than the OP as a legal
+      entity.  When the signing AID is not the AP's legal-entity AID, a
+      delegated signer credential in the dossier MUST prove the
+      relationship.
+
+   *JWT payload:*
+
+   *  evd — MUST be the OOBI of the dossier ACDC ([TOIP-ACDC]) for the
+      AP.  Resolves to an HTTP resource serving application/cesr.
+      Analogous to x5u in X.509 contexts but with tamper-evident SAID-
+      keyed caching.
+
+   *  orig — Required channel-binding field; see Section 6.
+
+   *  dest — Required channel-binding field; see Section 6.
+
+   *  iat — Required.  Seconds since the Unix epoch.
+
+   *  exp — Required in VVP; see Section 7.
+
+   *  card — Optional.  Brand attributes in VCard format [RFC6350].  If
+      present, MUST be justified by a brand credential in the dossier.
+
+   *  goal — Optional.  Machine-readable goal code per [ARIES-RFC-0519].
+      If present, the dossier MUST prove CP authorization for calls with
+      this goal.
+
+   *  jti — Optional.  Unique identifier for the citation.  MAY be used
+      for deduplication.
+
+   *  call-reason — Optional.  Human-readable description of call
+      intent.  This field is largely redundant with goal.  Use is
+      discouraged; it is retained for RCD interoperability.  It cannot
+      be verified.
+
+   *  origId — Optional.  Follows SHAKEN semantics per [RFC8588].
+
+   For callee-direction passports only:
+
+   *  call-id — Required.  MUST equal the value of the Call-ID header in
+      the preceding SIP INVITE.
+
+   *  cseq — Required.  MUST equal the value of the CSeq header in the
+      preceding SIP INVITE.
+
+   Fields defined in the OVC abstract model that appear in the JWT
+   payload of callee passports are otherwise identical to those of
+   caller passports, subject to the callee-specific channel-binding
+   rules in Section 6.
+
+5.1.1.  Sample Passport
+
+   An example caller VVP passport (long CESR-encoded hashes shortened by
+   ellipsis):
+
+   {
+     "header": {
+       "alg": "EdDSA",
+       "typ": "passport",
+       "ppt": "vvp",
+       "kid": "https://agentsrus.net/oobi/EMC.../agent/EAx..."
+     },
+     "payload": {
+       "orig": {"tn": ["+33612345678"]},
+       "dest": {"tn": ["+33765432109"]},
+       "card": ["NICKNAME:Monde d'Exemples",
+         "LOGO;HASH=EK2...;VALUE=URI:https://example.com/ico64x48.png"],
+       "goal": "negotiate.schedule",
+       "call-reason": "planifier le prochain rendez-vous",
+       "evd": "https://fr.example.com/dossiers/E0F....cesr",
+       "origId": "e0ac7b44-1fc3-4794-8edd-34b83c018fe9",
+       "iat": 1699840000,
+       "exp": 1699840015,
+       "jti": "70664125-c88d-49d6-b66f-0510c20fc3a6"
+     }
+   }
+
+6.  Channel-Binding Fields
+
+   VVP defines the following channel-binding fields per [OVC]
+   Section 4.2.
+
+6.1.  Caller-Direction Binding
+
+   orig (required):  The originating telephone number.  Format MUST
+      conform to SHAKEN requirements ([RFC8588]).  Only one telephone
+      number is permitted, even when the SIP INVITE specifies multiple
+      originating numbers.  The single number is the one whose
+      authorization is proved by the dossier.
+
+   dest (required):  The destination telephone number.  Format MUST
+      conform to SHAKEN requirements ([RFC8588]).
+
+   The verifier confirms that orig and dest match the corresponding
+   values in the SIP INVITE.
+
+6.2.  Callee-Direction Binding
+
+   call-id (required):  MUST equal the Call-ID value from the preceding
+      SIP INVITE.
+
+   cseq (required):  MUST equal the CSeq value from the preceding SIP
+      INVITE.
+
+   iat (required):  MUST be present and MUST contain a value from the
+      callee's system clock.
+
+   The call-id and cseq fields bind the callee's passport to the
+   specific SIP dialog.  The verifier confirms that these values match
+   the INVITE.  The callee omits orig and dest because those are already
+   established by the caller's passport and the dialog context.
+
+7.  Replay Mitigation
+
+   exp is REQUIRED in VVP for both caller and callee passports.  The
+   same two telephone numbers may have many calls; timing plus channel
+   binding alone is insufficient to prevent replay.
+
+   The recommended value for exp is iat + 15 seconds.  This is long
+   enough for an INVITE to be routed and trigger ringing on a handset.
+   The maximum permitted value is iat + 60 seconds.  Values greater than
+   60 seconds MUST NOT be used.
+
+   For callee passports, exp is permitted but not required.  A callee
+   that omits exp signals no additional timeout constraint beyond what
+   the caller's passport implies.  If present, the same 60-second
+   maximum applies.
+
+   The verifier MUST confirm that exp is greater than iat and greater
+   than the reference time.  The verifier MUST also confirm that iat is
+   close enough to the reference time to satisfy its replay tolerance.
+   Thirty seconds is a recommended default tolerance for caller
+   passports.
+
+   Detailed generic replay mitigation guidance is in [OVC] Section 7.2.
+
+8.  Citation Encoding
+
+8.1.  Caller Direction
+
+   The JWT compact form
+   (base64url(header).base64url(payload).base64url(signature)) is placed
+   in the Identity header of the SIP INVITE per [RFC8224]:
+
+   Identity: <compact-jwt>;info=<oobi-url>;alg=es256
+
+   The alg parameter in the Identity header indicates the signing
+   algorithm per [RFC8224].  For EdDSA, use "es256" for SHAKEN
+   compatibility — TODO: confirm whether SHAKEN's alg parameter registry
+   accepts "EdDSA" or whether a bridging convention is needed here.
+
+   The info parameter SHOULD be set to the OOBI URL from the kid header,
+   giving SHAKEN-aware intermediaries a familiar resolution path.
+
+8.2.  Callee Direction
+
+   The JWT compact form is placed as an a=callee-passport: attribute in
+   the SDP [RFC8866] body of the callee's 200 OK response.  The value is
+   the compact JWT followed by the suffix ;type=vvp:
+
+   a=callee-passport:<compact-jwt>;type=vvp
+
+   The attribute MAY also appear in a 180 Ringing response to make the
+   callee verifiable earlier, but MUST appear in the 200 OK response.
+
+   Identity headers are not used for callee passports.  Existing SIP
+   tooling does not preserve Identity headers on responses.  The
+   callee's identity is primarily of interest to the caller, who reads
+   the SDP body.
+
+9.  Directionality
+
+   VVP supports evidence in both directions of a voice call.  Compliant
+   implementations MAY support caller-direction only, callee-direction
+   only, or both.  The supported direction(s) SHOULD be documented in
+   deployment configuration.
+
+   *Caller direction:* Supported when the OP generates a VVP passport
+   and places it in the SIP INVITE Identity header as specified in
+   Section 8.
+
+   *Callee direction:* Supported when the callee generates a VVP
+   passport and places it in the SDP body of the 200 OK response as
+   specified in Section 8.
+
+   The two passports are independently constructed and independently
+   verified.  They reference the same dossier structure but typically
+   different dossiers (each party proves things about itself).  The
+   callee's channel-binding fields reference the dialog established by
+   the caller's INVITE.
+
+   For callee-direction passports that include card and goal claims: if
+   the preceding INVITE also declared a goal, the callee's goal MUST be
+   a subset of the caller's goal, or the caller's goal MUST be a subset
+   of the callee's goal.  This ensures that the two parties are aligned
+   on the communication purpose.
+
+   Generic directionality requirements are in [OVC] Section 3.4.
+
+10.  Additional Voice-Specific Fields
+
+   The fields typ, ppt, orig, dest, call-id, cseq, call-reason, and
+   origId are defined in Section 5.  No additional fields beyond those
+   defined in this document and in [OVC] Section 4.1 are defined by this
+   profile.
+
+   Implementations that encounter unknown fields in a VVP passport MUST
+   ignore them, per [OVC] Section 4.1.
+
+11.  OOBI Resolution
+
+   kid and evd carry full OOBI URLs.  No resolver infrastructure is
+   required.  A verifier dereferences each URL directly.  The OOBI for
+   kid returns the OP's KEL in application/cesr format.  The OOBI for
+   evd returns the dossier ACDC in application/cesr format.
+
+   Because the dossier SAID is globally unique and the dossier is highly
+   stable, verifiers SHOULD cache dossier validations keyed by the SAID.
+   Verifiers MAY cache key state keyed by the AID.  Freshness
+   requirements for revocation checking MUST be respected in both cases.
+   See [OVC] Section 5.2.
+
+12.  Verification
+
+   VVP verification follows the generic algorithm in [OVC] Section 5.1.
+   The following steps are VVP-specific instantiations of the steps that
+   OVC delegates to profiles:
+
+   *Step 2 (timing):* Use the replay tolerance and exp rules in
+   Section 7.
+
+   *Step 3 (channel binding):* For caller passports, confirm that orig
+   matches the originating telephone number in the SIP INVITE and that
+   dest matches the destination number.  For callee passports, confirm
+   that call-id and cseq match the corresponding values from the
+   preceding SIP INVITE and that iat is consistent with the timing of
+   the call.
+
+   *Step 10 (resource authorization):* Confirm that the dossier contains
+   a TNAlloc credential ([TOIP-DOSSIER]) that covers the originating
+   telephone number in orig.  For callee passports, confirm that the
+   dossier contains a TNAlloc credential for the destination telephone
+   number.  If the TNAlloc credential covers a number with a Do Not
+   Originate (DNO) flag, the credential MAY be used in callee-direction
+   passports but MUST NOT be cited in caller-direction passports.
+
+   All other steps proceed as defined in [OVC] Section 5.1.  VVP
+   implementations SHOULD implement caching as described in [OVC]
+   Section 5.2.  VVP implementations MAY perform historical analysis as
+   described in [OVC] Section 5.3.
+
+13.  Relationship to Existing Trust Mechanisms
+
+13.1.  SHAKEN
+
+   VVP and SHAKEN both use STIR PASSporTs in SIP signaling.  They
+   address different problems.  SHAKEN attests a service provider's
+   confidence level (A/B/C) in the caller's identity.  VVP provides
+   independently verifiable evidence that lets any party — including
+   parties outside SHAKEN's governance — draw their own conclusions.
+
+   The two mechanisms interoperate in two modes per [OVC] Section 9.2.
+
+   *Cascaded mode:* An OSP that has verified a VVP caller passport may
+   issue a SHAKEN passport with an A attestation.  The OSP's SHAKEN
+   certificate is referenced via x5u in the SHAKEN passport.  The OVC
+   evidence underlies the A attestation — the OSP's assertion that the
+   caller controls the number is now backed by a verifiable dossier
+   rather than unilateral judgment.  This is the primary deployment
+   model for VVP in SHAKEN ecosystems: VVP provides upstream assurance;
+   SHAKEN carries the result downstream in a form that existing
+   infrastructure understands.
+
+   *Foundation mode:* A VVP passport MAY include an x5u header pointing
+   to an X.509 certificate for the OP.  The x5u header does not change
+   OVC verification — key state from the AID's KEL is still required.
+   However, if the certificate is issued to the public key of the OP's
+   AID, the certificate-aware downstream ecosystem receives the full
+   weight of OVC evidence.  Foundation mode is useful when a transit
+   provider or analytics engine requires a certificate but the evidence
+   backing it should be OVC-grade.
+
+   *Scope:* SHAKEN is deployed primarily in North America.  VVP operates
+   without jurisdictional boundary.  The cascaded and foundation modes
+   allow VVP evidence originating anywhere in the world to be translated
+   into SHAKEN-compatible form at whatever ingress point SHAKEN
+   governance covers.  The reverse — SHAKEN evidence flowing into VVP —
+   is accomplished by incorporating a SHAKEN attestation credential into
+   the dossier via the foreign artifact bridge mechanism in
+   [TOIP-DOSSIER].
+
+13.2.  RCD and Branded Calling
+
+   The card field in a VVP passport carries brand attributes in VCard
+   [RFC6350] format.  These attributes are analogous to data in RCD
+   [RFC9796] and CTIA Branded Calling [CTIA-BCID] passports.
+
+   The difference is the evidence basis.  Brand attributes in a VVP
+   passport MUST be justified by a brand credential in the dossier.
+   They are not self-asserted and not solely dependent on a platform's
+   internal vetting.  A verifier that checks the dossier can trace the
+   brand right back to an authoritative registrar.
+
+   This creates a bridge to RCD.  An OSP or analytics engine that has
+   validated a VVP caller passport — including the brand credential in
+   the dossier — may issue a derivative RCD passport using the validated
+   brand data.  The VVP dossier provides the evidentiary foundation for
+   the RCD assertion.  Conversely, an RCD or CTIA-BCID vetting
+   credential may be incorporated into the dossier via the foreign
+   artifact wrapper mechanism in [TOIP-DOSSIER], providing additional
+   corroboration.
+
+   The call-reason field is included in VVP for RCD interoperability.
+   RCD passports include a call reason field; including the same data in
+   the VVP passport allows derivative RCD passports to preserve it.
+   Because call-reason is self-asserted and unverifiable, its use is
+   discouraged in VVP contexts where goal (which is verifiable) serves
+   the same purpose.
+
+13.3.  vCon
+
+   VVP passports MAY be attached to vCon conversation records to provide
+   permanent evidence of the identity assertions made during a recorded
+   call.  A vCon stir party attachment field is the natural location for
+   a caller passport.  Callee passports MAY be attached similarly.
+
+   As long as signatures over the vCon container assert truthfully that
+   the passport was verified at the time of attachment, all OVC
+   guarantees transfer without replay risk.  The dossier's SAID-keyed
+   stability means that validators examining the vCon record months or
+   years later can re-verify the full evidence graph as it existed at
+   the time of the call.
+
+   Generic guidance on vCon integration is in [OVC] Section 9.4.  Voice-
+   specific integration details — the stir vCon field semantics,
+   attachment format, and verification lifecycle — are TODO: reference
+   the vCon specification or define here once the relevant vCon
+   extension is stable.
+
+14.  Security Considerations
+
+   This section addresses attack surfaces specific to voice over SIP.
+   Generic security considerations for OVC citations — key management,
+   replay mitigation, delegation constraints, algorithm agility, and
+   quantum readiness — are in [OVC] Section 7.
+
+14.1.  SIP B2BUA Intermediaries
+
+   Session border controllers and back-to-back user agents (B2BUAs)
+   along the call route may strip, replace, or fail to forward the
+   Identity header.  An attacker controlling a B2BUA can suppress a VVP
+   passport entirely, downgrading the call to unverified.
+
+   VVP cannot prevent stripping, but it limits the damage.  If a
+   downstream verifier requires VVP verification and the passport is
+   absent, it can apply a configured policy — accept at reduced
+   assurance, challenge, or reject.  Verifiers SHOULD distinguish
+   between calls with no VVP passport and calls with an invalid VVP
+   passport.  The absence of a passport is a policy question; an invalid
+   passport is an integrity failure.
+
+   Deployments that require end-to-end VVP assurance SHOULD negotiate
+   passport preservation as a condition of peering agreements with
+   intermediaries.
+
+14.2.  TN Spoofing in SIP
+
+   VVP binds the originating telephone number orig to the OP's key state
+   and dossier.  A forger cannot produce a valid VVP passport for a
+   number they do not control without also controlling the AID in kid
+   and a dossier that proves authorization for that number.  This is a
+   substantially higher bar than SIP header manipulation alone.
+
+   However, VVP does not prevent an OP from constructing a valid
+   passport for a number they legitimately control while using a SIP
+   FROM header that contains a different number.  Verifiers MUST check
+   that the orig value in the passport matches the actual SIP FROM and
+   P-Asserted-Identity headers, not only that the passport is
+   cryptographically valid.
+
+14.3.  SRTP and Media Integrity
+
+   VVP secures SIP signaling.  It makes no assertions about the media
+   stream.  An attacker who hijacks the media path after INVITE
+   acceptance cannot be detected by VVP.  Media integrity, if required,
+   depends on SRTP or similar mechanisms outside the scope of this
+   specification.
+
+14.4.  Robocall Threat Model
+
+   VVP is designed to raise the cost of caller fraud.  A caller who
+   curates a dossier — acquiring vetting credentials from identity
+   vetters, TNAlloc credentials from number allocators, and brand
+   credentials from brand registrars — must interact with authoritative
+   parties that can report or revoke abusive actors.  The AID and KEL
+   create a non-repudiable, auditable record of the caller's actions.
+   Revocations propagate quickly and are detectable by watchers.
+
+   However, VVP does not prevent a legitimately vetted party from
+   misusing their authority (e.g., a vetted organization that
+   subsequently engages in fraud).  Revocation of the dossier or
+   individual credentials terminates the VVP assurance for future calls.
+   For ongoing monitoring, verifiers SHOULD configure freshness
+   thresholds for revocation checking that are appropriate to the risk
+   profile of the call population.
+
+14.5.  Key Compromise
+
+   OVC's use of AIDs with witnesses and prerotation makes VVP more
+   resilient to key compromise than certificate-based approaches.  A
+   compromised signing key can be rotated without replacing the AID or
+   the dossier.  Compromises are detectable via witness queries.  The
+   damage from a compromise is bounded to calls signed between
+   compromise and detection; historical calls are not retroactively
+   invalidated.
+
+   For the signing AID in kid, which is typically a delegated automation
+   key (not the AP's legal-entity AID), compromise is further bounded:
+   only calls from that specific SBC are affected, not calls from other
+   delegated parties of the same AP.
+
+15.  IANA Considerations
+
+15.1.  PASSporT Type Registration
+
+   This document requests IANA registration of the "vvp" PASSporT type
+   per [RFC8225]:
+
+   Type: vvp
+   Description: Verifiable Voice Protocol PASSporT
+   Specification: [this document]
+
+15.2.  SDP Attribute Registration
+
+   This document defines a new SDP [RFC8866] session-level attribute per
+   the registry in [RFC8866]:
+
+   Attribute name:      callee-passport
+   Long-form description: A STIR-compatible VVP passport citing a
+     dossier of evidence about the callee's identity, brand, and
+     related attributes. Placed in 200 OK (and optionally 180
+     Ringing) responses to a SIP INVITE.
+   Type of attribute:   session-level
+   Subject to charset:  No
+   Syntax:              callee-passport: <compact-jwt>;type=vvp
+   Reference:           [this document]
+
+15.3.  Content Type
+
+   This specification depends on OOBIs ([TOIP-KERI]) being served as web
+   resources with IANA content type application/cesr.
+
+16.  References
+
+16.1.  Normative References
+
+   [OVC]      Hardman, D. and Trust Over IP Foundation, "Open Verifiable
+              Communications (OVC)", 2025,
+              <https://trustoverip.github.io/kswg-ovc-specification/>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC3261]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
+              A., Peterson, J., Sparks, R., Handley, M., and E.
+              Schooler, "SIP: Session Initiation Protocol", RFC 3261,
+              DOI 10.17487/RFC3261, June 2002,
+              <https://www.rfc-editor.org/rfc/rfc3261>.
+
+   [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
+              (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
+              <https://www.rfc-editor.org/rfc/rfc7519>.
+
+   [RFC8032]  Josefsson, S. and I. Liusvaara, "Edwards-Curve Digital
+              Signature Algorithm (EdDSA)", RFC 8032,
+              DOI 10.17487/RFC8032, January 2017,
+              <https://www.rfc-editor.org/rfc/rfc8032>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8224]  Peterson, J., Jennings, C., Rescorla, E., and C. Wendt,
+              "Authenticated Identity Management in the Session
+              Initiation Protocol (SIP)", RFC 8224,
+              DOI 10.17487/RFC8224, February 2018,
+              <https://www.rfc-editor.org/rfc/rfc8224>.
+
+   [RFC8225]  Wendt, C. and J. Peterson, "PASSporT: Personal Assertion
+              Token", RFC 8225, DOI 10.17487/RFC8225, February 2018,
+              <https://www.rfc-editor.org/rfc/rfc8225>.
+
+   [RFC8588]  Wendt, C. and M. Barnes, "Personal Assertion Token
+              (PaSSporT) Extension for Signature-based Handling of
+              Asserted information using toKENs (SHAKEN)", RFC 8588,
+              DOI 10.17487/RFC8588, May 2019,
+              <https://www.rfc-editor.org/rfc/rfc8588>.
+
+   [RFC8866]  Begen, A., Kyzivat, P., Perkins, C., and M. Handley, "SDP:
+              Session Description Protocol", RFC 8866,
+              DOI 10.17487/RFC8866, January 2021,
+              <https://www.rfc-editor.org/rfc/rfc8866>.
+
+   [TOIP-ACDC]
+              Smith, S., Feairheller, P., Griffin, K., Ed., and Trust
+              Over IP Foundation, "Authentic Chained Data Containers
+              (ACDC)", November 2023,
+              <https://trustoverip.github.io/tswg-acdc-specification/>.
+
+   [TOIP-CESR]
+              Smith, S., Griffin, K., Ed., and Trust Over IP Foundation,
+              "Composable Event Streaming Representation (CESR)",
+              November 2023,
+              <https://trustoverip.github.io/tswg-cesr-specification/>.
+
+   [TOIP-DOSSIER]
+              Hardman, D., "Verifiable Dossiers", September 2025,
+              <https://trustoverip.github.io/kswg-dossier-
+              specification/>.
+
+   [TOIP-KERI]
+              Smith, S., Griffin, K., Ed., and Trust Over IP Foundation,
+              "Key Event Receipt Infrastructure (KERI)", January 2024,
+              <https://trustoverip.github.io/tswg-keri-specification/>.
+
+16.2.  Informative References
+
+   [ARIES-RFC-0519]
+              Hardman, D., "Aries RFC 0519: Goal Codes", April 2021,
+              <https://github.com/hyperledger/aries-rfcs/blob/main/
+              concepts/0519-goal-codes/README.md>.
+
+   [CTIA-BCID]
+              CTIA, "Branded Calling ID Best Practices", November 2022,
+              <https://api.ctia.org/wp-content/uploads/2022/11/Branded-
+              Calling-Best-Practices.pdf>.
+
+   [FN-DSA]   NIST, "FIPS 206: FN-DSA (Falcon)", September 2025,
+              <https://csrc.nist.gov/presentations/2025/fips-206-fn-dsa-
+              falcon>.
+
+   [RFC4353]  Rosenberg, J., "A Framework for Conferencing with the
+              Session Initiation Protocol (SIP)", RFC 4353,
+              DOI 10.17487/RFC4353, February 2006,
+              <https://www.rfc-editor.org/rfc/rfc4353>.
+
+   [RFC4575]  Rosenberg, J., Schulzrinne, H., and O. Levin, Ed., "A
+              Session Initiation Protocol (SIP) Event Package for
+              Conference State", RFC 4575, DOI 10.17487/RFC4575, August
+              2006, <https://www.rfc-editor.org/rfc/rfc4575>.
+
+   [RFC5626]  Jennings, C., Ed., Mahy, R., Ed., and F. Audet, Ed.,
+              "Managing Client-Initiated Connections in the Session
+              Initiation Protocol (SIP)", RFC 5626,
+              DOI 10.17487/RFC5626, October 2009,
+              <https://www.rfc-editor.org/rfc/rfc5626>.
+
+   [RFC6350]  Perreault, S., "vCard Format Specification", RFC 6350,
+              DOI 10.17487/RFC6350, August 2011,
+              <https://www.rfc-editor.org/rfc/rfc6350>.
+
+   [RFC9796]  Wendt, C. and J. Peterson, "SIP Call-Info Parameters for
+              Rich Call Data", RFC 9796, DOI 10.17487/RFC9796, July
+              2025, <https://www.rfc-editor.org/rfc/rfc9796>.
+
+Acknowledgments
+
+   Much of the cybersecurity infrastructure used by VVP depends on KERI,
+   which was invented by Sam Smith, and first implemented by Sam plus
+   Phil Feairheller, Kevin Griffin, and other technical staff at GLEIF.
+   Thanks to logistical support from Trust Over IP and the Linux
+   Foundation, and to a diverse community of technical experts in those
+   communities and in the Web of Trust group.
+
+   Techniques that apply KERI to telco use cases were developed by
+   Daniel Hardman, Randy Warshaw, and Ruth Choueka, with additional
+   contributions from Dmitrii Tychinin, Yaroslav Lazarev, Arshdeep
+   Singh, and many other staff members at Provenant, Inc. Thanks as well
+   to Ed Eykholt for multiple editorial improvements, and to Sam Smith
+   and Kevin Griffin for ongoing collaboration on the OVC framework.
+
+Author's Address
+
+   Daniel Hardman
+   Provenant, Inc
+   Email: daniel.hardman@gmail.com
