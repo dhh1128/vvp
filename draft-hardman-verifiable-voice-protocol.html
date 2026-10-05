@@ -1252,7 +1252,10 @@ svg {
             <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1304,7 +1307,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-overview">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-overview" class="section-name selfRef">Overview</a>
       </h2>
-<p id="section-3-1">Fundamentally, VVP requires identified parties (callers and/or callees) to curate a dossier (<span>[<a href="#TOIP-DOSSIER" class="cite xref">TOIP-DOSSIER</a>]</span>) of stable evidence that proves things about them. This is done once or occasionally, in advance, as a configuration precondition. Then, for each call, participants decide whether to share this evidence. Callers share evidence by creating an ephemeral STIR-compatible VVP PASSporT (<span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span>) that cites (<a href="#citing" class="auto internal xref">4</a>) their preconfigured dossier. This passport travels along the delivery route as an <code>Identity</code> header in a SIP INVITE. Callees share evidence by sending an analogous passport back to the caller, preferably as an <code>Identity</code> header in a mid-dialog request (<span>[<a href="#RFC4916" class="cite xref">RFC4916</a>]</span>), and optionally as an attribute line in the SDP <span>[<a href="#RFC8866" class="cite xref">RFC8866</a>]</span> body of their SIP response. This passes a signed citation to their dossier in the other direction. Verifiers anywhere along the route check the citation(s) and corresponding dossier(s), including realtime revocation status, to make decisions (<a href="#verifying" class="auto internal xref">5</a>).<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">Fundamentally, VVP requires identified parties (callers and/or callees) to curate a dossier (<span>[<a href="#TOIP-DOSSIER" class="cite xref">TOIP-DOSSIER</a>]</span>) of stable evidence that proves things about them. This is done once or occasionally, in advance, as a configuration precondition. Then, for each call, participants decide whether to share this evidence. Callers share evidence by creating an ephemeral STIR-compatible VVP PASSporT (<span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span>) that cites (<a href="#citing" class="auto internal xref">Section 4</a>) their preconfigured dossier. This passport travels along the delivery route as an <code>Identity</code> header in a SIP INVITE. Callees share evidence by sending an analogous passport back to the caller, preferably as an <code>Identity</code> header in a mid-dialog request (<span>[<a href="#RFC4916" class="cite xref">RFC4916</a>]</span>), and optionally as an attribute line in the SDP <span>[<a href="#RFC8866" class="cite xref">RFC8866</a>]</span> body of their SIP response. This passes a signed citation to their dossier in the other direction. Verifiers anywhere along the route check the citation(s) and corresponding dossier(s), including realtime revocation status, to make decisions (<a href="#verifying" class="auto internal xref">Section 5</a>).<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">A VVP call may carry assurance in either or both directions. Compliant implementations may choose to support only assurance about the caller, only assurance about the callee, or both.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="roles">
 <section id="section-3.1">
@@ -1393,7 +1396,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-citing-the-aps-dossier">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-citing-the-aps-dossier" class="section-name selfRef">Citing the AP's dossier</a>
         </h3>
-<p id="section-4.1-1">A VVP call that makes the caller verifiable begins when the OP (<a href="#OP" class="auto internal xref">3.1.2</a>) generates a new VVP passport <span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span> that complies with STIR <span>[<a href="#RFC8224" class="cite xref">RFC8224</a>]</span> requirements. In its compact-serialized JWT <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> form, this passport is then passed as an <code>Identity</code> header in a SIP INVITE <span>[<a href="#RFC3261" class="cite xref">RFC3261</a>]</span>. The passport <em>constitutes</em> lightweight, direct, and ephemeral evidence; it <em>cites</em> and therefore depends upon comprehensive, indirect, and long-lived evidence (the AP's dossier). Safely and efficiently citing stronger evidence in a dossier is one way that VVP differs from alternatives.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">A VVP call that makes the caller verifiable begins when the OP (<a href="#OP" class="auto internal xref">Section 3.1.2</a>) generates a new VVP passport <span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span> that complies with STIR <span>[<a href="#RFC8224" class="cite xref">RFC8224</a>]</span> requirements. In its compact-serialized JWT <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> form, this passport is then passed as an <code>Identity</code> header in a SIP INVITE <span>[<a href="#RFC3261" class="cite xref">RFC3261</a>]</span>. The passport <em>constitutes</em> lightweight, direct, and ephemeral evidence; it <em>cites</em> and therefore depends upon comprehensive, indirect, and long-lived evidence (the AP's dossier). Safely and efficiently citing stronger evidence in a dossier is one way that VVP differs from alternatives.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <div id="questions-answered-by-an-aps-passport">
 <section id="section-4.1.1">
           <h4 id="name-questions-answered-by-an-ap">
@@ -1477,7 +1480,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
               <p id="section-4.1.2-4.3.1"><code>ppt</code> <em>(required)</em> Per <span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span>, <span class="bcp14">MUST</span> identify the specific PASSporT type -- in this case, "vvp".<a href="#section-4.1.2-4.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.4">
-              <p id="section-4.1.2-4.4.1"><code>kid</code> <em>(required)</em> <span class="bcp14">MUST</span> be the OOBI of an AID (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>) controlled by the OP (<a href="#OP" class="auto internal xref">3.1.2</a>). An OOBI is a special URL that facilitates ACDC's viral discoverability goals. It returns IANA content-type <code>application/json+cesr</code>, which provides some important security guarantees. The content for this particular OOBI <span class="bcp14">MUST</span> be a KEL (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>). Typically the AID in question does not identify the OP as a legal entity, but rather software running on or invoked by the SBC operated by the OP. (The AID that identifies the OP as a legal entity may be controlled by a multisig scheme and thus require multiple humans to create a signature. The AID for <code>kid</code> <span class="bcp14">MUST</span> be single-sig and, in the common case where it is not the legal entity AID, <span class="bcp14">MUST</span> have a delegate relationship with the legal entity AID that's proved through formal evidence.)<a href="#section-4.1.2-4.4.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.2-4.4.1"><code>kid</code> <em>(required)</em> <span class="bcp14">MUST</span> be the OOBI of an AID (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>) controlled by the OP (<a href="#OP" class="auto internal xref">Section 3.1.2</a>). An OOBI is a special URL that facilitates ACDC's viral discoverability goals. It returns IANA content-type <code>application/json+cesr</code>, which provides some important security guarantees. The content for this particular OOBI <span class="bcp14">MUST</span> be a KEL (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>). Typically the AID in question does not identify the OP as a legal entity, but rather software running on or invoked by the SBC operated by the OP. (The AID that identifies the OP as a legal entity may be controlled by a multisig scheme and thus require multiple humans to create a signature. The AID for <code>kid</code> <span class="bcp14">MUST</span> be single-sig and, in the common case where it is not the legal entity AID, <span class="bcp14">MUST</span> have a delegate relationship with the legal entity AID that's proved through formal evidence.)<a href="#section-4.1.2-4.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.2-4.5">
               <p id="section-4.1.2-4.5.1"><code>orig</code> <em>(required)</em> Although VVP does not depend on SHAKEN, the format of this field <span class="bcp14">MUST</span> conform to SHAKEN requirements (<span>[<a href="#RFC8588" class="cite xref">RFC8588</a>]</span>), for interoperability reasons. It <span class="bcp14">MUST</span> also satisfy one additional constraint, which is that only one phone number is allowed. Despite the fact that a containing SIP INVITE may allow multiple originating phone numbers, only one can be tied to evidence evaluated by verifiers.<a href="#section-4.1.2-4.5.1" class="pilcrow">¶</a></p>
@@ -1581,7 +1584,7 @@ Validation also includes comparing data structure and values against the declare
               <p id="section-5.1.1-2.10.1">Assuming that the dossier is valid and has no breakages due to revocation, confirm that the OP is authorized to sign the passport. If there is no delegation evidence, the AP and the OP <span class="bcp14">MUST</span> be identical, and the OP <span class="bcp14">MUST</span> be the issuee of the identity credential; otherwise, the OP <span class="bcp14">MUST</span> be the issuee of a delegated signing credential for which the issuer is the AP.<a href="#section-5.1.1-2.10.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-5.1.1-2.11">
-              <p id="section-5.1.1-2.11.1">Extract the <code>orig</code> field and compare it to the TNAlloc credential cited in the dossier to confirm that the AP (<a href="#AP" class="auto internal xref">3.1.3</a>) -- or, if OP is not equal to AP and OP is using their own number, the OP (<a href="#OP" class="auto internal xref">3.1.2</a>) -- has the right to originate calls with this number.<a href="#section-5.1.1-2.11.1" class="pilcrow">¶</a></p>
+              <p id="section-5.1.1-2.11.1">Extract the <code>orig</code> field and compare it to the TNAlloc credential cited in the dossier to confirm that the AP (<a href="#AP" class="auto internal xref">Section 3.1.3</a>) -- or, if OP is not equal to AP and OP is using their own number, the OP (<a href="#OP" class="auto internal xref">Section 3.1.2</a>) -- has the right to originate calls with this number.<a href="#section-5.1.1-2.11.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-5.1.1-2.12">
               <p id="section-5.1.1-2.12.1">If the passport includes non-null values for the optional <code>card</code> claim, extract that information and check that the brand attributes claimed for the call are justified by a brand credential in the dossier.<a href="#section-5.1.1-2.12.1" class="pilcrow">¶</a></p>
@@ -1937,11 +1940,26 @@ Validation also includes comparing data structure and values against the declare
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">Much of the cybersecurity infrastructure used by VVP depends on KERI, which was invented by Sam Smith, and first implemented by Sam plus Phil Feairheller, Kevin Griffin, and other technical staff at GLEIF. Thanks to logistical support from Trust Over IP and the Linux Foundation, and to a diverse community of technical experts in those communities and in the Web of Trust group.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">Techniques that apply KERI to telco use cases were developed by Daniel Hardman, Randy Warshaw, and Ruth Choueka, with additional contributions from Dmitrii Tychinin, Yaroslav Lazarev, Arshdeep Singh, and many other staff members at Provenant, Inc. Thanks as well to Ed Eykholt for multiple editorial improvements, and to Victor Davidenko for feedback on SDP fragility, OOBI dereferencing, and toll fraud through compromised originators.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">Techniques that apply KERI to telco use cases were developed by Daniel Hardman, Randy Warshaw, and Ruth Choueka, with additional contributions from Dmitrii Tychinin, Yaroslav Lazarev, Arshdeep Singh, and many other staff members at Provenant, Inc. Thanks as well to Ed Eykholt for multiple editorial improvements.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="contributors">
+<section id="appendix-B">
+      <h2 id="name-contributors">
+<a href="#name-contributors" class="section-name selfRef">Contributors</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Victor Davidenko</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:victor@scarpprotocol.com" class="email">victor@scarpprotocol.com</a>
+</div>
+</address>
+<p id="appendix-B-1">Feedback on SDP fragility, OOBI dereferencing, and toll fraud through compromised originators.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-B">
+<section id="appendix-C">
       <h2 id="name-authors-address">
 <a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
       </h2>
