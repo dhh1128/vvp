@@ -6,6 +6,11 @@
 
 3. `$ make next`
 
+    Then strip the `<?line N?>` processing instructions that kramdown-rfc always emits (idnits warns about them), and check the result locally with the same idnits the datatracker runs:
+
+    `$ perl -0pi -e 's/<\?line -?\d+\?>\n?//g' versioned/draft-hardman-verifiable-voice-protocol-NN.xml`<br>
+    `$ npx -y @ietf-tools/idnits --mode submission versioned/draft-hardman-verifiable-voice-protocol-NN.xml`
+
 4. [Submit the .xml file](https://datatracker.ietf.org/submit/) that was produced in the versioned folder (NOT the .txt file).
 
 5. Tag the repository so the next run of `make next` will increment the version. The tag you should use is the full draft name including a revision number. Something like this:
