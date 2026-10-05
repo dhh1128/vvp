@@ -32,6 +32,12 @@ author:
     organization: Provenant, Inc
     email: "daniel.hardman@gmail.com"
 
+contributor:
+ -
+    fullname: "Victor Davidenko"
+    email: "victor@scarpprotocol.com"
+    contribution: "Feedback on SDP fragility, OOBI dereferencing, and toll fraud through compromised originators."
+
 normative:
   RFC3261:
   RFC3311:
@@ -410,4 +416,4 @@ This specification also depends on OOBIs ({{TOIP-KERI}}) being served as web res
 
 Much of the cybersecurity infrastructure used by VVP depends on KERI, which was invented by Sam Smith, and first implemented by Sam plus Phil Feairheller, Kevin Griffin, and other technical staff at GLEIF. Thanks to logistical support from Trust Over IP and the Linux Foundation, and to a diverse community of technical experts in those communities and in the Web of Trust group.
 
-Techniques that apply KERI to telco use cases were developed by Daniel Hardman, Randy Warshaw, and Ruth Choueka, with additional contributions from Dmitrii Tychinin, Yaroslav Lazarev, Arshdeep Singh, and many other staff members at Provenant, Inc. Thanks as well to Ed Eykholt for multiple editorial improvements, and to Victor Davidenko for feedback on SDP fragility, OOBI dereferencing, and toll fraud through compromised originators.
+Techniques that apply KERI to telco use cases were developed by Daniel Hardman, Randy Warshaw, and Ruth Choueka, with additional contributions from Dmitrii Tychinin, Yaroslav Lazarev, Arshdeep Singh, and many other staff members at Provenant, Inc. Thanks as well to Ed Eykholt for multiple editorial improvements.
