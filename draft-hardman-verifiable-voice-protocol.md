@@ -34,7 +34,9 @@ author:
 
 normative:
   RFC3261:
+  RFC3311:
   RFC4575:
+  RFC4916:
   RFC5626:
   RFC8032:
   RFC8224:
@@ -137,7 +139,7 @@ VVP solves these problems by applying crucial innovations in evidence scope, evi
 
 # Overview
 
-Fundamentally, VVP requires identified parties (callers and/or callees) to curate a dossier ({{TOIP-DOSSIER}}) of stable evidence that proves things about them. This is done once or occasionally, in advance, as a configuration precondition. Then, for each call, participants decide whether to share this evidence. Callers share evidence by creating an ephemeral STIR-compatible VVP PASSporT ({{RFC8225}}) that cites ({{<citing}}) their preconfigured dossier. This passport travels along the delivery route as an `Identity` header in a SIP INVITE. Callees share evidence by adding an analogous passport to an attribute line in the SDP {{RFC8866}} body of their SIP response. This passes a signed citation to their dossier in the other direction. Verifiers anywhere along the route check the citation(s) and corresponding dossier(s), including realtime revocation status, to make decisions ({{<verifying}}).
+Fundamentally, VVP requires identified parties (callers and/or callees) to curate a dossier ({{TOIP-DOSSIER}}) of stable evidence that proves things about them. This is done once or occasionally, in advance, as a configuration precondition. Then, for each call, participants decide whether to share this evidence. Callers share evidence by creating an ephemeral STIR-compatible VVP PASSporT ({{RFC8225}}) that cites ({{<citing}}) their preconfigured dossier. This passport travels along the delivery route as an `Identity` header in a SIP INVITE. Callees share evidence by sending an analogous passport back to the caller, preferably as an `Identity` header in a mid-dialog request ({{RFC4916}}), and optionally as an attribute line in the SDP {{RFC8866}} body of their SIP response. This passes a signed citation to their dossier in the other direction. Verifiers anywhere along the route check the citation(s) and corresponding dossier(s), including realtime revocation status, to make decisions ({{<verifying}}).
 
 A VVP call may carry assurance in either or both directions. Compliant implementations may choose to support only assurance about the caller, only assurance about the callee, or both.
 
@@ -252,12 +254,16 @@ The semantics of the fields are:
 * `exp` *(required)* Follows standard JWT semantics. As this sets a window for potential replay attacks between the same two phone numbers, a recommended expiration SHOULD be 15 seconds (just long enough for an INVITE to be routed and trigger ringing on a handset), and MUST NOT exceed 60 seconds.
 * `jti` *(optional)* Follows standard JWT semantics.
 
-## Citing a callee's dossier
+## Citing a callee's dossier {#callee-citing}
 Optionally, evidence in VVP can also flow from callee to caller. For privacy reasons, individuals who receive phone calls may choose not to use VVP in this way. However, enterprises and call centers may find it useful as a reassurance to their customers about who they've reached.
 
 In such cases, the callee must have curated a dossier. The format of the callee dossier is identical in schema to that used by a caller. It may therefore introduce evidence of the callee's legal identity, right to use a brand, right to use a TN, delegated authority to a call center proxy or an AI, and so forth. (A callee's dossier might differ in one minor way that doesn't affect the schema: it could prove the right to use a TN that has a DNO flag.)
 
-A reference to the callee's dossier is conveyed by adding a special `a=callee-passport:X` attribute line to the SDP {{RFC8866}} body of the callee's `200 OK` response. (Optionally, the lines MAY also be added to a `180 Ringing` response, to make the callee verifiable earlier, but it MUST appear on the `200 OK` response.) The value of this line is a JWT in compact form, with the `;type=vvp` suffix. This is exactly compliant with the format used by callers to convey VVP passports in `Identity` headers. However, `Identity` headers are not used for callees because existing SIP tooling does not expect or preserve `Identity` headers on responses. Furthermore, the identity of a callee is primarily of interest to the caller, who is willing to parse the SDP body; it does not need the same full-route auditability as the identity of a caller.
+A callee's passport cannot travel in an `Identity` header on a SIP response, because existing SIP tooling does not expect or preserve `Identity` headers on responses. Instead, the callee SHOULD convey its passport in an `Identity` header ({{RFC8224}}) on a request that it initiates within the dialog, following the connected-identity model of {{RFC4916}}. Normally this is an UPDATE ({{RFC3311}}) sent after the callee has sent its `200 OK` and received the ACK. Per {{RFC4916}}, a re-INVITE MAY be used instead when the caller does not support UPDATE, and an UPDATE MAY be sent on an early dialog to make the callee verifiable before the call is answered. Requests are handled by intermediaries the same way as a caller's INVITE, so the passport has the same chance of surviving the route as a caller's passport does.
+
+The callee MAY also, or instead, add a special `a=callee-passport:X` attribute line to the SDP {{RFC8866}} body of its `200 OK` response, and optionally of a `180 Ringing` response. The value of this line is a JWT in compact form, with the `;type=vvp` suffix -- exactly the format used to convey VVP passports in `Identity` headers. This option requires no additional request, but it is fragile: session border controllers and B2BUAs regenerate SDP at most enterprise and carrier boundaries, and will usually drop the attribute. It is therefore suitable mainly where the path between caller and callee is known to preserve SDP. A callee that uses the SDP attribute without the request SHOULD place it in the `200 OK`.
+
+If the passport arrives by both routes, the two MUST be identical. A caller that receives no callee passport by either route treats the callee as unverified (see {{outcomes}}).
 
 Although dossiers are identical in either direction, the callee JWT has a slightly different schema than a caller's VVP passport. The headers of the JWT match, but `kid` contains the OOBI of the callee, not of the OP. Two new claims are added to the JWT payload: `call-id` and `cseq`. These MUST contain the values of the `Call-ID` and `CSeq` values on the preceding SIP INVITE. The `iat` claim MUST also be present and MUST contain a value from the system clock of the callee. The `exp` field MAY also be present and use a value chosen by the callee; if it is missing, this communicates the callee's intention to impose no new timeout logic on the call. The `evd` field MUST also be present, and MUST contain the OOBI of the callee's dossier. The `card` and `goal` claims are also allowed. Other claims MAY be present, but MUST be ignored by compliant implementations that do not understand them. (Because the callee references the specific SIP dialog via `call-id` and `cseq`, there is no point in repeating fields that describe the dialog, like `orig`, `dest`, and so forth.)
 
@@ -285,13 +291,13 @@ When a verifier encounters a VVP passport, they SHOULD verify by using an algori
 6. Assuming that the dossier is valid and has no breakages due to revocation, confirm that the OP is authorized to sign the passport. If there is no delegation evidence, the AP and the OP MUST be identical, and the OP MUST be the issuee of the identity credential; otherwise, the OP MUST be the issuee of a delegated signing credential for which the issuer is the AP.
 7. Extract the `orig` field and compare it to the TNAlloc credential cited in the dossier to confirm that the AP ({{<AP}}) -- or, if OP is not equal to AP and OP is using their own number, the OP ({{<OP}}) -- has the right to originate calls with this number.
 8. If the passport includes non-null values for the optional `card` claim, extract that information and check that the brand attributes claimed for the call are justified by a brand credential in the dossier.
-9. Check any business logic. For example, if the passport includes a non-null value for the optional `goal` claim, confirm that the verifier is willing to accept a call with that goal. Or, if the delegated signer credential says that the OP can only call on behalf of the AP during certain hours, or in certain geos, check those attributes of the call.
+9. Check any business logic. For example, if the passport includes a non-null value for the optional `goal` claim, confirm that the verifier is willing to accept a call with that goal. Or, if the delegated signer credential says that the OP can only call on behalf of the AP during certain hours, in certain geos, to certain destinations (e.g., country codes or number prefixes, checked against `dest`), or at no more than a certain rate, check those attributes of the call. (A rate constraint cannot be evaluated from a single call; it is checkable only by a verifier that observes many calls signed by the same `kid`, and by the OP itself before signing. See {{compromised-op}}.)
 
 ## Verifying the callee
 
 The callee is verified with an algorithm that MAY be optimized but MUST achieve the same security guarantees as this:
 
-1. Confirm that the `call-id` and `cseq` claims match the values of `Call-ID` and `CSeq` from the preceding SIP INVITE.
+1. Confirm that the `call-id` and `cseq` claims match the values of `Call-ID` and `CSeq` from the preceding SIP INVITE. If the passport arrived in a request such as UPDATE, also confirm that the request belongs to the same dialog.
 1. Confirm that the `iat` claim matches contextual observations and other SIP metadata. That is, the timing described by the callee appears aligned with what is known about the call from external sources.
 1. If the `exp` claim is present, analyze the `iat` and `exp` claims to evaluate timeout.
 1. Extract the `kid` header.
@@ -305,6 +311,25 @@ The callee is verified with an algorithm that MAY be optimized but MUST achieve 
 7. Compare the callee's TN to the TNAlloc credential cited in the dossier to confirm that the callee has the right to accept calls at this number.
 8. If the passport includes non-null values for the optional `card` claim, extract that information and check that the brand attributes claimed for the call are justified by a brand credential in the dossier.
 9. Check any business logic. For example, if the passport includes a non-null value for the optional `goal` claim, and the preceding INVITE included a VVP passport that also declared a goal, confirm that the callee's and caller's goals overlap (one must be a subset of the other). Or, if the delegated signer credential says that a call center or an AI can accept calls during certain hours, or in certain geos, check those attributes of the call.
+
+## Verification outcomes {#outcomes}
+A verifier MUST classify the result of examining a call, in each direction where it looks for evidence, as exactly one of the following:
+
+verified:
+: A VVP passport was present, and every step of the applicable algorithm succeeded.
+
+absent:
+: No VVP passport was present. Either the party did not provide one, or an intermediary removed it. Absence is a policy question, not an integrity failure; the verifier MAY accept the call at reduced assurance, challenge it, or reject it, according to local policy.
+
+failed:
+: A VVP passport was present, and at least one step of the algorithm definitively failed: the passport was malformed or stale, the channel binding did not match, the signature was invalid, the dossier was invalid or revoked, the OP was not authorized, the TN or brand was not justified, or a constraint in a delegation credential was violated. A failed passport MUST NOT be treated more favorably than an absent one.
+
+indeterminate:
+: A VVP passport was present, but verification could not be completed -- for example, because an OOBI or the dossier could not be fetched within the verifier's time budget, or because revocation status could not be refreshed to meet the verifier's freshness requirements. An indeterminate result MUST NOT be reported as verified. It SHOULD NOT be reported as failed, because its usual cause is network conditions rather than forgery. A verifier MAY let the call proceed while it completes verification asynchronously, and act on or record the eventual result.
+
+A verifier MAY additionally report which steps succeeded before verification stopped (for example, a valid signature from the OP, but a dossier that could not be fetched).
+
+When a verification service rejects a request because of a VVP passport, it SHOULD use the response codes of {{RFC8224}}, Section 6.2.2: 403 with the reason phrase "Stale Date" when `iat` falls outside its replay tolerance; 436 "Bad Identity Info" for an indeterminate result caused by inability to dereference `kid` or `evd`; 437 "Unsupported Credential" when it does not support the signing algorithm; and 438 "Invalid Identity Header" for other failures. As {{RFC8224}} notes, intermediaries often forward a call with an annotation rather than reject it. Because a callee passport conveyed in UPDATE arrives after the call is established, rejecting that UPDATE does not end the call; a caller that wishes to end a call whose callee failed verification does so with BYE.
 
 ## Planning for efficiency
 A complete verification of either caller or callee passport, from scratch, is quite rigorous. With no caches, it may take several seconds, much like a thorough validation of a certificate chain. However, much VVP evidence is stable for long periods of time and lends itself to caching, subject to the proviso that revocation freshness must be managed wisely. Since the same dossier is used to add assurance to many calls -- perhaps thousands or millions of calls, for busy call centers -- and many dossiers will reference the same issuers and issuees and their associated key states and KELs ({{TOIP-KERI}}), caching will produce huge benefits.
@@ -345,6 +370,27 @@ Generally understood best practices in cybersecurity will avoid many of these pr
 
 4. Watchers SHOULD propagate events to local caches with a low latency, and MUST provide information that allows verifiers to decide whether that latency meets their freshness requirements.
 
+## Intermediaries that modify signaling
+SBCs and B2BUAs along the call route may strip or fail to forward `Identity` headers, and commonly regenerate SDP bodies. An attacker who controls such an intermediary can suppress a VVP passport, downgrading the call from verified (or failed) to absent. VVP cannot prevent this, but the distinction between absent and failed outcomes ({{outcomes}}) means that suppression can only lower assurance; it cannot make a forged passport verify. Deployments that need end-to-end VVP assurance SHOULD make preservation of `Identity` headers a condition of their interconnect agreements. Callees SHOULD prefer the request-based transport described in {{callee-citing}} over the SDP attribute for the same reason.
+
+## Dereferencing OOBIs
+The `kid` and `evd` values of a passport are URLs chosen by whoever built the passport, and a verifier dereferences them before it knows whether the passport is genuine. A verifier that fetches them naively, on every call, exposes itself and others to several attacks:
+
+* Server-side request forgery. A passport can point `kid` or `evd` at an internal service on the verifier's network. Verifiers MUST only dereference `https` URLs, and MUST refuse to connect to loopback, link-local, and private address ranges (checked after DNS resolution, and again after any redirect) unless local policy explicitly allows a particular internal host. Verifiers SHOULD limit the number of redirects they follow, the size of responses they accept, and the time they spend on each fetch.
+* Reflection and amplification. An attacker can place many calls whose passports point at a victim's web server, so that verifiers along the route generate traffic against it. Verifiers SHOULD rate-limit fetches per host, and SHOULD cache failed fetches for a short period so that repeated calls citing the same unreachable URL do not each trigger a new fetch.
+* Delay. A verifier with a cold cache may need several seconds to fetch and validate a dossier, and an attacker can choose a slow server deliberately. Verifiers SHOULD set a time budget for fetching during call setup. If the budget is exhausted, the outcome is indeterminate ({{outcomes}}), and the verifier MAY complete verification asynchronously. Because dossiers are cached by SAID and are reused across many calls, this cost falls mostly on the first call that cites a given dossier; verifiers MAY also prefetch dossiers for frequent callers.
+
+Content fetched from an OOBI is self-certifying: a KEL is verified against the AID it claims to describe, and a dossier against its SAID. A malicious server can therefore cause delay or failure, but cannot cause forged evidence to verify.
+
+## Compromised legitimate originator {#compromised-op}
+A common form of toll fraud does not rely on a fake system. Instead, the attacker takes over a genuine PBX or SBC and routes calls through it -- often in from outside and straight back out, to premium-rate or international destinations. The outbound call then carries the real identity of the compromised system. If that system is a VVP OP, its key signs the fraudulent passports, and they verify.
+
+Key rotation does not address this, because the attacker uses the system to sign rather than stealing the key. VVP limits the damage in other ways, and OPs and APs SHOULD use them:
+
+* Delegated signer credentials SHOULD constrain the OP to the destinations it legitimately needs (for example, by country code or number prefix) and to a maximum call rate, in addition to any time-of-day and geographic constraints. Verifiers check destination constraints against `dest` on every call. Rate constraints can be checked by any verifier that observes aggregate traffic for a given `kid`, such as a TSP.
+* An OP SHOULD apply its own outbound policy before signing, refusing to sign passports for calls that its delegation would not authorize, rather than relying on downstream verifiers to catch them.
+* Each SBC or signing service SHOULD have its own AID, so that a compromise affects only the calls that pass through that service. When a compromise is detected, revoking that service's delegated signer credential stops further passports from verifying, without disturbing the AP's other delegates.
+
 # IANA Considerations
 
 This document defines a new SDP {{RFC8866}} session-level attribute:
@@ -362,6 +408,6 @@ This specification also depends on OOBIs ({{TOIP-KERI}}) being served as web res
 # Acknowledgments
 {:numbered="false"}
 
-Much of the cybersecurity infrastructure used by VVP depends on KERI, which was invented by Sam Smith, and first implemented by Sam plus Phil Fairheller, Kevin Griffin, and other technical staff at GLEIF. Thanks to logistical support from Trust Over IP and the Linux Foundation, and to a diverse community of technical experts in those communities and in the Web of Trust group.
+Much of the cybersecurity infrastructure used by VVP depends on KERI, which was invented by Sam Smith, and first implemented by Sam plus Phil Feairheller, Kevin Griffin, and other technical staff at GLEIF. Thanks to logistical support from Trust Over IP and the Linux Foundation, and to a diverse community of technical experts in those communities and in the Web of Trust group.
 
-Techniques that apply KERI to telco use cases were developed by Daniel Hardman, Randy Warshaw, and Ruth Choueka, with additional contributions from Dmitrii Tychinin, Yaroslav Lazarev, Arshdeep Singh, and many other staff members at Provenant, Inc. Thanks as well to Ed Eykholt for multiple editorial improvements.
+Techniques that apply KERI to telco use cases were developed by Daniel Hardman, Randy Warshaw, and Ruth Choueka, with additional contributions from Dmitrii Tychinin, Yaroslav Lazarev, Arshdeep Singh, and many other staff members at Provenant, Inc. Thanks as well to Ed Eykholt for multiple editorial improvements, and to Victor Davidenko for feedback on SDP fragility, OOBI dereferencing, and toll fraud through compromised originators.
