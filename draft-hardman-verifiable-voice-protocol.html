@@ -9,7 +9,7 @@
 <meta content="
        Verifiable Voice Protocol (VVP) authenticates and authorizes organizations and individuals making and/or receiving telephone calls. This eliminates trust gaps that malicious parties exploit. Like related technologies such as SHAKEN, RCD, and BCID, VVP uses STIR to bind cryptographic evidence to a SIP INVITE, and verify this evidence downstream. VVP can also let evidence flow the other way, proving things about the callee. VVP builds from different technical and governance assumptions than alternatives, and uses richer, stronger evidence. This allows VVP to cross jurisdictional boundaries easily and robustly. It also makes VVP simpler, more decentralized, cheaper to deploy and maintain, more private, more scalable, and higher assurance. Because it is easier to adopt, VVP can plug gaps or build bridges between other approaches, functioning as glue in hybrid ecosystems. For example, it may justify an A attestation in SHAKEN, or an RCD passport for branded calling, when a call originates outside SHAKEN or RCD ecosystems. VVP also works well as a standalone mechanism, independent of other solutions. An extra benefit is that VVP enables two-way evidence sharing with verifiable text and chat (e.g., RCS and vCon), as well as with other industry verticals that need verifiability in non-telco contexts. 
     " name="description">
-<meta content="xml2rfc 3.32.0" name="generator">
+<meta content="xml2rfc 3.34.1" name="generator">
 <meta content="voip" name="keyword">
 <meta content="telecom" name="keyword">
 <meta content="telco" name="keyword">
@@ -18,18 +18,19 @@
 <meta content="KYC" name="keyword">
 <meta content="draft-hardman-verifiable-voice-protocol-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.32.0
-    Python 3.12.12
-    ConfigArgParse 1.7
+  xml2rfc 3.34.1
+    Python 3.14.8
+    ConfigArgParse 1.8.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.9.4
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.12.2
     pycountry 24.6.1
     PyYAML 6.0.3
-    requests 2.32.5
-    wcwidth 0.6.0
+    requests 2.33.1
+    wcwidth 0.9.1
 -->
 <link href="draft-hardman-verifiable-voice-protocol.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -65,7 +66,6 @@
   src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: italic;
@@ -114,7 +114,6 @@
   src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: normal;
@@ -179,7 +178,6 @@
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 }
 
 @font-face {
@@ -296,16 +294,19 @@ h1, h2, h3, h4, h5, h6 {
   font-size-adjust: 0.5;
   color: var(--title-color);
 }
-h1#title {
-  font-size: 32px;
-  line-height: 40px;
-  clear: both;
-}
-h1#title, h1#rfcnum {
-  margin: 1.5em 0 0.2em;
-}
-h1#rfcnum + h1#title {
-  margin: 0.2em 0;
+h1 {
+  &#title {
+    font-size: 32px;
+    line-height: 40px;
+    clear: both;
+    margin: 1.5em 0 0.2em;
+  }
+  &#rfcnum {
+    margin: 1.5em 0 0.2em;
+    & + h1#title {
+      margin: 0.2em 0;
+    }
+  }
 }
 
 h1, h2, h3 {
@@ -325,10 +326,10 @@ h4, h5, h6 {
 #abstract+p {
   font-size: 18px;
   line-height: 24px;
-}
-#abstract+p code, #abstract+p samp, #abstract+p tt {
-  font-size: 16px;
-  line-height: 0;
+  & code, & samp, & tt {
+    font-size: 16px;
+    line-height: 0;
+  }
 }
 
 p {
@@ -339,59 +340,59 @@ p {
 div {
   margin: 0;
 }
-.alignRight.art-text {
-  background-color: var(--highlight-color);
-  border: 1px solid var(--line-color);
-  border-radius: 3px;
-  padding: 0.5em 1em 0;
-  margin-bottom: 0.5em;
-}
-.alignRight.art-text pre {
-  padding: 0;
-  width: auto;
-}
 .alignRight {
   margin: 1em 0;
-}
-.alignRight > *:first-child {
-  border: none;
-  margin: 0;
-  float: right;
-  clear: both;
-}
-.alignRight > *:nth-child(2) {
-  clear: both;
-  display: block;
-  border: none;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    margin: 0;
+    float: right;
+    clear: both;
+  }
+  & > *:nth-child(2) {
+    clear: both;
+    display: block;
+    border: none;
+  }
 }
 svg {
   display: block;
-}
-/* font-family isn't space-separated, but =~ will have to do */
-svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
-  font-family: var(--font-mono);
-}
-.alignCenter.art-text {
-  background-color: var(--highlight-color);
-  border: 1px solid var(--line-color);
-  border-radius: 3px;
-  padding: 0.5em 1em 0;
-  margin-bottom: 0.5em;
-}
-.alignCenter.art-text pre {
-  padding: 0;
-  width: auto;
+  /* font-family isn't space-separated, but =~ will have to do */
+  &[font-family~="monospace" i], & [font-family~="monospace" i] {
+    font-family: var(--font-mono);
+  }
 }
 .alignCenter {
   margin: 1em 0;
-}
-.alignCenter > *:first-child {
-  border: none;
-  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
-     support flexbox yet.
-  */
-  display: table;
-  margin: 0 auto;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+       support flexbox yet.
+    */
+    display: table;
+    margin: 0 auto;
+  }
 }
 
 /* lists */
@@ -429,26 +430,25 @@ dl {
     --indent: 5ch;
     & > dt {
       min-width: calc(var(--indent) - 2ch);
+      float: none;
     }
-  }
-  &.olPercent > dt {
-    float: none;
   }
 
   dl > dd > & {
     margin-top: 0.5em;
     margin-bottom: 0;
   }
-}
-dl:not(.dlNewline) > dt {
-  float: left;
-  margin-right: 2ch;
-  min-width: 8ch;
-}
-dl > dd {
-  margin-bottom: .8em;
-  margin-left: var(--indent) !important; /* stupid element overrides */
-  min-height: 2ex;
+
+  &:not(.dlNewline) > dt {
+    float: left;
+    margin-right: 2ch;
+    min-width: 8ch;
+  }
+  & > dd {
+    margin-bottom: .8em;
+    margin-left: var(--indent) !important; /* stupid element overrides */
+    min-height: 2ex;
+  }
 }
 :is(dl.compact, .dlCompact) > dd {
   margin-bottom: 0;
@@ -464,20 +464,22 @@ dl > dd {
 }
 
 /* links */
-a, a[href].selfRef:hover {
+a {
   text-decoration: none;
+  &[href] {
+    color: var(--link-color);
+    &:hover { text-decoration: underline; }
+    &.selfRef {
+      color: var(--text-color);
+      &:hover {
+        text-decoration: none;
+        background-color: var(--highlight-color);
+      }
+    }
+  }
 }
-a[href] {
-  color: var(--link-color);
-}
-a[href].selfRef, .iref + a[href].internal {
+.iref + a[href].internal {
   color: var(--text-color);
-}
-a[href]:hover {
-  text-decoration: underline;
-}
-a[href].selfRef:hover {
-  background-color: var(--highlight-color);
 }
 a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
   white-space: nowrap;
@@ -513,9 +515,9 @@ img {
 figure {
   margin: 0.5em 0;
   padding: 0;
-}
-figure blockquote {
-  margin: 0.8em 0.4em 0.4em;
+  & blockquote {
+    margin: 0.8em 0.4em 0.4em;
+  }
 }
 figcaption, caption {
   font-style: italic;
@@ -525,17 +527,19 @@ figcaption, caption {
 }
 @media screen {
   /* Auto-collapse boilerplate. */
-  :is(#status-of-memo, #copyright) p {
-    margin: -2px 0;
-    max-height: 0;
-    transition: max-height 2s ease, margin 0.5s ease 0.5s;
-    overflow: hidden;
-  }
-  :is(#status-of-memo, #copyright):hover p,
-  :is(#status-of-memo, #copyright) h2:target ~ p {
-    margin: 0.5em 0;
-    max-height: 500px;
-    overflow: auto;
+  :is(#status-of-memo, #copyright) {
+    & p {
+      margin: -2px 0;
+      max-height: 0;
+      transition: max-height 2s ease, margin 0.5s ease 0.5s;
+      overflow: hidden;
+    }
+    &:hover p,
+    & h2:target ~ p {
+      margin: 0.5em 0;
+      max-height: 500px;
+      overflow: auto;
+    }
   }
   pre, svg {
     display: inline-block;
@@ -585,25 +589,17 @@ table {
   max-width: 100%;
   margin: 0 0 1em;
   border-collapse: collapse;
-}
-table.right {
-  margin-left: auto;
-}
-table.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-table.left {
-  margin-right: auto;
-}
-table .text-left {
-  text-align: left;
-}
-table .text-center {
-  text-align: center;
-}
-table .text-right {
-  text-align: right;
+  &.right { margin-left: auto; }
+  &.center { margin-left: auto; margin-right: auto; }
+  &.left { margin-right: auto; }
+  & .text-left { text-align: left; }
+  & .text-center { text-align: center; }
+  & .text-right { text-align: right; }
+  & caption {
+    margin: 0;
+    padding: 3px 0 3px 1em;
+  }
+  & p { margin: 0; }
 }
 
 thead, tbody {
@@ -623,13 +619,6 @@ th {
 :is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
   background-color: var(--highlight-color);
 }
-table caption {
-  margin: 0;
-  padding: 3px 0 3px 1em;
-}
-table p {
-  margin: 0;
-}
 
 /* pilcrow */
 a.pilcrow {
@@ -640,18 +629,16 @@ a.pilcrow {
     color: var(--pilcrow-weak);
     &:hover { text-decoration: none; }
   }
-}
-@media not print {
-  :hover > a.pilcrow, a.pilcrow:focus {
-    opacity: 1;
+  @media not print {
+    :hover > &, &:focus {
+      opacity: 1;
+    }
+    &[href]:hover {
+      color: var(--pilcrow-strong);
+      background-color: transparent;
+    }
   }
-  a.pilcrow[href]:hover {
-    color: var(--pilcrow-strong);
-    background-color: transparent;
-  }
-}
-@media print {
-  a.pilcrow {
+  @media print {
     display: none;
   }
 }
@@ -710,9 +697,9 @@ sub, sup {
   font-size: 0.9em;
   font-style: italic;
   margin-top: 2em;
-}
-.docInfo .prepared {
-  float: right;
+  & .prepared {
+    float: right;
+  }
 }
 
 /* table of contents */
@@ -802,23 +789,27 @@ hr.addr {
   max-width: calc(100% - 16px);
 }
 @media (min-width: 500px) {
-  #authors-addresses > section {
-    column-count: 2;
-    column-gap: 20px;
-  }
-  #authors-addresses > section > h2 {
-    column-span: all;
-  }
-  /* hack for break-inside: avoid-column */
-  #authors-addresses address {
-    display: inline-block;
-    break-inside: avoid-column;
+  #authors-addresses {
+    & > section {
+      column-count: 2;
+      column-gap: 20px;
+    }
+    & > section > h2 {
+      column-span: all;
+    }
+    /* hack for break-inside: avoid-column */
+    & address {
+      display: inline-block;
+      break-inside: avoid-column;
+    }
   }
 }
 
 /* Comments */
-.rfcEditorRemove p:first-of-type {
-  font-style: italic;
+.rfcEditorRemove {
+  & p:first-of-type {
+    font-style: italic;
+  }
 }
 .cref {
   background-color: rgba(249, 232, 105, 0.3);
@@ -829,19 +820,21 @@ hr.addr {
 }
 
 @media screen {
-  #toc nav {
-    font-family: var(--font-title);
-    font-weight: 360;
-    & > ul { margin-bottom: 2em; }
-    & ul {
-      margin: 0 0 0 4px;
-      & :is(p, li) {
-        margin: 2px 0;
+  #toc {
+    & nav {
+      font-family: var(--font-title);
+      font-weight: 360;
+      & > ul { margin-bottom: 2em; }
+      & ul {
+        margin: 0 0 0 4px;
+        & :is(p, li) {
+          margin: 2px 0;
+        }
       }
     }
-  }
-  #toc a.toplink {
-    float: right;
+    & a.toplink {
+      float: right;
+    }
   }
 }
 @media not screen {
@@ -862,54 +855,54 @@ hr.addr {
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
-  }
-  #toc h2 {
-    margin: 0;
-    padding: 2px 0 2px 6px;
-    padding-right: 1em;
-    font-size: 18px;
-    line-height: 24px;
-    min-width: 190px;
-    text-align: right;
-    background-color: #444;
-    color: white;
-    cursor: pointer;
-    &::before { /* css hamburger */
-      float: right;
-      position: relative;
-      width: 1em;
-      height: 1px;
-      left: -164px;
-      margin: 8px 0 0 0;
-      background: white none repeat scroll 0 0;
-      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
-      content: "";
+    & h2 {
+      margin: 0;
+      padding: 2px 0 2px 6px;
+      padding-right: 1em;
+      font-size: 18px;
+      line-height: 24px;
+      min-width: 190px;
+      text-align: right;
+      background-color: #444;
+      color: white;
+      cursor: pointer;
+      &::before { /* css hamburger */
+        float: right;
+        position: relative;
+        width: 1em;
+        height: 1px;
+        left: -164px;
+        margin: 8px 0 0 0;
+        background: white none repeat scroll 0 0;
+        box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+        content: "";
+      }
     }
-  }
-  #toc nav {
-    display: none;
-    background-color: var(--background-color);
-    padding: 0.5em 1em 1em;
-    overflow: auto;
-    overscroll-behavior: contain;
-    height: calc(100vh - 48px);
-    border-left: 1px solid #ddd;
-  }
-  #toc.active {
-    opacity: 1;
-    & nav { display: block; }
-  }
-  /* Make the collapsed ToC header render white on gray also when it's a link */
-  #toc h2 a,
-  #toc h2 a:is(:link, :focus, :hover),
-  #toc a.toplink,
-  #toc a.toplink:hover {
-    color: white;
-    background-color: #444;
-    text-decoration: none;
-  }
-  #toc a.toplink {
-    margin: 2px 0.5em 0;
+    & nav {
+      display: none;
+      background-color: var(--background-color);
+      padding: 0.5em 1em 1em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      height: calc(100vh - 48px);
+      border-left: 1px solid #ddd;
+    }
+    &.active {
+      opacity: 1;
+      & nav { display: block; }
+    }
+    /* Make the collapsed ToC header render white on gray also when it's a link */
+    & h2 a,
+    & h2 a:is(:link, :focus, :hover),
+    & a.toplink,
+    & a.toplink:hover {
+      color: white;
+      background-color: #444;
+      text-decoration: none;
+    }
+    & a.toplink {
+      margin: 2px 0.5em 0;
+    }
   }
 }
 
@@ -928,26 +921,26 @@ hr.addr {
     margin: 0;
     padding: 0;
     z-index: 1;
-  }
-  #toc h2 {
-    margin: 0;
-    padding: 0.25em 1em 1em 0;
-  }
-  #toc nav {
-    display: block;
-    height: calc(90vh - 84px);
-    bottom: 0;
-    padding: 0.5em 0 2em;
-    overflow: auto;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
+    & h2 {
+      margin: 0;
+      padding: 0.25em 1em 1em 0;
+    }
+    & nav {
+      display: block;
+      height: calc(90vh - 84px);
+      bottom: 0;
+      padding: 0.5em 0 2em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+    & a.toplink {
+      margin: 8px 0.5em 0;
+    }
   }
   img { /* future proofing */
     max-width: 100%;
     height: auto;
-  }
-  #toc a.toplink {
-    margin: 8px 0.5em 0;
   }
 }
 
@@ -963,12 +956,13 @@ hr.addr {
   #n-copyright-notice {
     border-bottom: none;
   }
-  #toc, #n-introduction {
-    page-break-before: always;
-  }
   #toc {
+    page-break-before: always;
     border-top: none;
     padding-top: 0;
+  }
+  #n-introduction {
+    page-break-before: always;
   }
   figure, pre, .vcard {
     page-break-inside: avoid;
@@ -1030,17 +1024,19 @@ hr.addr {
 }
 
 /* SVG Trick: a prefix match works because only black and white are allowed */
-svg :is([stroke="black"], [stroke^="#000"]) {
-  stroke: var(--text-color);
-}
-svg :is([stroke="white"], [stroke^="#fff"]) {
-  stroke: var(--background-color);
-}
-svg :is([fill="black"], [fill^="#000"], :not([fill])) {
-  fill: var(--text-color);
-}
-svg :is([fill="white"], [fill^="#fff"]) {
-  fill: var(--background-color);
+svg {
+  & :is([stroke="black"], [stroke^="#000"]) {
+    stroke: var(--text-color);
+  }
+  & :is([stroke="white"], [stroke^="#fff"]) {
+    stroke: var(--background-color);
+  }
+  & :is([fill="black"], [fill^="#000"], :not([fill])) {
+    fill: var(--text-color);
+  }
+  & :is([fill="white"], [fill^="#fff"]) {
+    fill: var(--background-color);
+  }
 }
 </style>
 
@@ -1050,11 +1046,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">VVP</td>
-<td class="right">March 2026</td>
+<td class="right">October 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Hardman</td>
-<td class="center">Expires 20 September 2026</td>
+<td class="center">Expires 8 April 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-hardman-verifiable-voice-protocol-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-03-19" class="published">19 March 2026</time>
+<time datetime="2026-10-05" class="published">5 October 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-09-20">20 September 2026</time></dd>
+<dd class="expires"><time datetime="2027-04-08">8 April 2027</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1117,7 +1113,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1214,15 +1210,29 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-verifying-the-callee" class="internal xref">Verifying the callee</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-planning-for-efficiency" class="internal xref">Planning for efficiency</a></p>
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-verification-outcomes" class="internal xref">Verification outcomes</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
-                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-historical-analysis" class="internal xref">Historical analysis</a></p>
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-planning-for-efficiency" class="internal xref">Planning for efficiency</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
+                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-historical-analysis" class="internal xref">Historical analysis</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-intermediaries-that-modify-" class="internal xref">Intermediaries that modify signaling</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-dereferencing-oobis" class="internal xref">Dereferencing OOBIs</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-compromised-legitimate-orig" class="internal xref">Compromised legitimate originator</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
@@ -1294,7 +1304,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-overview">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-overview" class="section-name selfRef">Overview</a>
       </h2>
-<p id="section-3-1">Fundamentally, VVP requires identified parties (callers and/or callees) to curate a dossier (<span>[<a href="#TOIP-DOSSIER" class="cite xref">TOIP-DOSSIER</a>]</span>) of stable evidence that proves things about them. This is done once or occasionally, in advance, as a configuration precondition. Then, for each call, participants decide whether to share this evidence. Callers share evidence by creating an ephemeral STIR-compatible VVP PASSporT (<span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span>) that cites (<a href="#citing" class="auto internal xref">4</a>) their preconfigured dossier. This passport travels along the delivery route as an <code>Identity</code> header in a SIP INVITE. Callees share evidence by adding an analogous passport to an attribute line in the SDP <span>[<a href="#RFC8866" class="cite xref">RFC8866</a>]</span> body of their SIP response. This passes a signed citation to their dossier in the other direction. Verifiers anywhere along the route check the citation(s) and corresponding dossier(s), including realtime revocation status, to make decisions (<a href="#verifying" class="auto internal xref">5</a>).<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">Fundamentally, VVP requires identified parties (callers and/or callees) to curate a dossier (<span>[<a href="#TOIP-DOSSIER" class="cite xref">TOIP-DOSSIER</a>]</span>) of stable evidence that proves things about them. This is done once or occasionally, in advance, as a configuration precondition. Then, for each call, participants decide whether to share this evidence. Callers share evidence by creating an ephemeral STIR-compatible VVP PASSporT (<span>[<a href="#RFC8225" class="cite xref">RFC8225</a>]</span>) that cites (<a href="#citing" class="auto internal xref">4</a>) their preconfigured dossier. This passport travels along the delivery route as an <code>Identity</code> header in a SIP INVITE. Callees share evidence by sending an analogous passport back to the caller, preferably as an <code>Identity</code> header in a mid-dialog request (<span>[<a href="#RFC4916" class="cite xref">RFC4916</a>]</span>), and optionally as an attribute line in the SDP <span>[<a href="#RFC8866" class="cite xref">RFC8866</a>]</span> body of their SIP response. This passes a signed citation to their dossier in the other direction. Verifiers anywhere along the route check the citation(s) and corresponding dossier(s), including realtime revocation status, to make decisions (<a href="#verifying" class="auto internal xref">5</a>).<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">A VVP call may carry assurance in either or both directions. Compliant implementations may choose to support only assurance about the caller, only assurance about the callee, or both.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="roles">
 <section id="section-3.1">
@@ -1504,15 +1514,17 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </div>
 </section>
 </div>
-<div id="citing-a-callees-dossier">
+<div id="callee-citing">
 <section id="section-4.2">
         <h3 id="name-citing-a-callees-dossier">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-citing-a-callees-dossier" class="section-name selfRef">Citing a callee's dossier</a>
         </h3>
 <p id="section-4.2-1">Optionally, evidence in VVP can also flow from callee to caller. For privacy reasons, individuals who receive phone calls may choose not to use VVP in this way. However, enterprises and call centers may find it useful as a reassurance to their customers about who they've reached.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">In such cases, the callee must have curated a dossier. The format of the callee dossier is identical in schema to that used by a caller. It may therefore introduce evidence of the callee's legal identity, right to use a brand, right to use a TN, delegated authority to a call center proxy or an AI, and so forth. (A callee's dossier might differ in one minor way that doesn't affect the schema: it could prove the right to use a TN that has a DNO flag.)<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">A reference to the callee's dossier is conveyed by adding a special <code>a=callee-passport:X</code> attribute line to the SDP <span>[<a href="#RFC8866" class="cite xref">RFC8866</a>]</span> body of the callee's <code>200 OK</code> response. (Optionally, the lines <span class="bcp14">MAY</span> also be added to a <code>180 Ringing</code> response, to make the callee verifiable earlier, but it <span class="bcp14">MUST</span> appear on the <code>200 OK</code> response.) The value of this line is a JWT in compact form, with the <code>;type=vvp</code> suffix. This is exactly compliant with the format used by callers to convey VVP passports in <code>Identity</code> headers. However, <code>Identity</code> headers are not used for callees because existing SIP tooling does not expect or preserve <code>Identity</code> headers on responses. Furthermore, the identity of a callee is primarily of interest to the caller, who is willing to parse the SDP body; it does not need the same full-route auditability as the identity of a caller.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
-<p id="section-4.2-4">Although dossiers are identical in either direction, the callee JWT has a slightly different schema than a caller's VVP passport. The headers of the JWT match, but <code>kid</code> contains the OOBI of the callee, not of the OP. Two new claims are added to the JWT payload: <code>call-id</code> and <code>cseq</code>. These <span class="bcp14">MUST</span> contain the values of the <code>Call-ID</code> and <code>CSeq</code> values on the preceding SIP INVITE. The <code>iat</code> claim <span class="bcp14">MUST</span> also be present and <span class="bcp14">MUST</span> contain a value from the system clock of the callee. The <code>exp</code> field <span class="bcp14">MAY</span> also be present and use a value chosen by the callee; if it is missing, this communicates the callee's intention to impose no new timeout logic on the call. The <code>evd</code> field <span class="bcp14">MUST</span> also be present, and <span class="bcp14">MUST</span> contain the OOBI of the callee's dossier. The <code>card</code> and <code>goal</code> claims are also allowed. Other claims <span class="bcp14">MAY</span> be present, but <span class="bcp14">MUST</span> be ignored by compliant implementations that do not understand them. (Because the callee references the specific SIP dialog via <code>call-id</code> and <code>cseq</code>, there is no point in repeating fields that describe the dialog, like <code>orig</code>, <code>dest</code>, and so forth.)<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+<p id="section-4.2-3">A callee's passport cannot travel in an <code>Identity</code> header on a SIP response, because existing SIP tooling does not expect or preserve <code>Identity</code> headers on responses. Instead, the callee <span class="bcp14">SHOULD</span> convey its passport in an <code>Identity</code> header (<span>[<a href="#RFC8224" class="cite xref">RFC8224</a>]</span>) on a request that it initiates within the dialog, following the connected-identity model of <span>[<a href="#RFC4916" class="cite xref">RFC4916</a>]</span>. Normally this is an UPDATE (<span>[<a href="#RFC3311" class="cite xref">RFC3311</a>]</span>) sent after the callee has sent its <code>200 OK</code> and received the ACK. Per <span>[<a href="#RFC4916" class="cite xref">RFC4916</a>]</span>, a re-INVITE <span class="bcp14">MAY</span> be used instead when the caller does not support UPDATE, and an UPDATE <span class="bcp14">MAY</span> be sent on an early dialog to make the callee verifiable before the call is answered. Requests are handled by intermediaries the same way as a caller's INVITE, so the passport has the same chance of surviving the route as a caller's passport does.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2-4">The callee <span class="bcp14">MAY</span> also, or instead, add a special <code>a=callee-passport:X</code> attribute line to the SDP <span>[<a href="#RFC8866" class="cite xref">RFC8866</a>]</span> body of its <code>200 OK</code> response, and optionally of a <code>180 Ringing</code> response. The value of this line is a JWT in compact form, with the <code>;type=vvp</code> suffix -- exactly the format used to convey VVP passports in <code>Identity</code> headers. This option requires no additional request, but it is fragile: session border controllers and B2BUAs regenerate SDP at most enterprise and carrier boundaries, and will usually drop the attribute. It is therefore suitable mainly where the path between caller and callee is known to preserve SDP. A callee that uses the SDP attribute without the request <span class="bcp14">SHOULD</span> place it in the <code>200 OK</code>.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+<p id="section-4.2-5">If the passport arrives by both routes, the two <span class="bcp14">MUST</span> be identical. A caller that receives no callee passport by either route treats the callee as unverified (see <a href="#outcomes" class="auto internal xref">Section 5.3</a>).<a href="#section-4.2-5" class="pilcrow">¶</a></p>
+<p id="section-4.2-6">Although dossiers are identical in either direction, the callee JWT has a slightly different schema than a caller's VVP passport. The headers of the JWT match, but <code>kid</code> contains the OOBI of the callee, not of the OP. Two new claims are added to the JWT payload: <code>call-id</code> and <code>cseq</code>. These <span class="bcp14">MUST</span> contain the values of the <code>Call-ID</code> and <code>CSeq</code> values on the preceding SIP INVITE. The <code>iat</code> claim <span class="bcp14">MUST</span> also be present and <span class="bcp14">MUST</span> contain a value from the system clock of the callee. The <code>exp</code> field <span class="bcp14">MAY</span> also be present and use a value chosen by the callee; if it is missing, this communicates the callee's intention to impose no new timeout logic on the call. The <code>evd</code> field <span class="bcp14">MUST</span> also be present, and <span class="bcp14">MUST</span> contain the OOBI of the callee's dossier. The <code>card</code> and <code>goal</code> claims are also allowed. Other claims <span class="bcp14">MAY</span> be present, but <span class="bcp14">MUST</span> be ignored by compliant implementations that do not understand them. (Because the callee references the specific SIP dialog via <code>call-id</code> and <code>cseq</code>, there is no point in repeating fields that describe the dialog, like <code>orig</code>, <code>dest</code>, and so forth.)<a href="#section-4.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1575,7 +1587,7 @@ Validation also includes comparing data structure and values against the declare
               <p id="section-5.1.1-2.12.1">If the passport includes non-null values for the optional <code>card</code> claim, extract that information and check that the brand attributes claimed for the call are justified by a brand credential in the dossier.<a href="#section-5.1.1-2.12.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-5.1.1-2.13">
-              <p id="section-5.1.1-2.13.1">Check any business logic. For example, if the passport includes a non-null value for the optional <code>goal</code> claim, confirm that the verifier is willing to accept a call with that goal. Or, if the delegated signer credential says that the OP can only call on behalf of the AP during certain hours, or in certain geos, check those attributes of the call.<a href="#section-5.1.1-2.13.1" class="pilcrow">¶</a></p>
+              <p id="section-5.1.1-2.13.1">Check any business logic. For example, if the passport includes a non-null value for the optional <code>goal</code> claim, confirm that the verifier is willing to accept a call with that goal. Or, if the delegated signer credential says that the OP can only call on behalf of the AP during certain hours, in certain geos, to certain destinations (e.g., country codes or number prefixes, checked against <code>dest</code>), or at no more than a certain rate, check those attributes of the call. (A rate constraint cannot be evaluated from a single call; it is checkable only by a verifier that observes many calls signed by the same <code>kid</code>, and by the OP itself before signing. See <a href="#compromised-op" class="auto internal xref">Section 6.3</a>.)<a href="#section-5.1.1-2.13.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
 </section>
@@ -1590,7 +1602,7 @@ Validation also includes comparing data structure and values against the declare
 <p id="section-5.2-1">The callee is verified with an algorithm that <span class="bcp14">MAY</span> be optimized but <span class="bcp14">MUST</span> achieve the same security guarantees as this:<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-5.2-2">
 <li id="section-5.2-2.1">
-            <p id="section-5.2-2.1.1">Confirm that the <code>call-id</code> and <code>cseq</code> claims match the values of <code>Call-ID</code> and <code>CSeq</code> from the preceding SIP INVITE.<a href="#section-5.2-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-2.1.1">Confirm that the <code>call-id</code> and <code>cseq</code> claims match the values of <code>Call-ID</code> and <code>CSeq</code> from the preceding SIP INVITE. If the passport arrived in a request such as UPDATE, also confirm that the request belongs to the same dialog.<a href="#section-5.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.2-2.2">
             <p id="section-5.2-2.2.1">Confirm that the <code>iat</code> claim matches contextual observations and other SIP metadata. That is, the timing described by the callee appears aligned with what is known about the call from external sources.<a href="#section-5.2-2.2.1" class="pilcrow">¶</a></p>
@@ -1634,23 +1646,55 @@ Validation also includes comparing data structure and values against the declare
         </ol>
 </section>
 </div>
-<div id="planning-for-efficiency">
+<div id="outcomes">
 <section id="section-5.3">
-        <h3 id="name-planning-for-efficiency">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-planning-for-efficiency" class="section-name selfRef">Planning for efficiency</a>
+        <h3 id="name-verification-outcomes">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-verification-outcomes" class="section-name selfRef">Verification outcomes</a>
         </h3>
-<p id="section-5.3-1">A complete verification of either caller or callee passport, from scratch, is quite rigorous. With no caches, it may take several seconds, much like a thorough validation of a certificate chain. However, much VVP evidence is stable for long periods of time and lends itself to caching, subject to the proviso that revocation freshness must be managed wisely. Since the same dossier is used to add assurance to many calls -- perhaps thousands or millions of calls, for busy call centers -- and many dossiers will reference the same issuers and issuees and their associated key states and KELs (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>), caching will produce huge benefits.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.3-2">Furthermore, because SAIDs and their associated data (including links to other nodes in a data graph) have a tamper-evident relationship, any party can perform validation and compile their results, then share the data with verifiers that want to do less work. Validators like this are not oracles, because consumers of such data need not trust shared results blindly. They can always directly recompute some or all of it from a passport, to catch deception. However, they can do this lazily or occasionally, per their preferred balance of risk/effort.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3-3"><em>In toto</em>, these characteristics mean that no centralized registry is required in any given ecosystem. Data can be fetched directly from its source, across jurisdictional boundaries. Because it is fetched from its source, it comes with consent. Privacy can be tuned. Simple opportunistic, uncoordinated reuse (e.g., in or across the datacenters of TSPs) will arise spontaneously and will dramatically improve the scale and efficiency of the system.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-1">A verifier <span class="bcp14">MUST</span> classify the result of examining a call, in each direction where it looks for evidence, as exactly one of the following:<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-5.3-2">
+          <dt id="section-5.3-2.1">verified:</dt>
+          <dd style="margin-left: 1.5em" id="section-5.3-2.2">
+            <p id="section-5.3-2.2.1">A VVP passport was present, and every step of the applicable algorithm succeeded.<a href="#section-5.3-2.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-5.3-2.3">absent:</dt>
+          <dd style="margin-left: 1.5em" id="section-5.3-2.4">
+            <p id="section-5.3-2.4.1">No VVP passport was present. Either the party did not provide one, or an intermediary removed it. Absence is a policy question, not an integrity failure; the verifier <span class="bcp14">MAY</span> accept the call at reduced assurance, challenge it, or reject it, according to local policy.<a href="#section-5.3-2.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-5.3-2.5">failed:</dt>
+          <dd style="margin-left: 1.5em" id="section-5.3-2.6">
+            <p id="section-5.3-2.6.1">A VVP passport was present, and at least one step of the algorithm definitively failed: the passport was malformed or stale, the channel binding did not match, the signature was invalid, the dossier was invalid or revoked, the OP was not authorized, the TN or brand was not justified, or a constraint in a delegation credential was violated. A failed passport <span class="bcp14">MUST NOT</span> be treated more favorably than an absent one.<a href="#section-5.3-2.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-5.3-2.7">indeterminate:</dt>
+          <dd style="margin-left: 1.5em" id="section-5.3-2.8">
+            <p id="section-5.3-2.8.1">A VVP passport was present, but verification could not be completed -- for example, because an OOBI or the dossier could not be fetched within the verifier's time budget, or because revocation status could not be refreshed to meet the verifier's freshness requirements. An indeterminate result <span class="bcp14">MUST NOT</span> be reported as verified. It <span class="bcp14">SHOULD NOT</span> be reported as failed, because its usual cause is network conditions rather than forgery. A verifier <span class="bcp14">MAY</span> let the call proceed while it completes verification asynchronously, and act on or record the eventual result.<a href="#section-5.3-2.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<p id="section-5.3-3">A verifier <span class="bcp14">MAY</span> additionally report which steps succeeded before verification stopped (for example, a valid signature from the OP, but a dossier that could not be fetched).<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-4">When a verification service rejects a request because of a VVP passport, it <span class="bcp14">SHOULD</span> use the response codes of <span>[<a href="#RFC8224" class="cite xref">RFC8224</a>]</span>, Section 6.2.2: 403 with the reason phrase "Stale Date" when <code>iat</code> falls outside its replay tolerance; 436 "Bad Identity Info" for an indeterminate result caused by inability to dereference <code>kid</code> or <code>evd</code>; 437 "Unsupported Credential" when it does not support the signing algorithm; and 438 "Invalid Identity Header" for other failures. As <span>[<a href="#RFC8224" class="cite xref">RFC8224</a>]</span> notes, intermediaries often forward a call with an annotation rather than reject it. Because a callee passport conveyed in UPDATE arrives after the call is established, rejecting that UPDATE does not end the call; a caller that wishes to end a call whose callee failed verification does so with BYE.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="planning-for-efficiency">
+<section id="section-5.4">
+        <h3 id="name-planning-for-efficiency">
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-planning-for-efficiency" class="section-name selfRef">Planning for efficiency</a>
+        </h3>
+<p id="section-5.4-1">A complete verification of either caller or callee passport, from scratch, is quite rigorous. With no caches, it may take several seconds, much like a thorough validation of a certificate chain. However, much VVP evidence is stable for long periods of time and lends itself to caching, subject to the proviso that revocation freshness must be managed wisely. Since the same dossier is used to add assurance to many calls -- perhaps thousands or millions of calls, for busy call centers -- and many dossiers will reference the same issuers and issuees and their associated key states and KELs (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>), caching will produce huge benefits.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-2">Furthermore, because SAIDs and their associated data (including links to other nodes in a data graph) have a tamper-evident relationship, any party can perform validation and compile their results, then share the data with verifiers that want to do less work. Validators like this are not oracles, because consumers of such data need not trust shared results blindly. They can always directly recompute some or all of it from a passport, to catch deception. However, they can do this lazily or occasionally, per their preferred balance of risk/effort.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.4-3"><em>In toto</em>, these characteristics mean that no centralized registry is required in any given ecosystem. Data can be fetched directly from its source, across jurisdictional boundaries. Because it is fetched from its source, it comes with consent. Privacy can be tuned. Simple opportunistic, uncoordinated reuse (e.g., in or across the datacenters of TSPs) will arise spontaneously and will dramatically improve the scale and efficiency of the system.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="historical-analysis">
-<section id="section-5.4">
+<section id="section-5.5">
         <h3 id="name-historical-analysis">
-<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-historical-analysis" class="section-name selfRef">Historical analysis</a>
+<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-historical-analysis" class="section-name selfRef">Historical analysis</a>
         </h3>
-<p id="section-5.4-1">Normally, a verification algorithm determines whether the passport verifies <em>now</em>. (This is the only evaluation that's valid for most JWTs, because they depend on ephemeral key state fetched just in time from <code>x5u</code>). However, a VVP passport can do more. Its <code>kid</code> header references a KEL for the signer's AID (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>), and its <code>evd</code> header references a dossier issued by either the AID of the AP or the AID of the callee. Thence it connects to a KEL (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>). These data structures provide key state transitions that are timestamped -- both by the controllers of the AIDs, and by their independent witnesses. Although the timestamps are not guaranteed to be perfectly synchronized, they can be compared to establish rough transition times and to detect duplicity.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.4-2">Using this historical information, it becomes possible to ask whether a VVP passport would have verified at an arbitrary moment in the past. In such framings, the reference time from the verification algorithm is <em>then</em>, not <em>now</em>. In the normal case where <em>then</em> falls outside a fuzzy range, answers about key state are clear to all observers. In the rare cases where <em>then</em> falls inside a fuzzy range, a state transition was underway but not yet universally known, and a verifier can compute the key state (and thence, the outcome of the verification algorithm) according to their preferred interpretation.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.5-1">Normally, a verification algorithm determines whether the passport verifies <em>now</em>. (This is the only evaluation that's valid for most JWTs, because they depend on ephemeral key state fetched just in time from <code>x5u</code>). However, a VVP passport can do more. Its <code>kid</code> header references a KEL for the signer's AID (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>), and its <code>evd</code> header references a dossier issued by either the AID of the AP or the AID of the callee. Thence it connects to a KEL (<span>[<a href="#TOIP-KERI" class="cite xref">TOIP-KERI</a>]</span>). These data structures provide key state transitions that are timestamped -- both by the controllers of the AIDs, and by their independent witnesses. Although the timestamps are not guaranteed to be perfectly synchronized, they can be compared to establish rough transition times and to detect duplicity.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
+<p id="section-5.5-2">Using this historical information, it becomes possible to ask whether a VVP passport would have verified at an arbitrary moment in the past. In such framings, the reference time from the verification algorithm is <em>then</em>, not <em>now</em>. In the normal case where <em>then</em> falls outside a fuzzy range, answers about key state are clear to all observers. In the rare cases where <em>then</em> falls inside a fuzzy range, a state transition was underway but not yet universally known, and a verifier can compute the key state (and thence, the outcome of the verification algorithm) according to their preferred interpretation.<a href="#section-5.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1706,6 +1750,54 @@ Validation also includes comparing data structure and values against the declare
           <p id="section-6-7.4.1">Watchers <span class="bcp14">SHOULD</span> propagate events to local caches with a low latency, and <span class="bcp14">MUST</span> provide information that allows verifiers to decide whether that latency meets their freshness requirements.<a href="#section-6-7.4.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
+<div id="intermediaries-that-modify-signaling">
+<section id="section-6.1">
+        <h3 id="name-intermediaries-that-modify-">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-intermediaries-that-modify-" class="section-name selfRef">Intermediaries that modify signaling</a>
+        </h3>
+<p id="section-6.1-1">SBCs and B2BUAs along the call route may strip or fail to forward <code>Identity</code> headers, and commonly regenerate SDP bodies. An attacker who controls such an intermediary can suppress a VVP passport, downgrading the call from verified (or failed) to absent. VVP cannot prevent this, but the distinction between absent and failed outcomes (<a href="#outcomes" class="auto internal xref">Section 5.3</a>) means that suppression can only lower assurance; it cannot make a forged passport verify. Deployments that need end-to-end VVP assurance <span class="bcp14">SHOULD</span> make preservation of <code>Identity</code> headers a condition of their interconnect agreements. Callees <span class="bcp14">SHOULD</span> prefer the request-based transport described in <a href="#callee-citing" class="auto internal xref">Section 4.2</a> over the SDP attribute for the same reason.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="dereferencing-oobis">
+<section id="section-6.2">
+        <h3 id="name-dereferencing-oobis">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-dereferencing-oobis" class="section-name selfRef">Dereferencing OOBIs</a>
+        </h3>
+<p id="section-6.2-1">The <code>kid</code> and <code>evd</code> values of a passport are URLs chosen by whoever built the passport, and a verifier dereferences them before it knows whether the passport is genuine. A verifier that fetches them naively, on every call, exposes itself and others to several attacks:<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2-2.1">
+            <p id="section-6.2-2.1.1">Server-side request forgery. A passport can point <code>kid</code> or <code>evd</code> at an internal service on the verifier's network. Verifiers <span class="bcp14">MUST</span> only dereference <code>https</code> URLs, and <span class="bcp14">MUST</span> refuse to connect to loopback, link-local, and private address ranges (checked after DNS resolution, and again after any redirect) unless local policy explicitly allows a particular internal host. Verifiers <span class="bcp14">SHOULD</span> limit the number of redirects they follow, the size of responses they accept, and the time they spend on each fetch.<a href="#section-6.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.2-2.2">
+            <p id="section-6.2-2.2.1">Reflection and amplification. An attacker can place many calls whose passports point at a victim's web server, so that verifiers along the route generate traffic against it. Verifiers <span class="bcp14">SHOULD</span> rate-limit fetches per host, and <span class="bcp14">SHOULD</span> cache failed fetches for a short period so that repeated calls citing the same unreachable URL do not each trigger a new fetch.<a href="#section-6.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.2-2.3">
+            <p id="section-6.2-2.3.1">Delay. A verifier with a cold cache may need several seconds to fetch and validate a dossier, and an attacker can choose a slow server deliberately. Verifiers <span class="bcp14">SHOULD</span> set a time budget for fetching during call setup. If the budget is exhausted, the outcome is indeterminate (<a href="#outcomes" class="auto internal xref">Section 5.3</a>), and the verifier <span class="bcp14">MAY</span> complete verification asynchronously. Because dossiers are cached by SAID and are reused across many calls, this cost falls mostly on the first call that cites a given dossier; verifiers <span class="bcp14">MAY</span> also prefetch dossiers for frequent callers.<a href="#section-6.2-2.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-6.2-3">Content fetched from an OOBI is self-certifying: a KEL is verified against the AID it claims to describe, and a dossier against its SAID. A malicious server can therefore cause delay or failure, but cannot cause forged evidence to verify.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="compromised-op">
+<section id="section-6.3">
+        <h3 id="name-compromised-legitimate-orig">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-compromised-legitimate-orig" class="section-name selfRef">Compromised legitimate originator</a>
+        </h3>
+<p id="section-6.3-1">A common form of toll fraud does not rely on a fake system. Instead, the attacker takes over a genuine PBX or SBC and routes calls through it -- often in from outside and straight back out, to premium-rate or international destinations. The outbound call then carries the real identity of the compromised system. If that system is a VVP OP, its key signs the fraudulent passports, and they verify.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">Key rotation does not address this, because the attacker uses the system to sign rather than stealing the key. VVP limits the damage in other ways, and OPs and APs <span class="bcp14">SHOULD</span> use them:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3-3.1">
+            <p id="section-6.3-3.1.1">Delegated signer credentials <span class="bcp14">SHOULD</span> constrain the OP to the destinations it legitimately needs (for example, by country code or number prefix) and to a maximum call rate, in addition to any time-of-day and geographic constraints. Verifiers check destination constraints against <code>dest</code> on every call. Rate constraints can be checked by any verifier that observes aggregate traffic for a given <code>kid</code>, such as a TSP.<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.3-3.2">
+            <p id="section-6.3-3.2.1">An OP <span class="bcp14">SHOULD</span> apply its own outbound policy before signing, refusing to sign passports for calls that its delegation would not authorize, rather than relying on downstream verifiers to catch them.<a href="#section-6.3-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.3-3.3">
+            <p id="section-6.3-3.3.1">Each SBC or signing service <span class="bcp14">SHOULD</span> have its own AID, so that a compromise affects only the calls that pass through that service. When a compromise is detected, revoking that service's delegated signer credential stops further passports from verifying, without disturbing the AP's other delegates.<a href="#section-6.3-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1739,11 +1831,19 @@ Validation also includes comparing data structure and values against the declare
 <dd class="break"></dd>
 <dt id="RFC3261">[RFC3261]</dt>
         <dd>
-<span class="refAuthor">Rosenberg, J.</span>, <span class="refAuthor">Schulzrinne, H.</span>, <span class="refAuthor">Camarillo, G.</span>, <span class="refAuthor">Johnston, A.</span>, <span class="refAuthor">Peterson, J.</span>, <span class="refAuthor">Sparks, R.</span>, <span class="refAuthor">Handley, M.</span>, and <span class="refAuthor">E. Schooler</span>, <span class="refTitle">"SIP: Session Initiation Protocol"</span>, <span class="seriesInfo">RFC 3261</span>, <span class="seriesInfo">DOI 10.17487/RFC3261</span>, <time datetime="2002-06" class="refDate">June 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3261">https://www.rfc-editor.org/rfc/rfc3261</a>&gt;</span>. </dd>
+<span class="refAuthor">Rosenberg, J.</span>, <span class="refAuthor">Schulzrinne, H.</span>, <span class="refAuthor">Camarillo, G.</span>, <span class="refAuthor">Johnston, A.</span>, <span class="refAuthor">Peterson, J.</span>, <span class="refAuthor">Sparks, R.</span>, <span class="refAuthor">Handley, M.</span>, and <span class="refAuthor">E. Schooler</span>, <span class="refTitle">"SIP: Session Initiation Protocol"</span>, <span class="seriesInfo">RFC 3261</span>, <span class="seriesInfo">DOI 10.17487/RFC3261</span>, <time datetime="2002-07" class="refDate">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3261">https://www.rfc-editor.org/rfc/rfc3261</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3311">[RFC3311]</dt>
+        <dd>
+<span class="refAuthor">Rosenberg, J.</span>, <span class="refTitle">"The Session Initiation Protocol (SIP) UPDATE Method"</span>, <span class="seriesInfo">RFC 3311</span>, <span class="seriesInfo">DOI 10.17487/RFC3311</span>, <time datetime="2002-10" class="refDate">October 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3311">https://www.rfc-editor.org/rfc/rfc3311</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC4575">[RFC4575]</dt>
         <dd>
 <span class="refAuthor">Rosenberg, J.</span>, <span class="refAuthor">Schulzrinne, H.</span>, and <span class="refAuthor">O. Levin, Ed.</span>, <span class="refTitle">"A Session Initiation Protocol (SIP) Event Package for Conference State"</span>, <span class="seriesInfo">RFC 4575</span>, <span class="seriesInfo">DOI 10.17487/RFC4575</span>, <time datetime="2006-08" class="refDate">August 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4575">https://www.rfc-editor.org/rfc/rfc4575</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC4916">[RFC4916]</dt>
+        <dd>
+<span class="refAuthor">Elwell, J.</span>, <span class="refTitle">"Connected Identity in the Session Initiation Protocol (SIP)"</span>, <span class="seriesInfo">RFC 4916</span>, <span class="seriesInfo">DOI 10.17487/RFC4916</span>, <time datetime="2007-06" class="refDate">June 2007</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4916">https://www.rfc-editor.org/rfc/rfc4916</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5626">[RFC5626]</dt>
         <dd>
@@ -1836,8 +1936,8 @@ Validation also includes comparing data structure and values against the declare
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">Much of the cybersecurity infrastructure used by VVP depends on KERI, which was invented by Sam Smith, and first implemented by Sam plus Phil Fairheller, Kevin Griffin, and other technical staff at GLEIF. Thanks to logistical support from Trust Over IP and the Linux Foundation, and to a diverse community of technical experts in those communities and in the Web of Trust group.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">Techniques that apply KERI to telco use cases were developed by Daniel Hardman, Randy Warshaw, and Ruth Choueka, with additional contributions from Dmitrii Tychinin, Yaroslav Lazarev, Arshdeep Singh, and many other staff members at Provenant, Inc. Thanks as well to Ed Eykholt for multiple editorial improvements.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">Much of the cybersecurity infrastructure used by VVP depends on KERI, which was invented by Sam Smith, and first implemented by Sam plus Phil Feairheller, Kevin Griffin, and other technical staff at GLEIF. Thanks to logistical support from Trust Over IP and the Linux Foundation, and to a diverse community of technical experts in those communities and in the Web of Trust group.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">Techniques that apply KERI to telco use cases were developed by Daniel Hardman, Randy Warshaw, and Ruth Choueka, with additional contributions from Dmitrii Tychinin, Yaroslav Lazarev, Arshdeep Singh, and many other staff members at Provenant, Inc. Thanks as well to Ed Eykholt for multiple editorial improvements, and to Victor Davidenko for feedback on SDP fragility, OOBI dereferencing, and toll fraud through compromised originators.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
